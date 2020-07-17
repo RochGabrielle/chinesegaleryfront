@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "chineseFineArtGallery"
+    }
+  },
+  "defaultProject": "chineseFineArtGallery",
+  "cli": {
+    "analytics": false
+  }
 }

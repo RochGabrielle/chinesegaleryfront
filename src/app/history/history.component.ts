@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslationService } from './../services/translation.service';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  history: string = "default history";
+
+  constructor(private translationService: TranslationService) { }
 
   ngOnInit(): void {
+
+  this.history = this.translationService.translate();
   }
 
 }

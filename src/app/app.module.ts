@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {[ RouterModule ]} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,11 +15,12 @@ import { FooterComponent } from './footer/footer.component';
 import { HistoryComponent } from './history/history.component';
 import { Routes } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
+import { TranslationService } from './services/translation.service';
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'history', component: HistoryComponent },
-  { path: '', component: AppareilViewComponent }
+  { path: '', component: ContactComponent }
 ];
 
 @NgModule({
@@ -33,9 +37,12 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+      TranslationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
