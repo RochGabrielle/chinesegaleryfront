@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,10 +17,16 @@ import { HistoryComponent } from './history/history.component';
 import { Routes } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
 import { TranslationService } from './services/translation.service';
+import { ArticleService } from './services/article.service';
+import { EditArticleComponent } from './edit-article/edit-article.component';
+import { ArticleListComponent } from './article-list/article-list.component';
+import { NewArticleComponent } from './new-article/new-article.component';
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'history', component: HistoryComponent },
+  { path: 'articles', component: ArticleListComponent },
+  { path: 'new-article', component: NewArticleComponent },
   { path: '', component: ContactComponent }
 ];
 
@@ -32,16 +39,22 @@ const appRoutes: Routes = [
     GalleryComponent,
     FooterComponent,
     HistoryComponent,
-    ContactComponent
+    ContactComponent,
+    EditArticleComponent,
+    ArticleListComponent,
+    NewArticleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-      TranslationService
+      TranslationService,
+      ArticleService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,36 @@
+<div class="col-sm-8 col-sm-offset-2">
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text" id="title" class="form-control" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label for="artist">Artist</label>
+      <input type="text" id="artist" class="form-control" formControlName="artist">
+    </div>
+    <div class="form-group">
+      <label for="dynasty">dynasty</label>
+      <input type="text" id="dynasty" class="form-control" formControlName="dynasty">
+    </div>
+    <div class="form-group">
+      <label for="theme">theme</label>
+      <select id="theme" class="form-control" formControlName="theme">
+        <option value="qing">qing</option>
+        <option value="song">song</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="material">Material</label>
+      <input type="text" id="material" class="form-control" formControlName="material">
+    </div>
+    <div class="form-group">
+      <label for="discount">Discount</label>
+      <input type="text" id="discount" class="form-control" formControlName="discount">
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input type="text" id="category" class="form-control" formControlName="category">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

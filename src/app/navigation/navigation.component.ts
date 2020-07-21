@@ -13,6 +13,7 @@ export class NavigationComponent implements OnInit {
 componentName: string = "navigation";
 history: string ;
 contact: string ;
+admin: string;
 
 
   constructor(private translationService: TranslationService) { }
@@ -32,6 +33,15 @@ this.translationService.translate('en', this.componentName, 'history').subscribe
  this.translationService.translate('fr', this.componentName, 'contact').subscribe(
   (response) => {
   		this.contact = response;
+  },
+  (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+
+  );
+  this.translationService.translate('fr', this.componentName, 'admin').subscribe(
+  (response) => {
+      this.admin = response;
   },
   (error) => {
           console.log('Erreur ! : ' + error);

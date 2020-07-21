@@ -1,16 +1,30 @@
-import { User } from '../models/Article.model';
-import { Subject } from 'rxjs/Subject';
+import { Article } from '../models/Article.model';
+import { Subject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import{ GlobalConstants } from './../common/global-constants';
 
+
+@Injectable()
 export class ArticleService {
   private articles: Article[];
   articleSubject = new Subject<Article[]>();
+  httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
-  emitArticles() {
-    this.articleSubject.next(this.articles.slice());
+
+  constructor( private httpClient: HttpClient) {
   }
 
-  addArticle(article: Article) {
-    this.articles.push(article);
-    this.emitArticles();
+  //emitArticles() {
+  //  this.articleSubject.next(this.articles.slice());
+  //}
+
+  addArticle(article: Article) : Observable<any>{
+    return this.httpClient.post(GlobalConstants.apiURL+'article_add', article, this.httpOptions);
   }
 }
