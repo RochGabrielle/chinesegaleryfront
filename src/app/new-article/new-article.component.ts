@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class NewArticleComponent implements OnInit {
 
-  //articleForm: FormGroup;
 articleForm : FormGroup;
   constructor(private formBuilder: FormBuilder,
   			  private articleService: ArticleService,
@@ -47,6 +46,7 @@ onSubmitForm() {
       formValue['category'],
 
     );
+    console.log(JSON.stringify(newArticle));
     this.articleService.addArticle(newArticle);
     this.router.navigate(['/articles']);
   }

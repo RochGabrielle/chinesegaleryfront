@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import{ GlobalConstants } from './../common/global-constants';
 import { Observable } from 'rxjs';
@@ -6,15 +6,26 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TranslationService {
+httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    //'Authorization': 'my-auth-token'
+  })
+};
 
 //private traduction: any[] = ['world hello!'];
 
 constructor(private httpClient: HttpClient) { }
 
-translate(lang: string, item: string, keyword: string) : Observable<any>{
+translateAllEntity(lang: string, item: string) : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'translation/'+lang+'/'+item+'/'+keyword);
+    .get<any[]>(GlobalConstants.apiURL+'translation/'+lang+'/'+item);
 
+}
+
+addTranslation( newItem: Object) {
+return this.httpClient
+    .post<any[]>(GlobalConstants.apiURL+'translation_add', JSON.stringify(newItem),this.httpOptions);
 }
   
 }

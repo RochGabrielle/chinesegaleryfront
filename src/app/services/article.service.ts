@@ -25,6 +25,6 @@ export class ArticleService {
   //}
 
   addArticle(article: Article) : Observable<any>{
-    return this.httpClient.post(GlobalConstants.apiURL+'article_add', article, this.httpOptions);
+    return this.httpClient.post(GlobalConstants.apiURL+'article_add', JSON.stringify(article), this.httpOptions);
   }
 }

@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit(): void {
 
-  this.history = this.translationService.translate('en', this.translationBook, 'gattere')[0];
+  this.history = this.translationService.translateAllEntity('en', this.translationBook)[0];
   }
 
 }

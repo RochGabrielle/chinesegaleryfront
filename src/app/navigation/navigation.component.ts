@@ -15,38 +15,21 @@ history: string ;
 contact: string ;
 admin: string;
 
-
   constructor(private translationService: TranslationService) { }
 
   ngOnInit(): void {
 
-this.translationService.translate('en', this.componentName, 'history').subscribe(
+this.translationService.translateAllEntity('en', this.componentName).subscribe(
   (response) => {
-          this.history = response;
-          console.log(this.history);
-        },
-        (error) => {
-          console.log('Erreur ! : ' + error);
-          this.history = 'ca ne marche pas!';
+          this.history = response.history;
+          this.contact = response.contact;
+          this.admin   = response.admin;
         }
+        //,
+        //(error) => {
+         // console.log('Erreur ! : ');
+         // this.history = 'ca ne marche pas!';
+       // }
       );
- this.translationService.translate('fr', this.componentName, 'contact').subscribe(
-  (response) => {
-  		this.contact = response;
-  },
-  (error) => {
-          console.log('Erreur ! : ' + error);
-        }
-
-  );
-  this.translationService.translate('fr', this.componentName, 'admin').subscribe(
-  (response) => {
-      this.admin = response;
-  },
-  (error) => {
-          console.log('Erreur ! : ' + error);
-        }
-
-  );
   }
 }
