@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,12 +22,15 @@ import { ArticleService } from './services/article.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
+import { SimpletranslationlistComponent } from './simpletranslationlist/simpletranslationlist.component';
+import { EditsimpletranslationComponent } from './editsimpletranslation/editsimpletranslation.component';
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'articles', component: ArticleListComponent },
   { path: 'new-article', component: NewArticleComponent },
+  { path: 'edit_material', component: SimpletranslationlistComponent},
   { path: '', component: ContactComponent }
 ];
 
@@ -42,7 +46,9 @@ const appRoutes: Routes = [
     ContactComponent,
     EditArticleComponent,
     ArticleListComponent,
-    NewArticleComponent
+    NewArticleComponent,
+    SimpletranslationlistComponent,
+    EditsimpletranslationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule, 
+    NgbModule,
   ],
   providers: [
       TranslationService,

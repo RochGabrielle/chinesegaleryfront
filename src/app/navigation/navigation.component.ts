@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class NavigationComponent implements OnInit {
 
 componentName: string = "navigation";
+home: string;
 history: string ;
 contact: string ;
 admin: string;
@@ -19,17 +20,13 @@ admin: string;
 
   ngOnInit(): void {
 
-this.translationService.translateAllEntity('en', this.componentName).subscribe(
+this.translationService.translateAllEntity('en_gb', this.componentName).subscribe(
   (response) => {
+          this.home = response.home;
           this.history = response.history;
           this.contact = response.contact;
           this.admin   = response.admin;
         }
-        //,
-        //(error) => {
-         // console.log('Erreur ! : ');
-         // this.history = 'ca ne marche pas!';
-       // }
       );
   }
 }

@@ -27,5 +27,10 @@ addTranslation( newItem: Object) {
 return this.httpClient
     .post<any[]>(GlobalConstants.apiURL+'translation_add', JSON.stringify(newItem),this.httpOptions);
 }
+
+simpletranslationlist(entity:string) : Observable<any>{
+return this.httpClient
+    .get<any[]>(GlobalConstants.apiURL+'translationlist/'+entity);
+}
   
 }
