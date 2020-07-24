@@ -35,19 +35,19 @@ articleForm : FormGroup;
 
 onSubmitForm() {
     const formValue = this.articleForm.value;
-    const newArticle = new Article(
-      formValue['title'],
-      formValue['artist'],
-      formValue['dynasty'],
-      formValue['theme'],
-      formValue['material'],
-      formValue['discount'],
-      formValue['price'],
-      formValue['category'],
+   // const newArticle = new Article(
+   //   formValue['title'],
+   //   formValue['artist'],
+   //   formValue['dynasty'],
+   //   formValue['theme'],
+   //   formValue['material'],
+   //   formValue['discount'],
+    //  formValue['price'],
+    //  formValue['category'],
 
-    );
-    console.log(JSON.stringify(newArticle));
-    this.articleService.addArticle(newArticle);
-    this.router.navigate(['/articles']);
+   // );
+  //  console.log(JSON.stringify(newArticle));
+  //  this.articleService.addArticle(newArticle);
+   // this.router.navigate(['/articles']);
   }
 }

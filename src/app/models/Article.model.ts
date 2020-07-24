@@ -7,7 +7,11 @@ export class Article {
     public description: string,
     public discount: number,
     public price: number,
+    public length: number,
+    public width: number,
+    public artist: string,
     public category?: string[],
     public theme?: string[],
+    
   ) {}
 }

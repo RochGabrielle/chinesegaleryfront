@@ -19,11 +19,16 @@ import { Routes } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
 import { TranslationService } from './services/translation.service';
 import { ArticleService } from './services/article.service';
+import { DiscountService } from './services/discount.service';
+import { SizecategoryService } from './services/sizecategory.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { SimpletranslationlistComponent } from './simpletranslationlist/simpletranslationlist.component';
 import { EditsimpletranslationComponent } from './editsimpletranslation/editsimpletranslation.component';
+import { EditArtistComponent } from './edit-artist/edit-artist.component';
+import { EditDiscountComponent } from './edit-discount/edit-discount.component';
+import { EditSizeCategoryComponent } from './edit-size-category/edit-size-category.component';
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
@@ -31,6 +36,11 @@ const appRoutes: Routes = [
   { path: 'articles', component: ArticleListComponent },
   { path: 'new-article', component: NewArticleComponent },
   { path: 'edit_material', component: SimpletranslationlistComponent},
+  { path: 'edit_category', component: SimpletranslationlistComponent},
+  { path: 'edit_theme', component: SimpletranslationlistComponent},
+  { path: 'edit_sizecategory', component: SimpletranslationlistComponent},
+  { path: 'edit_discount', component: EditDiscountComponent},
+  { path: 'edit_artist', component: EditArtistComponent},  
   { path: '', component: ContactComponent }
 ];
 
@@ -48,7 +58,10 @@ const appRoutes: Routes = [
     ArticleListComponent,
     NewArticleComponent,
     SimpletranslationlistComponent,
-    EditsimpletranslationComponent
+    EditsimpletranslationComponent,
+    EditArtistComponent,
+    EditDiscountComponent,
+    EditSizeCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +75,8 @@ const appRoutes: Routes = [
   ],
   providers: [
       TranslationService,
-      ArticleService
+      ArticleService,
+      DiscountService
   ],
   bootstrap: [AppComponent]
 })

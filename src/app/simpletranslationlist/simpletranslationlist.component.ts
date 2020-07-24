@@ -32,7 +32,9 @@ headers = ["placeholder", "en_gb", "fr_fr"];
 	this.initForm(placeholder, en_gb, fr_fr);
 	}
 
-	add() {console.log("on ajoute!");}
+	add() {console.log("on ajoute!");
+  this.initForm();
+  }
 
 	initForm( placeholder: string = '', en_gb: string = '', fr_fr: string = '') {
     this.translationForm = new FormGroup({
@@ -53,8 +55,14 @@ headers = ["placeholder", "en_gb", "fr_fr"];
       this.entity
     );
     console.log(JSON.stringify(newTranslation));
-    this.translationService.addTranslation(newTranslation);
-    this.router.navigate(['/edit_material']);
+    this.translationService.addTranslation(newTranslation).subscribe(
+  (response) => { 
+  this.router.navigate([this.location.path()]);
+  console.log(this.location.path());
+  }
+
+  );
+    
 
 	}
 
