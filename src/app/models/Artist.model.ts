@@ -3,7 +3,9 @@ export class Artist {
     public name: string,
     public birth: string,
     public death: string,
-    public description: string,
-    public dynasty?: string[],
+    public en_gb: string,
+    public fr_fr: string,
+    public dynasty: string[],
+    public entity: string
   ) {}
 }

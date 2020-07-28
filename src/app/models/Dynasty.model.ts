@@ -3,6 +3,8 @@ export class Dynasty {
     public name: string,
     public birth: number,
     public death: number,
-    public description: string,
+    public en_gb: string,
+    public fr_fr: string,
+    public entity: string,
   ) {}
 }

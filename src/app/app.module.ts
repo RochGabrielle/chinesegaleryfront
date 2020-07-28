@@ -21,6 +21,7 @@ import { TranslationService } from './services/translation.service';
 import { ArticleService } from './services/article.service';
 import { DiscountService } from './services/discount.service';
 import { SizecategoryService } from './services/sizecategory.service';
+import { ElementService } from './services/element.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -29,6 +30,8 @@ import { EditsimpletranslationComponent } from './editsimpletranslation/editsimp
 import { EditArtistComponent } from './edit-artist/edit-artist.component';
 import { EditDiscountComponent } from './edit-discount/edit-discount.component';
 import { EditSizeCategoryComponent } from './edit-size-category/edit-size-category.component';
+import { DynastyComponent } from './dynasty/dynasty.component';
+import { EditDynastyComponent } from './edit-dynasty/edit-dynasty.component';
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
@@ -38,9 +41,11 @@ const appRoutes: Routes = [
   { path: 'edit_material', component: SimpletranslationlistComponent},
   { path: 'edit_category', component: SimpletranslationlistComponent},
   { path: 'edit_theme', component: SimpletranslationlistComponent},
+  { path: 'edit_navigation', component: SimpletranslationlistComponent},
   { path: 'edit_sizecategory', component: SimpletranslationlistComponent},
   { path: 'edit_discount', component: EditDiscountComponent},
   { path: 'edit_artist', component: EditArtistComponent},  
+  { path: 'edit_dynasty', component: EditDynastyComponent},  
   { path: '', component: ContactComponent }
 ];
 
@@ -61,7 +66,9 @@ const appRoutes: Routes = [
     EditsimpletranslationComponent,
     EditArtistComponent,
     EditDiscountComponent,
-    EditSizeCategoryComponent
+    EditSizeCategoryComponent,
+    DynastyComponent,
+    EditDynastyComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,8 @@ const appRoutes: Routes = [
   providers: [
       TranslationService,
       ArticleService,
-      DiscountService
+      DiscountService,
+      ElementService,
   ],
   bootstrap: [AppComponent]
 })

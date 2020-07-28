@@ -8,39 +8,33 @@
       {{column}}
       </th>
       	</tr>
-      	<tr *ngFor="let artist of artists">
+      	<tr *ngFor="let dynasty of dynastys">
       		<td >
-      			{{artist.name}}     			
+      			{{dynasty.name}}     			
       		</td>
       		<td>    
-      			{{artist.birth}} 			
+      			{{dynasty.birth}} 			
       		</td>
       		<td>     			
-      			{{artist.death}}
+      			{{dynasty.death}}
       		</td>
       		<td>     			
-      			{{artist.en_gb}}
+      			{{dynasty.en_gb}}
       		</td>
       		<td>     			
-      			{{artist.fr_fr}}
+      			{{dynasty.fr_fr}}
       		</td>
-      		<td> 
-      		<ul>
-      		<li *ngFor="let dyn of artist.dynasty" >{{dyn.dyn}}</li> 
-      	</ul>
-      		</td>
-
       		<td>
-      			<button (click) = "edit(artist.name,artist.birth,artist.death,artist.en_gb,artist.fr_fr, artist.dynasty)">edit</button>
+      			<button (click) = "edit(dynasty.name,dynasty.birth,dynasty.death,dynasty.en_gb,dynasty.fr_fr)">edit</button>
       		</td>
       	</tr>
       </table>      
     </div>
   </div>
 </div>
-<button (click) = "add()">add new artist</button>
+<button (click) = "add()">add new dynasty</button>
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
-  <form [formGroup]="artistForm" (ngSubmit)="onSubmitForm()">
+  <form [formGroup]="dynastyForm" (ngSubmit)="onSubmitForm()">
     <div class="form-group">
       <label for="name">name</label>
       <input type="text" id="name" class="form-control" formControlName="name">
@@ -61,11 +55,6 @@
       <label for="fr_fr">fr_fr</label>
       <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
     </div>
-    <div *ngFor="let dynasty of dynastyList" class="form-group">
-    <input type="checkbox" [value]="dynasty.id" (change)="onChange($event)"/>
-    {{ dynasty.name }}
-  </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
