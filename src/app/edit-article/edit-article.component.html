@@ -1,1 +1,71 @@
-<p>edit-article works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>{{entity}}</h2>
+      <table>
+      	<tr>
+      		<th *ngFor = "let column of headers">     		
+      {{column}}
+      </th>
+      	</tr>
+      	<tr *ngFor="let article of articles">
+      		<td >
+      			{{article.title}}     			
+      		</td>
+      		<td>    
+      			{{article.birth}} 			
+      		</td>
+      		<td>     			
+      			{{article.price}}
+      		</td>
+      		<td>
+      			{{article.category[0].placeholder}}
+      		</td>
+      		<td> 
+      			{{article.material[0].placeholder}}
+      		</td>
+      		<td>
+      			<button (click) = "edit(article.title,article.birth,article.price,article.category[0].id,article.material[0].id)">edit</button>
+      		</td>
+      	</tr>
+      </table>      
+    </div>
+  </div>
+</div>
+<button (click) = "add()">add new article</button>
+<div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text" id="title" class="form-control" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label for="birth">birth</label>
+      <input type="text" id="birth" class="form-control" formControlName="birth">
+    </div>
+    <div class="form-group">
+      <label for="price">price</label>
+      <input type="text" id="price" class="form-control" formControlName="price">
+    </div>
+    <div class="form-group">
+      <label for="category">Category: </label>
+  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="category">
+    <option value="0">--All--</option>
+    <option *ngFor="let category of categoryList" value={{category.id}}>
+      {{category.placeholder}}
+    </option>
+  </select>
+    </div>
+    <div class="form-group">
+      <label for="material">Material: </label>
+  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="material">
+    <option value="0">--All--</option>
+    <option *ngFor="let material of materialList" value={{material.id}}>
+      {{material.placeholder}}
+    </option>
+  </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

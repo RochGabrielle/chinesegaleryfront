@@ -45,7 +45,8 @@ const appRoutes: Routes = [
   { path: 'edit_sizecategory', component: SimpletranslationlistComponent},
   { path: 'edit_discount', component: EditDiscountComponent},
   { path: 'edit_artist', component: EditArtistComponent},  
-  { path: 'edit_dynasty', component: EditDynastyComponent},  
+  { path: 'edit_dynasty', component: EditDynastyComponent},
+  { path: 'edit_article', component: EditArticleComponent},  
   { path: '', component: ContactComponent }
 ];
 

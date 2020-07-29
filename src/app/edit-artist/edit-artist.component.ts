@@ -101,6 +101,7 @@ constructor(private router: Router,
   this.entity = this.location.path().slice(6);
   this.elementService.elementlist(this.entity).subscribe(
   (response) => {
+  console.log(Object.values(response));
   this.artists = Object.values(response);
 
         }

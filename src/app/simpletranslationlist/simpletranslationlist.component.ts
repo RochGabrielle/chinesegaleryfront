@@ -58,6 +58,7 @@ headers = ["placeholder", "en_gb", "fr_fr"];
     this.translationService.addTranslation(newTranslation).subscribe(
   (response) => { 
   this.router.navigate([this.location.path()]);
+  this.router.navigate(['edit_material']);
   console.log(this.location.path());
   }
 
