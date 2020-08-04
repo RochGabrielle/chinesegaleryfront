@@ -25,7 +25,18 @@
       			{{article.material[0].placeholder}}
       		</td>
       		<td>
-      			<button (click) = "edit(article.title,article.birth,article.price,article.category[0].id,article.material[0].id)">edit</button>
+      			<button (click) = "edit(article.title,
+            article.birth,
+            article.price,
+            article.category[0].id,
+            article.material[0].id,
+            article.discount[0].id,
+            article.artist,
+            article.dynasty,
+            article.en_gb,
+            article.fr_fr,
+            article.sizes
+            )">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -51,7 +62,7 @@
       <label for="category">Category: </label>
   <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="category">
     <option value="0">--All--</option>
-    <option *ngFor="let category of categoryList" value={{category.id}}>
+    <option *ngFor="let category of categoryList" [value]="category.id">
       {{category.placeholder}}
     </option>
   </select>
@@ -60,11 +71,107 @@
       <label for="material">Material: </label>
   <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="material">
     <option value="0">--All--</option>
-    <option *ngFor="let material of materialList" value={{material.id}}>
+    <option *ngFor="let material of materialList" [value]="material.id">
       {{material.placeholder}}
     </option>
   </select>
     </div>
+     <div class="form-group">
+      <label for="discount">Discount: </label>
+  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="discount">
+    <option value="0">--All--</option>
+    <option *ngFor="let discount of discountList" [value]="discount.id">
+      {{discount.placeholder}}
+    </option>
+  </select>
+    </div>
+    <div class="form-group">
+      <label for="artist">Artist: </label>
+  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="artist">
+    <option value="0">--All--</option>
+    <option *ngFor="let artist of artistList" [value]="artist.id">
+      {{artist.name}}
+    </option>
+  </select>
+    </div>
+    <div class="form-group">
+      <label for="dynasty">Dynasty: </label>
+  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="dynasty">
+    <option value="0">--All--</option>
+    <option *ngFor="let dynasty of dynastyList" [value]="dynasty.id">
+      {{dynasty.name}}
+    </option>
+  </select>
+    </div>
+    <div class="form-group">
+      <label for="en_gb">English description:</label>
+      <input type="text" id="en_gb" class="form-control" formControlName="en_gb">
+    </div>
+    <div class="form-group">
+      <label for="fr_fr">French description:</label>
+      <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
+    </div>
+
+    <div>
+  <h3>Sizes</h3> <button  type="button" (click)="addSize()">Add size</button>
+
+  <div formArrayName="sizes" class="form-group" *ngFor="let size of articleForm.get('sizes').controls; let i=index">
+    <!-- The repeated alias template -->
+    <div [formGroupName]="i">
+    <label>
+      width:{{index}}
+      <input type="text" class="form-control" formControlName="width">
+    </label>
+    <label>
+      length:{{index}}
+      <input type="text" class="form-control" formControlName="length">
+    </label>
+    <label>
+      <input type="text" class="form-control" formControlName="sizeId" hidden>
+    </label>
+    <label for="sizecategory">Size category: </label>
+  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="sizecategoryId">
+    <option value="0">--All--</option>
+    <option *ngFor="let sizecategory of sizecategoryList" [value]="sizecategory.id">
+      {{sizecategory.placeholder}}
+    </option>
+  </select>
+</div>
+  </div>
+</div>
+<h3>Upload article small picture</h3>
+    
+    <div class="form-group">
+        <label for="file">File</label>
+        <input 
+            formControlName="smallImage"
+            id="smallImage" 
+            type="file" 
+            class="form-control"
+            (change)="smallImageChange($event)">
+        <div *ngIf="f.smallImage.touched && f.smallImage.invalid" class="alert alert-danger">
+            <div *ngIf="f.smallImage.errors.required">File is required.</div>
+        </div>
+    </div>
+    
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+
+<h3>Upload article big picture</h3>
+    
+    <div class="form-group">
+        <label for="file">File</label>
+        <input 
+            formControlName="bigImage"
+            id="bigImage" 
+            type="file" 
+            class="form-control"
+            (change)="bigImageChange($event)">
+        <div *ngIf="f.bigImage.touched && f.bigImage.invalid" class="alert alert-danger">
+            <div *ngIf="f.bigImage.errors.required">File is required.</div>
+        </div>
+    </div>
+    
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

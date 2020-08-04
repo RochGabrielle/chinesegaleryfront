@@ -1,0 +1,23 @@
+.gallery {
+	display: flex;
+
+}
+
+.gallery-item {
+	width: 800px;
+	text-align: center;
+}
+
+.gallery-item img {
+  display: block;
+  max-width:150px;
+  max-height:150px;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+}
+
+.gallery-item ul {
+list-style:none;
+cursor: pointer;
+}

@@ -17,6 +17,8 @@ export class ArticleService {
 };
 
 
+
+
   constructor( private httpClient: HttpClient) {
   }
 
@@ -24,8 +26,8 @@ export class ArticleService {
   //  this.articleSubject.next(this.articles.slice());
   //}
 
-  addArticle(article: Article) : Observable<any>{
-    return this.httpClient.post(GlobalConstants.apiURL+'add_article', JSON.stringify(article), this.httpOptions);
+  addArticle(article: FormData) : Observable<any>{
+    return this.httpClient.post(GlobalConstants.apiURL+'add_article', article);
   }
 
   articlelist() : Observable<any>{
@@ -38,5 +40,14 @@ return this.httpClient
     .get<any[]>(GlobalConstants.apiURL+'simpleArticleList/'+entity);
 }
 
+
+uploadFile(fd : FormData) : Observable<any> {
+  return this.httpClient.post(GlobalConstants.apiURL+'uploadFile', fd);
+}
+
+articleGalleryList(lang: string) {
+  return this.httpClient
+    .get<any[]>(GlobalConstants.apiURL+'articleGalleryList/'+lang);
+}
 
 }

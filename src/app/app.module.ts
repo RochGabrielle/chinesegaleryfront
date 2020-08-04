@@ -32,6 +32,8 @@ import { EditDiscountComponent } from './edit-discount/edit-discount.component';
 import { EditSizeCategoryComponent } from './edit-size-category/edit-size-category.component';
 import { DynastyComponent } from './dynasty/dynasty.component';
 import { EditDynastyComponent } from './edit-dynasty/edit-dynasty.component';
+import { HomeComponent } from './home/home.component';
+import { DisplayarticleComponent } from './displayarticle/displayarticle.component';
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
@@ -46,7 +48,9 @@ const appRoutes: Routes = [
   { path: 'edit_discount', component: EditDiscountComponent},
   { path: 'edit_artist', component: EditArtistComponent},  
   { path: 'edit_dynasty', component: EditDynastyComponent},
-  { path: 'edit_article', component: EditArticleComponent},  
+  { path: 'edit_article', component: EditArticleComponent},
+  { path: 'displayArticle', component: DisplayarticleComponent},   
+  { path: 'home', component: HomeComponent },
   { path: '', component: ContactComponent }
 ];
 
@@ -69,13 +73,15 @@ const appRoutes: Routes = [
     EditDiscountComponent,
     EditSizeCategoryComponent,
     DynastyComponent,
-    EditDynastyComponent
+    EditDynastyComponent,
+    HomeComponent,
+    DisplayarticleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     FormsModule,
     ReactiveFormsModule,
     BrowserModule, 

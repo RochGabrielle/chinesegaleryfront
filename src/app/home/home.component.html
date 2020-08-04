@@ -1,0 +1,18 @@
+<div class= "gallery">
+<div  class= "gallery-item" *ngFor="let article of gallery">
+ <ul (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
+        <li>
+        	<img src= "{{imgSrc}}{{article.smallimage}}">
+      	</li>
+      	
+<li>
+      		
+      		{{article.title}}  
+      		
+      	</li>
+      	<li>{{article.bigimage}}</li>
+      </ul>
+
+
+</div>
+</div>

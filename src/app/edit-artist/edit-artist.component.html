@@ -62,7 +62,7 @@
       <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
     </div>
     <div *ngFor="let dynasty of dynastyList" class="form-group">
-    <input type="checkbox" [value]="dynasty.id" (change)="onChange($event)"/>
+    <input type="checkbox" [value]="dynasty.id" (change)="onChange($event)" name="dynasty.id"/>
     {{ dynasty.name }}
   </div>
 
