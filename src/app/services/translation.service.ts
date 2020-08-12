@@ -13,7 +13,6 @@ httpOptions = {
   })
 };
 
-//private traduction: any[] = ['world hello!'];
 
 constructor(private httpClient: HttpClient) { }
 

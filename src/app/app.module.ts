@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,10 @@ import { ArticleService } from './services/article.service';
 import { DiscountService } from './services/discount.service';
 import { SizecategoryService } from './services/sizecategory.service';
 import { ElementService } from './services/element.service';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { TokenStorageService } from './services/token-storage.service';
+import { FirewallService } from './services/firewall.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -34,6 +39,10 @@ import { DynastyComponent } from './dynasty/dynasty.component';
 import { EditDynastyComponent } from './edit-dynasty/edit-dynasty.component';
 import { HomeComponent } from './home/home.component';
 import { DisplayarticleComponent } from './displayarticle/displayarticle.component';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { RegisterComponent } from './register/register.component';
+
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
@@ -50,6 +59,8 @@ const appRoutes: Routes = [
   { path: 'edit_dynasty', component: EditDynastyComponent},
   { path: 'edit_article', component: EditArticleComponent},
   { path: 'displayArticle', component: DisplayarticleComponent},   
+   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: ContactComponent }
 ];
@@ -76,6 +87,9 @@ const appRoutes: Routes = [
     EditDynastyComponent,
     HomeComponent,
     DisplayarticleComponent,
+    LoginComponent,
+    UserComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +106,12 @@ const appRoutes: Routes = [
       ArticleService,
       DiscountService,
       ElementService,
+      UserService,
+      AuthService,
+      TokenStorageService,
+      authInterceptorProviders,
+      FirewallService
+
   ],
   bootstrap: [AppComponent]
 })
