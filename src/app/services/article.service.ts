@@ -27,12 +27,12 @@ export class ArticleService {
   //}
 
   addArticle(article: FormData) : Observable<any>{
-    return this.httpClient.post(GlobalConstants.apiURL+'add_article', article);
+    return this.httpClient.post(GlobalConstants.apiAdminURL+'add_article', article);
   }
 
   articlelist() : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'articlelist');
+    .get<any[]>(GlobalConstants.apiAdminURL+'articlelist');
 }
 
 simplearticlelist(entity:string) : Observable<any>{
@@ -42,7 +42,7 @@ return this.httpClient
 
 
 uploadFile(fd : FormData) : Observable<any> {
-  return this.httpClient.post(GlobalConstants.apiURL+'uploadFile', fd);
+  return this.httpClient.post(GlobalConstants.apiAdminURL+'uploadFile', fd);
 }
 
 articleGalleryList(lang: string) {

@@ -19,12 +19,12 @@ constructor(private httpClient: HttpClient) { }
 
 addDiscount( newItem: Object) {
 return this.httpClient
-    .post<any[]>(GlobalConstants.apiURL+'add_discount', JSON.stringify(newItem),this.httpOptions);
+    .post<any[]>(GlobalConstants.apiAdminURL+'add_discount', JSON.stringify(newItem),this.httpOptions);
 }
 
 discountlist() : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'discountlist');
+    .get<any[]>(GlobalConstants.apiAdminURL+'discountlist');
 }
   
 }

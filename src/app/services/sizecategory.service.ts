@@ -19,7 +19,7 @@ constructor(private httpClient: HttpClient) { }
 
 addSizecategory( newItem: Object) {
 return this.httpClient
-    .post<any[]>(GlobalConstants.apiURL+'add_sizecategory', JSON.stringify(newItem),this.httpOptions);
+    .post<any[]>(GlobalConstants.apiAdminURL+'add_sizecategory', JSON.stringify(newItem),this.httpOptions);
 }
 
 sizecategorylist() : Observable<any>{

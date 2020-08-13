@@ -19,7 +19,7 @@ constructor(private httpClient: HttpClient) { }
 
 addElement( newItem: Object) {
 return this.httpClient
-    .post<any[]>(GlobalConstants.apiURL+'add_element', JSON.stringify(newItem),this.httpOptions);
+    .post<any[]>(GlobalConstants.apiAdminURL+'add_element', JSON.stringify(newItem),this.httpOptions);
 }
 
 elementlist(entity:string) : Observable<any>{
