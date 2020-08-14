@@ -32,7 +32,7 @@ export class ArticleService {
 
   articlelist() : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiAdminURL+'articlelist');
+    .get<any[]>(GlobalConstants.apiURL+'articlelist');
 }
 
 simplearticlelist(entity:string) : Observable<any>{

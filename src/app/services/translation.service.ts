@@ -29,7 +29,7 @@ return this.httpClient
 
 simpletranslationlist(entity:string) : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'translationlist/'+entity);
+    .get<any[]>(GlobalConstants.apiAdminURL+'translationlist/'+entity);
 }
   
 }
