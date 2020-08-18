@@ -45,9 +45,13 @@ uploadFile(fd : FormData) : Observable<any> {
   return this.httpClient.post(GlobalConstants.apiAdminURL+'uploadFile', fd);
 }
 
-articleGalleryList(lang: string) {
+articleGalleryList(lang: string, type: string) : Observable<any>{
   return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'articleGalleryList/'+lang);
+    .get<any[]>(GlobalConstants.apiURL+'gallery/'+type+'/'+lang);
+}
+
+updateStatus(data) : Observable<any> {
+  return this.httpClient.post(GlobalConstants.apiAdminURL+'status', data, this.httpOptions);
 }
 
 }

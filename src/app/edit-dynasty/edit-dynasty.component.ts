@@ -14,12 +14,12 @@ import { Dynasty } from '../models/Dynasty.model';
 export class EditDynastyComponent implements OnInit {
 
 entity: string;
-dynasty: {name: string, birth: number, death: number, en_gb: string, fr_fr: string};
-dynastys: Array<{name: string, birth: number, death: number, en_gb: string, fr_fr: string}>;
+dynasty: {name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string};
+dynastys: Array<{name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string}>;
 dynastyForm : FormGroup;
 edition: boolean = false;
 
-headers = ["name", "birth", "death", "en_gb", "fr_fr"];
+headers = ["name", "birth", "death", "en_gb", "fr_fr","cn_cn"];
 
    constructor(private router: Router, 
    				private location:Location, 
@@ -27,22 +27,23 @@ headers = ["name", "birth", "death", "en_gb", "fr_fr"];
    				private formBuilder: FormBuilder) 
    				{ }
 
-	edit(name: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '') {
-	console.log("on édite!");
-	this.initForm(name, birth, death, en_gb, fr_fr);
+	edit(name: string = '', name_cn: string = '',birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '',cn_cn: string) {
+	this.initForm(name, name_cn, birth, death, en_gb, fr_fr,cn_cn);
 	}
 
 	add() {console.log("on ajoute!");
   this.initForm();
   }
 
-	initForm( name: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '') {
+	initForm( name: string = '',name_cn: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '',cn_cn: string = '') {
     this.dynastyForm = new FormGroup({
       name: new FormControl(name),
+      name_cn: new FormControl(name_cn),
       birth: new FormControl(birth),
       death: new FormControl(death),
       en_gb: new FormControl(en_gb),
       fr_fr: new FormControl(fr_fr),
+      cn_cn: new FormControl(cn_cn),
     	});
     this.edition = true;
 	}
@@ -52,10 +53,12 @@ headers = ["name", "birth", "death", "en_gb", "fr_fr"];
 	const formValue = this.dynastyForm.value;
     const newDynasty = new Dynasty(
       formValue['name'],
+      formValue['name_cn'],
       formValue['birth'],
       formValue['death'],
       formValue['en_gb'],
       formValue['fr_fr'],
+      formValue['cn_cn'],
       this.entity
     );
     console.log(JSON.stringify(newDynasty));

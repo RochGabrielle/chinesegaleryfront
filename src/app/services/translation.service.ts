@@ -27,9 +27,10 @@ return this.httpClient
     .post<any[]>(GlobalConstants.apiAdminURL+'translation_add', JSON.stringify(newItem),this.httpOptions);
 }
 
-simpletranslationlist(entity:string) : Observable<any>{
+// Type of list if true complete list if false list only of placeholders and id
+simpletranslationlist(entity:string, typeOflist:string) : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiAdminURL+'translationlist/'+entity);
+    .get<any[]>(GlobalConstants.apiAdminURL+'translationlist/'+entity+'/'+typeOflist);
 }
   
 }

@@ -67,18 +67,14 @@ headers = ["placeholder", "en_gb", "fr_fr"];
 
 	}
 
-
-
   ngOnInit(): void {
   this.entity = this.location.path().slice(6);
-  this.translationService.simpletranslationlist(this.entity).subscribe(
+  this.translationService.simpletranslationlist(this.entity, 'true').subscribe(
   (response) => {
 
   this.translations =response;
  console.log(this.translations[0]);
- console.log(this.translations[0].placeholder);
-
-      
+ console.log(this.translations[0].placeholder);     
         }
       );
 

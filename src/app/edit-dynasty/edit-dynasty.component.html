@@ -24,8 +24,11 @@
       		<td>     			
       			{{dynasty.fr_fr}}
       		</td>
+          <td>          
+            {{dynasty.cn_cn}}
+          </td>
       		<td>
-      			<button (click) = "edit(dynasty.name,dynasty.birth,dynasty.death,dynasty.en_gb,dynasty.fr_fr)">edit</button>
+      			<button (click) = "edit(dynasty.name,dynasty.name_cn, dynasty.birth,dynasty.death,dynasty.en_gb,dynasty.fr_fr,dynasty.cn_cn)">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -38,6 +41,10 @@
     <div class="form-group">
       <label for="name">name</label>
       <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="name_cn">name_cn</label>
+      <input type="text" id="name_cn" class="form-control" formControlName="name_cn">
     </div>
     <div class="form-group">
       <label for="birth">birth</label>
@@ -54,6 +61,10 @@
     <div class="form-group">
       <label for="fr_fr">fr_fr</label>
       <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="cn_cn">cn_cn</label>
+      <input type="text" id="cn_cn" class="form-control" formControlName="cn_cn">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

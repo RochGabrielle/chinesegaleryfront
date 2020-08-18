@@ -24,6 +24,7 @@ import { SizecategoryService } from './services/sizecategory.service';
 import { ElementService } from './services/element.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
+import { MuseumService } from './services/museum.service';
 import { TokenStorageService } from './services/token-storage.service';
 import { FirewallService } from './services/firewall.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
@@ -41,6 +42,7 @@ import { DisplayarticleComponent } from './displayarticle/displayarticle.compone
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
+import { MuseumComponent } from './museum/museum.component';
 
 
 const appRoutes: Routes = [
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
   { path: 'edit_artist', component: EditArtistComponent},  
   { path: 'edit_dynasty', component: EditDynastyComponent},
   { path: 'edit_article', component: EditArticleComponent},
+  { path: 'edit_museum', component: MuseumComponent},
   { path: 'displayArticle', component: DisplayarticleComponent},   
    { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -88,7 +91,8 @@ const appRoutes: Routes = [
     DisplayarticleComponent,
     LoginComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    MuseumComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +113,8 @@ const appRoutes: Routes = [
       AuthService,
       TokenStorageService,
       authInterceptorProviders,
-      FirewallService
+      FirewallService,
+      MuseumService
 
   ],
   bootstrap: [AppComponent]

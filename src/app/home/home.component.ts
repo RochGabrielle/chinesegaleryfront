@@ -15,6 +15,21 @@ import{ GlobalConstants } from './../common/global-constants';
 })
 export class HomeComponent implements OnInit {
 
+main : Array<{
+  title: string, 
+  birth: number, 
+  price : number, 
+  smallimage : string,
+  bigimage : string,
+  en_gb : string,
+  fr_fr : string,
+  category: any[],
+  material: any[],
+  discount: any[],
+  artist: any[],
+  dynasty: any[],
+}>;
+
 gallery : Array<{
 	title: string, 
 	birth: number, 
@@ -46,14 +61,27 @@ imgSrc = GlobalConstants.imgURL;
 
   ngOnInit(): void {
 
-  	 this.articleService.articlelist().subscribe(
+    this.articleService.articleGalleryList('fr_fr', "main").subscribe(
   (response) => {
+    console.log("main");
+  console.log(Object.values(response));
+  console.log(this.imgSrc);
+  this.main = Object.values(response);
+
+        }
+      );
+
+    this.articleService.articleGalleryList('fr_fr', "gallery").subscribe(
+  (response) => {
+    console.log("gallery");
   console.log(Object.values(response));
   console.log(this.imgSrc);
   this.gallery = Object.values(response);
 
         }
       );
+
+  	
   }
 
 }

@@ -24,6 +24,9 @@
       		<td>     			
       			{{artist.fr_fr}}
       		</td>
+          <td>          
+            {{artist.cn_cn}}
+          </td>
       		<td> 
       		<ul>
       		<li *ngFor="let dyn of artist.dynasty" >{{dyn.dyn}}</li> 
@@ -31,7 +34,7 @@
       		</td>
 
       		<td>
-      			<button (click) = "edit(artist.name,artist.birth,artist.death,artist.en_gb,artist.fr_fr, artist.dynasty)">edit</button>
+      			<button (click) = "edit(artist.name,artist.namecn, artist.birth,artist.death,artist.en_gb,artist.fr_fr, artist.dynasty)">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -44,6 +47,10 @@
     <div class="form-group">
       <label for="name">name</label>
       <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="name_cn">name_cn</label>
+      <input type="text" id="name_cn" class="form-control" formControlName="name_cn">
     </div>
     <div class="form-group">
       <label for="birth">birth</label>
@@ -60,6 +67,10 @@
     <div class="form-group">
       <label for="fr_fr">fr_fr</label>
       <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="cn_cn">cn_cn</label>
+      <input type="text" id="cn_cn" class="form-control" formControlName="cn_cn">
     </div>
     <div *ngFor="let dynasty of dynastyList" class="form-group">
     <input type="checkbox" [value]="dynasty.id" (change)="onChange($event)" name="dynasty.id"/>

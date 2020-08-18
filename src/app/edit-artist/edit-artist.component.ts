@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { ElementService } from './../services/element.service';
+import { TranslationService } from './../services/translation.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { Artist } from '../models/Artist.model';
@@ -14,22 +15,24 @@ import { Artist } from '../models/Artist.model';
 export class EditArtistComponent implements OnInit {
 
 entity: string;
-artist: {name: string, birth: number, death: number, en_gb: string, fr_fr: string, dynasty: Array<{id: number, name: string}>};
-artists: Array<{name: string, birth: number, death: number, en_gb: string, fr_fr: string, dynasty: Array<{id: number, name: string}>}>;
+artist: {name: string,name_cn: string, birth: number, death: number, en_gb: string, fr_fr: string, cn_cn: string, dynasty: Array<{id: number, name: string}>};
+artists: Array<{name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string, cn_cn: string,dynasty: Array<{id: number, name: string}>}>;
 artistForm : FormGroup;
 edition: boolean = false;
 dynastyList: Array<{id: number, name: string}>;
 
-headers = ["name", "birth", "death", "en_gb", "fr_fr", "dynasty"];
+headers = ["name", "birth", "death", "en_gb", "fr_fr", "cn_cn","dynasty"];
 
 constructor(private router: Router, 
    				private location:Location, 
    				private elementService: ElementService,
-   				private formBuilder: FormBuilder) 
+   				private formBuilder: FormBuilder,
+          private translationService: TranslationService,
+           ) 
    				{ }
 
-	edit(name: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '', dynasty: any[] = []) {
-	this.initForm(name, birth, death, en_gb, fr_fr, dynasty);
+	edit(name: string = '', name_cn: string = '',birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '', cn_cn: string = '',dynasty: any[] = []) {
+	this.initForm(name, name_cn, birth, death, en_gb, fr_fr, cn_cn, dynasty);
 	
 	}
 
@@ -54,17 +57,19 @@ constructor(private router: Router,
   }
   }
 
-	initForm( name: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '', dynasty: any[] = []) {
+	initForm( name: string = '',name_cn: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '', cn_cn: string = '',dynasty: any[] = []) {
 
-	this.elementService.simpleelementlist('dynasty').subscribe(
+	this.translationService.simpletranslationlist('dynasty','false').subscribe(
   (response) => {
   this.dynastyList =response;
   this.artistForm = new FormGroup({
       name: new FormControl(name),
+      name_cn: new FormControl(name_cn),
       birth: new FormControl(birth),
       death: new FormControl(death),
       en_gb: new FormControl(en_gb),
       fr_fr: new FormControl(fr_fr),
+      cn_cn: new FormControl(cn_cn),
       dynastyChoice: new FormArray([])
     	});
     	this.artistForm.get('dynastyChoice');
@@ -81,10 +86,12 @@ constructor(private router: Router,
 	const formValue = this.artistForm.value;
     const newArtist = new Artist(
       formValue['name'],
+      formValue['name_cn'],
       formValue['birth'],
       formValue['death'],
       formValue['en_gb'],
       formValue['fr_fr'],
+      formValue['cn_cn'],
       formValue['dynastyChoice'],
       this.entity
     );

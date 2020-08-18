@@ -25,7 +25,12 @@
       			{{article.material[0].placeholder}}
       		</td>
       		<td>
-      			<button (click) = "edit(article.title,
+      			<button (click) = "edit(
+            article.id,
+            article.title,
+            article.title_en, 
+            article.title_fr, 
+            article.title_cn,
             article.birth,
             article.price,
             article.category[0].id,
@@ -38,6 +43,19 @@
             article.sizes
             )">edit</button>
       		</td>
+          <td>
+            <div class="o-switch btn-group" data-toggle="buttons" role="group">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="{{article.id}}" id="1" value = "1" autocomplete="on" checked  (change) = "status($event)"> Actif
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="{{article.id}}" id="2" value = "2" autocomplete="on" (change) = "status($event)"> Première page
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="{{article.id}}" id="3" value = "3" autocomplete="on" (change) = "status($event)"> désactivé
+  </label>
+</div>
+          </td>
       	</tr>
       </table>      
     </div>
@@ -46,9 +64,25 @@
 <button (click) = "add()">add new article</button>
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="articleForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group" display:hidden>
+      <label for="id">id</label>
+      <input type="text" id="id" class="form-control" formControlName="id">
+    </div>
     <div class="form-group">
       <label for="title">title</label>
-      <input type="text" id="title" class="form-control" formControlName="title">
+      <input type="text" id="title" class="form-control" formControlName="title" >
+    </div>
+    <div class="form-group">
+      <label for="title_en_gb">title_en_gb</label>
+      <input type="text" id="title_en_gb" class="form-control" formControlName="title_en_gb">
+    </div>
+    <div class="form-group">
+      <label for="title_fr_fr">title_fr_fr</label>
+      <input type="text" id="title_fr_fr" class="form-control" formControlName="title_fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="title_cn_cn">title_cn_cn</label>
+      <input type="text" id="title_cn_cn" class="form-control" formControlName="title_cn_cn">
     </div>
     <div class="form-group">
       <label for="birth">birth</label>
@@ -60,7 +94,7 @@
     </div>
     <div class="form-group">
       <label for="category">Category: </label>
-  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="category">
+  <select  class="form-control" formControlName="category">
     <option value="0">--All--</option>
     <option *ngFor="let category of categoryList" [value]="category.id">
       {{category.placeholder}}
@@ -69,7 +103,7 @@
     </div>
     <div class="form-group">
       <label for="material">Material: </label>
-  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="material">
+  <select  class="form-control" formControlName="material">
     <option value="0">--All--</option>
     <option *ngFor="let material of materialList" [value]="material.id">
       {{material.placeholder}}
@@ -78,7 +112,7 @@
     </div>
      <div class="form-group">
       <label for="discount">Discount: </label>
-  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="discount">
+  <select  class="form-control" formControlName="discount">
     <option value="0">--All--</option>
     <option *ngFor="let discount of discountList" [value]="discount.id">
       {{discount.placeholder}}
@@ -87,19 +121,28 @@
     </div>
     <div class="form-group">
       <label for="artist">Artist: </label>
-  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="artist">
+  <select class="form-control" formControlName="artist">
     <option value="0">--All--</option>
     <option *ngFor="let artist of artistList" [value]="artist.id">
-      {{artist.name}}
+      {{artist.placeholder}}
     </option>
   </select>
     </div>
     <div class="form-group">
       <label for="dynasty">Dynasty: </label>
-  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="dynasty">
+  <select class="form-control" formControlName="dynasty">
     <option value="0">--All--</option>
     <option *ngFor="let dynasty of dynastyList" [value]="dynasty.id">
-      {{dynasty.name}}
+      {{dynasty.placeholder}}
+    </option>
+  </select>
+    </div>
+    <div class="form-group">
+      <label for="museum">Museum: </label>
+  <select  class="form-control" formControlName="museum">
+    <option value="0">--All--</option>
+    <option *ngFor="let museum of museumList" [value]="museum.id">
+      {{museum.placeholder}}
     </option>
   </select>
     </div>
@@ -110,6 +153,10 @@
     <div class="form-group">
       <label for="fr_fr">French description:</label>
       <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="cn_cn">Chinese description:</label>
+      <input type="text" id="cn_cn" class="form-control" formControlName="cn_cn">
     </div>
 
     <div>
@@ -130,7 +177,7 @@
       <input type="text" class="form-control" formControlName="sizeId" hidden>
     </label>
     <label for="sizecategory">Size category: </label>
-  <select (change)="dropdownchange($event.target.value)" class="form-control" formControlName="sizecategoryId">
+  <select  class="form-control" formControlName="sizecategoryId">
     <option value="0">--All--</option>
     <option *ngFor="let sizecategory of sizecategoryList" [value]="sizecategory.id">
       {{sizecategory.placeholder}}

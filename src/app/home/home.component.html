@@ -1,3 +1,18 @@
+
+<div class= "main">
+  <div  class= "main-item" *ngFor="let mainarticle of main">
+  
+         
+          <img src= "{{imgSrc}}{{mainarticle.bigimage}}">
+        <div>{{mainarticle.title}}</div>
+        <p>{{mainarticle.title_cn}}
+        
+        <p> {{mainarticle.fr_fr}}</p>
+
+
+</div>
+</div>
+
 <div class= "gallery">
 <div  class= "gallery-item" *ngFor="let article of gallery">
  <ul (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
