@@ -28,18 +28,20 @@
       			<button (click) = "edit(
             article.id,
             article.title,
-            article.title_en, 
-            article.title_fr, 
-            article.title_cn,
+            article.title_en_gb, 
+            article.title_fr_fr, 
+            article.title_cn_cn,
             article.birth,
             article.price,
             article.category[0].id,
             article.material[0].id,
             article.discount[0].id,
-            article.artist,
-            article.dynasty,
-            article.en_gb,
-            article.fr_fr,
+            article.artist[0].id,
+            article.dynasty[0].id,
+            '0',
+            article.museum[0].id,
+            article.description_en_gb,
+            article.description_fr_fr,
             article.sizes
             )">edit</button>
       		</td>
@@ -66,7 +68,7 @@
   <form [formGroup]="articleForm" (ngSubmit)="onSubmitForm()">
     <div class="form-group" display:hidden>
       <label for="id">id</label>
-      <input type="text" id="id" class="form-control" formControlName="id">
+      <input type="text" id="id" class="form-control" formControlName="id" hidden>
     </div>
     <div class="form-group">
       <label for="title">title</label>
@@ -119,6 +121,39 @@
     </option>
   </select>
     </div>
+     <div class="form-group">
+      <label for="media">Media: </label>
+  <select class="form-control" formControlName="media" (change)="mediachoice($event)">
+    <option value="0">--All--</option>
+    <option *ngFor="let media of mediaList" [value]="media.id">
+      {{media.placeholder}}
+    </option>
+  </select>
+    </div>
+    Theme: 
+    <div class="form-group" *ngIf="paintingchoice">
+      <div *ngFor="let order of themesFormArray.controls; let i = index">
+      <label formArrayName="themes" *ngIf="themeList[i].media == 'painting'">
+    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'painting'">
+    {{themeList[i].placeholder}}
+      </label>
+</div>
+    </div>
+    <ng-template [ngIf]="themeList" [ngIfElse]="loading">
+ <div class="hero-list">
+ </div>
+</ng-template>
+    <ng-template #loading>
+ <div>Loading...</div>
+</ng-template>
+    <div class="form-group" *ngIf="calligraphychoice">
+      <div *ngFor="let order of themesFormArray.controls; let i = index">
+      <label formArrayName="themes" *ngIf="themeList[i].media == 'Calligraphy'">
+    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'Calligraphy'">
+    {{themeList[i].placeholder}}
+  </label>
+</div>
+    </div>
     <div class="form-group">
       <label for="artist">Artist: </label>
   <select class="form-control" formControlName="artist">
@@ -147,16 +182,12 @@
   </select>
     </div>
     <div class="form-group">
-      <label for="en_gb">English description:</label>
-      <input type="text" id="en_gb" class="form-control" formControlName="en_gb">
+      <label for="description_en_gb">English description:</label>
+      <input type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb">
     </div>
     <div class="form-group">
-      <label for="fr_fr">French description:</label>
-      <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
-    </div>
-    <div class="form-group">
-      <label for="cn_cn">Chinese description:</label>
-      <input type="text" id="cn_cn" class="form-control" formControlName="cn_cn">
+      <label for="description_fr_fr">French description:</label>
+      <input type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr">
     </div>
 
     <div>

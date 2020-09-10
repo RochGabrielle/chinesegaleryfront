@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { ArticleService } from './../services/article.service';
 import { ElementService } from './../services/element.service';
 import { TranslationService } from './../services/translation.service';
+import { StatusService } from './../services/status.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
 import { Article } from '../models/Article.model';
@@ -26,23 +27,28 @@ museumList: Array<{id: number, name: string}>;
 categoryList: Array<{id: number, name: string}>;
 discountList: Array<{id: number, name: string}>;
 themeList: Array<{id: number, name: string}>;
+mediaList: Array<{id: number, name: string}>;
 sizeCategoryList: Array<{id: number, name: string}>;
 sizes: FormArray;
 imageSrc: string| ArrayBuffer=null;
 smallImage: string| Blob;
 bigImage: string| Blob;
+paintingchoice: boolean = false;
+calligraphychoice: boolean = false;
+
 
 headers = ["title", "date of creation", "price", "category", "material", "discount"];
 
 constructor(private router: Router, 
-   				private location:Location, 
-   				private articleService: ArticleService,
-   				private elementService: ElementService,
-   				private translationService: TranslationService,
-   				private formBuilder: FormBuilder) 
-   				{ }
+           private location:Location, 
+           private articleService: ArticleService,
+           private elementService: ElementService,
+           private translationService: TranslationService,
+           private statusService: StatusService,
+           private formBuilder: FormBuilder) 
+           { }
 
-	edit( id: number = 0,
+  edit( id: number = 0,
         title: string = '', 
         title_en_gb: string = '',
         title_fr_fr: string = '',
@@ -54,29 +60,56 @@ constructor(private router: Router,
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
+        media:  number = 0,
         museum:  number = 0, 
-        en_gb: string = '',
-        fr_fr: string = '',
-        cn_cn: string = '',
+        description_en_gb: string = '',
+        description_fr_fr: string = '',
         sizes:  any[] = []
         ) {
-	this.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,category, material,discount, artist,dynasty,museum, en_gb, fr_fr, cn_cn, sizes );
-	}
+    const me =this;
 
-	add() {
+    const promise = new Promise(function(resolve, reject) {
+      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,category, material,discount, artist,dynasty,media,museum, description_en_gb, description_fr_fr, sizes );
+    resolve('form has been charged!');
+    console.log(me.articleForm);
+    console.log(this.articleForm);
+    })
+    console.log(sizes);
+    promise.then( function(value) {
+      sizes.forEach( size => {
+        console.log('in promise');
+        console.log(size);
+        console.log(me);
+        console.log(this);
+        console.log(me.articleForm);
+me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
+  });
+      console.log(value);
+    });
+   
+  }
+
+  add() {
   this.initForm( 0, '', '', '', '',
          0, 
          0, 
          0, 
          0,
+         0,
          0, 
          0, 
          0,
          0, 
         '',
         '',
-        '',
         []);
+  }
+
+  mediachoice(event) {
+    const selectedValue = event.target.value;
+    console.log(selectedValue);
+this.paintingchoice = selectedValue == 4 ? true : false; 
+this.calligraphychoice = selectedValue == 5 ? true : false; 
   }
 
 
@@ -87,7 +120,7 @@ constructor(private router: Router,
       status: e.target.value,
       entity: 'article'
     };
-this.articleService.updateStatus(JSON.stringify(data)).subscribe(
+this.statusService.updateStatus(JSON.stringify(data)).subscribe(
   (response) => {
 
   }
@@ -99,18 +132,20 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
 
   }
 
-  createSizeForm(width: number= 0, length: number = 0, sizeId: number = 0, sizecategoryId: number = 0): FormGroup {
-  return this.formBuilder.group({
-    width: width,
-    length: length,
-    sizeId: sizeId,
-    sizecategoryId: sizecategoryId
-  });
-}
 
-  addSize() {
-  this.sizes = this.articleForm.get('sizes') as FormArray;
-  this.sizes.push(this.createSizeForm());
+  createSizeForm(width: number = 0, length: number = 0, sizeId: number = 0, sizecategoryId: number = 0) : FormGroup {
+    return this.formBuilder.group({
+          width : width,
+          length: length,
+          sizeId: sizeId,
+          sizecategoryId: sizecategoryId
+        });
+  }
+
+  addSize(width: number = 45, length: number = 23, sizeId: number = 1, sizecategoryId: number = 1) {
+    const me = this;
+  me.sizes = me.articleForm.get('sizes') as FormArray;
+  me.sizes.push(me.createSizeForm(width, length, sizeId, sizecategoryId));
   }
 
   getSimpleList(entity: string = '') {
@@ -129,6 +164,15 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
     this[entity+'List'] =response;         
         }
       );
+  }
+
+  private addCheckboxes() {
+    console.log(this.themeList);
+    this.themeList.forEach(() => this.themesFormArray.push(new FormControl(false)));
+  }
+
+  get themesFormArray() {
+    return this.articleForm.controls.themes as FormArray;
   }
 
   get f(){
@@ -156,7 +200,7 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
   }   
 
 
-	initForm( 
+  initForm( 
         id: number = 0,
         title: string = '', 
         title_en_gb: string = '', 
@@ -169,26 +213,29 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
+        media:  number = 0,
         museum: number = 0, 
-        en_gb: string = '',
-        fr_fr: string = '',
-        cn_cn: string = '',
+        description_en_gb: string = '',
+        description_fr_fr: string = '',
         sizes: any[] 
         ) {
-	
+  
 
-	this.getSimpleList('category');
+  this.getSimpleList('category');
   this.getSimpleList('discount');
   this.getSimpleList('sizecategory');
   this.getSimpleList('theme');
   this.getSimpleList('museum');
   this.getSimpleList('artist');
   this.getSimpleList('dynasty');
+  this.getSimpleList('media');
+
 
       this.translationService.simpletranslationlist('material', 'false').subscribe(
   (response) => {
-  console.log(response);
   this.materialList =response;
+  console.log(this.themeList);
+  console.log(this.mediaList);
 
 
     this.edition = true;   
@@ -196,65 +243,48 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
       this.articleForm = new FormGroup({
       id: new FormControl(id),
       title: new FormControl(title),
-      title_en_gb: new FormControl(title),
-      title_fr_fr: new FormControl(title),
-      title_cn_cn: new FormControl(title),
+      title_en_gb: new FormControl(title_en_gb),
+      title_fr_fr: new FormControl(title_fr_fr),
+      title_cn_cn: new FormControl(title_cn_cn),
       birth: new FormControl(birth),
       price: new FormControl(price),
       category: new FormControl(category),
       material: new FormControl(material),
-      discount: new FormControl(material),
+      discount: new FormControl(discount),
       artist: new FormControl(artist),
       dynasty: new FormControl(dynasty),
+      media: new FormControl(media),
+      themes: new FormArray([]),
       museum: new FormControl(museum),
-      en_gb: new FormControl(en_gb),
-      fr_fr: new FormControl(fr_fr),
-      cn_cn: new FormControl(cn_cn),
-      sizes: this.formBuilder.array([
-      this.createSizeForm()
-            ]),
+      description_en_gb: new FormControl(description_en_gb),
+      description_fr_fr: new FormControl(description_fr_fr),
+      sizes: this.formBuilder.array([this.createSizeForm()]),
       smallImage: new FormControl(),
       bigImage: new FormControl(),
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
       });
+
+      this.addCheckboxes();
     }
   );     
-	}
+  }
 
-	onSubmitForm(){
-	console.log('helloesss');
+  onSubmitForm(){
 
-	const formValue = this.articleForm.value;
-    const newArticle = new Article(
-      formValue['id'],
-      formValue['title'],
-      formValue['title_en_gb'],
-      formValue['title_fr_fr'],
-      formValue['title_cn_cn'],
-      formValue['birth'],
-      formValue['price'],
-      formValue['category'],
-      formValue['material'],
-      formValue['discount'],
-      formValue['artist'],
-      formValue['dynasty'],
-      formValue['museum'],
-      formValue['en_gb'],
-      formValue['fr_fr'],
-      formValue['cn_cn'],
-      formValue['sizes'],
-      formValue['smallImage'],
-      formValue['bigImage'],
-    );
-    console.log( 'string sizes:');
-    console.log(formValue['sizes'],);
+  const formValue = this.articleForm.value;
+const selectedOrderIds = formValue.themes
+      .map((checked, i) => checked ? this.themeList[i].id : null)
+      .filter(v => v !== null);
+      console.log('selected themes:');
+    console.log(selectedOrderIds);
+
     const formValues = new FormData();
     formValues.append('id', formValue['id']);
     formValues.append('title', formValue['title']);
-    formValues.append('title_en_gb', formValue['title']);
-    formValues.append('title_fr_fr', formValue['title']);
-    formValues.append('title_cn_cn', formValue['title']);
+    formValues.append('title_en_gb', formValue['title_en_gb']);
+    formValues.append('title_fr_fr', formValue['title_fr_fr']);
+    formValues.append('title_cn_cn', formValue['title_cn_cn']);
     formValues.append('birth', formValue['birth']);
     formValues.append('price', formValue['price']);
     formValues.append('category', formValue['category']);
@@ -262,18 +292,20 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
     formValues.append('discount', formValue['discount']);
     formValues.append('artist', formValue['artist']);
     formValues.append('dynasty', formValue['dynasty']);
+    formValues.append('media', formValue['media']);
+    formValues.append('themes', selectedOrderIds);
     formValues.append('museum', formValue['museum']);
-    formValues.append('en_gb', formValue['en_gb']);
-    formValues.append('fr_fr', formValue['fr_fr']);
-    formValues.append('cn_cn', formValue['cn_cn']);
+    formValues.append('description_en_gb', formValue['description_en_gb']);
+    formValues.append('description_fr_fr', formValue['description_fr_fr']);
     formValues.append('sizes', JSON.stringify(formValue['sizes']));
     formValues.append('fr_fr', formValue['fr_fr']);
-    formValues.append('smallImage', this.smallImage);
-    formValues.append('bigImage', this.bigImage);
+    formValues.append('small', this.smallImage);
+    formValues.append('big', this.bigImage);
     console.log( 'form dataaaaaaa:');
    
     console.log( formValues.get('sizes'));
-
+    console.log( formValues.get('artist'));
+console.log( formValues.get('themes'));
     this.articleService.addArticle(formValues).subscribe(
   (response) => { 
 
@@ -289,7 +321,7 @@ this.articleService.updateStatus(JSON.stringify(data)).subscribe(
     formData.append('file', this.articleForm.get('fileSource').value);
    console.log(formData);
     
-	}
+  }
 
   ngOnInit(): void {
   this.entity = this.location.path().slice(6);

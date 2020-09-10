@@ -34,3 +34,22 @@ height: 1000px;
 .main-item img{
 
 }
+
+.test {
+	position: relative;
+}
+
+.toto  {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 2s, opacity 2s, left 2s;
+}
+
+.toto:hover {
+ opacity: 0.5; 
+ left: -100px;
+}

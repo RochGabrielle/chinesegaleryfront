@@ -25,8 +25,10 @@ import { ElementService } from './services/element.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { MuseumService } from './services/museum.service';
+import { SlideService } from './services/slide.service';
 import { TokenStorageService } from './services/token-storage.service';
 import { FirewallService } from './services/firewall.service';
+import { StatusService } from './services/status.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -43,6 +45,8 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { MuseumComponent } from './museum/museum.component';
+import { EditSlideshowComponent } from './edit-slideshow/edit-slideshow.component';
+import { EditThemeComponent } from './edit-theme/edit-theme.component';
 
 
 const appRoutes: Routes = [
@@ -52,7 +56,7 @@ const appRoutes: Routes = [
   { path: 'new-article', component: NewArticleComponent },
   { path: 'edit_material', component: SimpletranslationlistComponent},
   { path: 'edit_category', component: SimpletranslationlistComponent},
-  { path: 'edit_theme', component: SimpletranslationlistComponent},
+  { path: 'edit_theme', component: EditThemeComponent},
   { path: 'edit_navigation', component: SimpletranslationlistComponent},
   { path: 'edit_sizecategory', component: SimpletranslationlistComponent},
   { path: 'edit_discount', component: EditDiscountComponent},
@@ -60,6 +64,8 @@ const appRoutes: Routes = [
   { path: 'edit_dynasty', component: EditDynastyComponent},
   { path: 'edit_article', component: EditArticleComponent},
   { path: 'edit_museum', component: MuseumComponent},
+  { path: 'edit_slideshow', component: EditSlideshowComponent},
+  { path: 'edit_media', component: SimpletranslationlistComponent},
   { path: 'displayArticle', component: DisplayarticleComponent},   
    { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -92,7 +98,9 @@ const appRoutes: Routes = [
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    MuseumComponent
+    MuseumComponent,
+    EditSlideshowComponent,
+    EditThemeComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +122,9 @@ const appRoutes: Routes = [
       TokenStorageService,
       authInterceptorProviders,
       FirewallService,
-      MuseumService
+      MuseumService,
+      SlideService,
+      StatusService
 
   ],
   bootstrap: [AppComponent]

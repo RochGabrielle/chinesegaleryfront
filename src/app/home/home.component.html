@@ -1,17 +1,18 @@
+<ngb-carousel 
+interval="6000"
+>
 
-<div class= "main">
-  <div  class= "main-item" *ngFor="let mainarticle of main">
-  
-         
-          <img src= "{{imgSrc}}{{mainarticle.bigimage}}">
-        <div>{{mainarticle.title}}</div>
-        <p>{{mainarticle.title_cn}}
-        
-        <p> {{mainarticle.fr_fr}}</p>
+  <ng-template ngbSlide *ngFor="let slide of slides">
+    <div class="picsum-img-wrapper">
+      <img src="{{imgSrc}}{{slide.desktop}}" alt="{{slide.title}}">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{slide.title}}</h3>
+      <p>{{slide.subtitle}}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
 
-
-</div>
-</div>
 
 <div class= "gallery">
 <div  class= "gallery-item" *ngFor="let article of gallery">

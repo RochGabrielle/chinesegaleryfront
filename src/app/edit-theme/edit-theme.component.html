@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>{{entity}}</h2>
+      <table>
+      	<tr>
+      		<th *ngFor = "let column of headers">     		
+      {{column}}
+      </th>
+      	</tr>
+      	<tr *ngFor="let theme of themes">
+      		<td >
+      			{{theme.placeholder}}     			
+      		</td>
+      		<td>    
+      			{{theme.en_gb}} 			
+      		</td>
+      		<td>     			
+      			{{theme.fr_fr}}
+      		</td>
+      		<td>     			
+      			{{theme.media}}
+      		</td>
+      		<td>
+      			<button (click) = "edit(theme.placeholder,theme.en_gb,theme.fr_fr,theme.mediaId)">edit</button>
+      		</td>
+      	</tr>
+      </table>      
+    </div>
+  </div>
+</div>
+<button (click) = "add()">add new placeholder</button>
+<div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
+  <form [formGroup]="themeForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="title">placeholder</label>
+      <input type="text" id="title" class="form-control" formControlName="placeholder">
+    </div>
+    <div class="form-group">
+      <label for="artist">fr_fr</label>
+      <input type="text" id="artist" class="form-control" formControlName="fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="dynasty">en_gb</label>
+      <input type="text" id="dynasty" class="form-control" formControlName="en_gb">
+    </div>
+    <div class="form-group">
+      <label for="category">Media: </label>
+  <select  class="form-control" formControlName="media">
+    <option value="0">--All--</option>
+    <option *ngFor="let media of medias" [value]="media.id">
+      {{media.placeholder}}
+    </option>
+  </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

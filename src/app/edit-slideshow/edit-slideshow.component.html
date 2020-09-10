@@ -1,0 +1,135 @@
+<p>edit-slideshow works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>{{entity}}</h2>
+      <table>
+      	<tr>
+      		<th *ngFor = "let column of headers">     		
+      {{column}}
+      </th>
+      	</tr>
+      	<tr *ngFor="let slide of slides">
+      		<td >
+      			{{slide.title}}     			
+      		</td>
+      		<td >
+      			{{slide.desktop}}     			
+      		</td>
+      		<td >
+      			{{slide.tablet}}     			
+      		</td>
+      		<td >
+      			{{slide.mobile}}     			
+      		</td>
+      		<td >
+      			{{slide.status}}     			
+      		</td>
+      		
+      		<td>
+      			<button (click) = "edit(
+            slide.id,
+            slide.title, 
+            slide.title_en_gb,
+            slide.title_fr_fr,
+            slide.title_cn_cn,
+            slide.subtitle_en_gb,
+            slide.subtitle_fr_fr
+          )">
+      edit</button>
+      		</td>
+          <td>
+            <div class="o-switch btn-group" data-toggle="buttons" role="group">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="{{slide.id}}" id="1" value = "1" autocomplete="on" checked  (change) = "status($event)"> Actif
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="{{slide.id}}" id="3" value = "3" autocomplete="on" (change) = "status($event)"> désactivé
+  </label>
+</div>
+          </td>
+      	</tr>
+      </table>      
+    </div>
+  </div>
+</div>
+
+<button (click) = "add()">add new slide</button>
+
+<div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
+  <form [formGroup]="slideshowForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group" display:hidden>
+      <label for="id">id</label>
+      <input type="text" id="id" class="form-control" formControlName="id">
+    </div>
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text" id="title" class="form-control" formControlName="title" >
+    </div>
+    <div class="form-group">
+      <label for="title_en_gb">title_en_gb</label>
+      <input type="text" id="title_en_gb" class="form-control" formControlName="title_en_gb">
+    </div>
+    <div class="form-group">
+      <label for="title_fr_fr">title_fr_fr</label>
+      <input type="text" id="title_fr_fr" class="form-control" formControlName="title_fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="title_cn_cn">title_cn_cn</label>
+      <input type="text" id="title_cn_cn" class="form-control" formControlName="title_cn_cn">
+    </div>
+    <div class="form-group">
+      <label for="subtitle_en_gb">subtitle_en_gb</label>
+      <input type="text" id="subtitle_en_gb" class="form-control" formControlName="subtitle_en_gb">
+    </div>
+    <div class="form-group">
+      <label for="subtitle_fr_fr">subtitle_fr_fr</label>
+      <input type="text" id="subtitle_fr_fr" class="form-control" formControlName="subtitle_fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="subtitle_cn_cn">title_cn_cn</label>
+      <input type="text" id="subtitle_cn_cn" class="form-control" formControlName="subtitle_cn_cn">
+    </div>
+<div class="form-group">
+        <label for="file">File desktop</label>
+        <input 
+            formControlName="desktop"
+            id="desktop" 
+            type="file" 
+            class="form-control"
+            (change)="imageChange($event)">
+        <div *ngIf="f.desktop.touched && f.desktop.invalid" class="alert alert-danger">
+            <div *ngIf="f.desktop.errors.required">File is required.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="file">File tablet</label>
+        <input 
+            formControlName="tablet"
+            id="tablet" 
+            type="file" 
+            class="form-control"
+            (change)="imageChange($event)">
+        <div *ngIf="f.tablet.touched && f.tablet.invalid" class="alert alert-danger">
+            <div *ngIf="f.tablet.errors.required">File is required.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="file">File mobile</label>
+        <input 
+            formControlName="mobile"
+            id="mobile" 
+            type="file" 
+            class="form-control"
+            (change)="imageChange($event)">
+        <div *ngIf="f.mobile.touched && f.mobile.invalid" class="alert alert-danger">
+            <div *ngIf="f.mobile.errors.required">File is required.</div>
+        </div>
+    </div>
+    
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+ <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
