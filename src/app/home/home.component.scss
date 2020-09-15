@@ -1,6 +1,14 @@
 .gallery {
-	display: flex;
+	width: 1000px;
 
+}
+
+.maingallery {
+  background-color: #f1f1f1;
+  padding: 20px;
+  font-family: Arial;
+  max-width: 1000px;
+  margin: auto;
 }
 
 .gallery-item {
@@ -52,4 +60,49 @@ height: 1000px;
 .toto:hover {
  opacity: 0.5; 
  left: -100px;
+}
+
+.row {
+  margin: 8px -16px;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+/* Add padding BETWEEN each column (if you want) */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+   float: left;
+   width: 200 px; 
+  display: none; /* Hide columns by default */
+}
+
+/* Clear floats after rows */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: white;
+  padding: 10px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+  width: 200px;
+}
+
+.gallery img {
+  max-width: 100px;
+  max-height: 100px;
 }
