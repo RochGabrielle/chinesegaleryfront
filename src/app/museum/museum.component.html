@@ -13,13 +13,13 @@
       			{{museum.placeholder}}     			
       		</td>
       		<td>    
-      			{{museum.en_gb}} 			
+      			{{museum.name_en_gb}} 			
       		</td>
       		<td>     			
-      			{{museum.fr_fr}}
+      			{{museum.name_fr_fr}}
       		</td>
       		<td>     			
-      			{{museum.cn_cn}}
+      			{{museum.name_cn_cn}}
       		</td>
       		<td>     			
       			{{museum.link}}
@@ -29,7 +29,7 @@
       		</td>
 
       		<td>
-      			<button (click) = "edit(museum.id, museum.placeholder,museum.en_gb,museum.fr_fr, museum.cn_cn,museum.link,museum.linkname )">edit</button>
+      			<button (click) = "edit(museum.id, museum.placeholder,museum.name_en_gb,museum.name_fr_fr, museum.name_cn_cn,museum.link,museum.linkname )">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -47,16 +47,16 @@
       <input type="text" id="placeholder" class="form-control" formControlName="placeholder">
     </div>
     <div class="form-group">
-      <label for="fr_fr">fr_fr</label>
-      <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
+      <label for="name_fr_fr">name in french</label>
+      <input type="text" id="name_fr_fr" class="form-control" formControlName="name_fr_fr">
     </div>
     <div class="form-group">
-      <label for="en_gb">en_gb</label>
-      <input type="text" id="en_gb" class="form-control" formControlName="en_gb">
+      <label for="name_en_gb">name in english</label>
+      <input type="text" id="name_en_gb" class="form-control" formControlName="name_en_gb">
     </div>
     <div class="form-group">
-      <label for="cn_cn">cn_cn</label>
-      <input type="text" id="en_gb" class="form-control" formControlName="cn_cn">
+      <label for="name_cn_cn">name in chinese</label>
+      <input type="text" id="name_cn_cn" class="form-control" formControlName="name_cn_cn">
     </div>
     <div class="form-group">
       <label for="link">link</label>

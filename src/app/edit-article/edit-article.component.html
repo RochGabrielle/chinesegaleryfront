@@ -145,8 +145,8 @@
 </ng-template>
     <div class="form-group" *ngIf="calligraphychoice">
       <div *ngFor="let order of themesFormArray.controls; let i = index">
-      <label formArrayName="themes" *ngIf="themeList[i].media == 'Calligraphy'">
-    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'Calligraphy'">
+      <label formArrayName="themes" *ngIf="themeList[i].media == 'calligraphy'">
+    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'calligraphy'">
     {{themeList[i].placeholder}}
   </label>
 </div>

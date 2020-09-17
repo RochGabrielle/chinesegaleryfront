@@ -36,13 +36,13 @@ headers = ["placeholder", "en_gb", "fr_fr","cn_cn","link", "linkname"];
   this.initForm();
   }
 
-	initForm(id: number = 0, placeholder: string = '', en_gb: string = '', fr_fr: string = '', cn_cn: string = '', link: string = '',linkname: string = '') {
+	initForm(id: number = 0, placeholder: string = '', name_en_gb: string = '', name_fr_fr: string = '', name_cn_cn: string = '', link: string = '',linkname: string = '') {
     this.museumForm = new FormGroup({
     	id: new FormControl(id),
       placeholder: new FormControl(placeholder),
-      en_gb: new FormControl(en_gb),
-      fr_fr: new FormControl(fr_fr),
-      cn_cn: new FormControl(cn_cn),
+      name_en_gb: new FormControl(name_en_gb),
+      name_fr_fr: new FormControl(name_fr_fr),
+      name_cn_cn: new FormControl(name_cn_cn),
       link: new FormControl(link),
       linkname: new FormControl(linkname),
     	});
@@ -55,9 +55,9 @@ headers = ["placeholder", "en_gb", "fr_fr","cn_cn","link", "linkname"];
     const newMuseum = new Museum(
     	formValue['id'],
       formValue['placeholder'],
-      formValue['en_gb'],
-      formValue['fr_fr'],
-      formValue['cn_cn'],
+      formValue['name_en_gb'],
+      formValue['name_fr_fr'],
+      formValue['name_cn_cn'],
       formValue['link'],
       formValue['linkname']
     );

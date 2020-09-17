@@ -27,14 +27,16 @@ ngb-carousel {
     display: flex !important;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1.2s ease-in-out, visibility 1.2s;
+    /*transition: opacity 3s ease-in-out, visibility 3s;*/ 
+    /*animation: fadeInAndOut ease-in-out 6s;*/
     z-index: -1;
 }
 
 .carousel-item.active{
-    opacity: 1;
+    /*opacity: 1;*/
     visibility: visible;
     z-index: 10;
+    animation: fadeInAndOut ease-in-out 6s;
 }
 
 .carousel-control-prev {
@@ -49,4 +51,84 @@ ngb-carousel {
 .carousel-indicators{
     z-index: 20;
 }
+
+@keyframes fadeInAndOut {
+  0% {
+    opacity:0;
+  }
+  30% {
+  opacity:1;
+
+  }
+  70% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-moz-keyframes fadeInAndOut {
+  0% {
+    opacity:0;
+  }
+  30% {
+  opacity:1;
+
+  }
+  70% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-webkit-keyframes fadeInAndOut {
+  0% {
+    opacity:0;
+  }
+  30% {
+  opacity:1;
+
+  }
+  70% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-o-keyframes fadeInAndOut {
+  0% {
+    opacity:0;
+  }
+  30% {
+  opacity:1;
+
+  }
+  70% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+@-ms-keyframes fadeInAndOut {
+  0% {
+    opacity:0;
+  }
+  30% {
+  opacity:1;
+
+  }
+  70% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+  }
+  }
 

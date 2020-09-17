@@ -19,13 +19,13 @@
       			{{artist.death}}
       		</td>
       		<td>     			
-      			{{artist.en_gb}}
+      			{{artist.description_en_gb}}
       		</td>
       		<td>     			
-      			{{artist.fr_fr}}
+      			{{artist.description_fr_fr}}
       		</td>
           <td>          
-            {{artist.cn_cn}}
+            {{artist.description_cn_cn}}
           </td>
       		<td> 
       		<ul>
@@ -34,7 +34,7 @@
       		</td>
 
       		<td>
-      			<button (click) = "edit(artist.name,artist.namecn, artist.birth,artist.death,artist.en_gb,artist.fr_fr, artist.dynasty)">edit</button>
+      			<button (click) = "edit(artist.name,artist.name_cn_cn, artist.birth,artist.death,artist.description_en_gb,artist.description_fr_fr, artist.description_cn_cn,artist.dynasty)">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -49,32 +49,33 @@
       <input type="text" id="name" class="form-control" formControlName="name">
     </div>
     <div class="form-group">
-      <label for="name_cn">name_cn</label>
-      <input type="text" id="name_cn" class="form-control" formControlName="name_cn">
+      <label for="name_cn_cn">name in chinese</label>
+      <input type="text" id="name_cn_cn" class="form-control" formControlName="name_cn_cn">
     </div>
     <div class="form-group">
-      <label for="birth">birth</label>
+      <label for="birth">date of birth</label>
       <input type="text" id="birth" class="form-control" formControlName="birth">
     </div>
     <div class="form-group">
-      <label for="death">death</label>
+      <label for="death">date of death</label>
       <input type="text" id="death" class="form-control" formControlName="death">
     </div>
     <div class="form-group">
-      <label for="en_gb">en_gb</label>
-      <input type="text" id="en_gb" class="form-control" formControlName="en_gb">
+      <label for="description_en_gb">English biography</label>
+      <input type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb">
     </div>
     <div class="form-group">
-      <label for="fr_fr">fr_fr</label>
-      <input type="text" id="fr_fr" class="form-control" formControlName="fr_fr">
+      <label for="description_fr_fr">French biography</label>
+      <input type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr">
     </div>
     <div class="form-group">
-      <label for="cn_cn">cn_cn</label>
-      <input type="text" id="cn_cn" class="form-control" formControlName="cn_cn">
+      <label for="description_cn_cn">Chinese biography</label>
+      <input type="text" id="description_cn_cn" class="form-control" formControlName="description_cn_cn">
     </div>
+    <div> Dynasty of activity</div>
     <div *ngFor="let dynasty of dynastyList" class="form-group">
     <input type="checkbox" [value]="dynasty.id" (change)="onChange($event)" name="dynasty.id"/>
-    {{ dynasty.name }}
+    {{ dynasty.placeholder }}
   </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

@@ -22,7 +22,7 @@ addSlide(slide: FormData) : Observable<any>{
 // Type of list if true complete list if false list only of placeholders and id
 slideList() : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'slidelist/');
+    .get<any[]>(GlobalConstants.apiURL+'slideList');
 }
 
 slideshow(lang: string): Observable<any>{

@@ -35,15 +35,15 @@ headers = ["name", "birth", "death", "en_gb", "fr_fr","cn_cn"];
   this.initForm();
   }
 
-	initForm( name: string = '',name_cn: string = '', birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '',cn_cn: string = '') {
+	initForm( name: string = '',name_cn_cn: string = '', birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '',description_cn_cn: string = '') {
     this.dynastyForm = new FormGroup({
       name: new FormControl(name),
-      name_cn: new FormControl(name_cn),
+      name_cn_cn: new FormControl(name_cn_cn),
       birth: new FormControl(birth),
       death: new FormControl(death),
-      en_gb: new FormControl(en_gb),
-      fr_fr: new FormControl(fr_fr),
-      cn_cn: new FormControl(cn_cn),
+      description_en_gb: new FormControl(description_en_gb),
+      description_fr_fr: new FormControl(description_fr_fr),
+      description_cn_cn: new FormControl(description_cn_cn),
     	});
     this.edition = true;
 	}
@@ -53,12 +53,12 @@ headers = ["name", "birth", "death", "en_gb", "fr_fr","cn_cn"];
 	const formValue = this.dynastyForm.value;
     const newDynasty = new Dynasty(
       formValue['name'],
-      formValue['name_cn'],
+      formValue['name_cn_cn'],
       formValue['birth'],
       formValue['death'],
-      formValue['en_gb'],
-      formValue['fr_fr'],
-      formValue['cn_cn'],
+      formValue['description_en_gb'],
+      formValue['description_fr_fr'],
+      formValue['description_cn_cn'],
       this.entity
     );
     console.log(JSON.stringify(newDynasty));

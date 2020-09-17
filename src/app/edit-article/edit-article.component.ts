@@ -108,8 +108,8 @@ me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
   mediachoice(event) {
     const selectedValue = event.target.value;
     console.log(selectedValue);
-this.paintingchoice = selectedValue == 4 ? true : false; 
-this.calligraphychoice = selectedValue == 5 ? true : false; 
+this.paintingchoice = selectedValue == 1 ? true : false; 
+this.calligraphychoice = selectedValue == 2 ? true : false; 
   }
 
 
