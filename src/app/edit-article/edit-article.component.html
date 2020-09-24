@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>{{entity}}</h2>
-      <table>
+      <table *ngIf="articlesLoading else loading">
       	<tr>
       		<th *ngFor = "let column of headers">     		
       {{column}}
@@ -38,20 +38,23 @@
             article.discount[0].id,
             article.artist[0].id,
             article.dynasty[0].id,
-            '0',
+            article.media.id,
             article.museum[0].id,
             article.description_en_gb,
             article.description_fr_fr,
-            article.sizes
+            article.sizes,
+            article.smallimage,
+            article.bigimage,
+            article.theme
             )">edit</button>
       		</td>
           <td>
             <div class="o-switch btn-group" data-toggle="buttons" role="group">
   <label class="btn btn-secondary active">
-    <input type="radio" name="{{article.id}}" id="1" value = "1" autocomplete="on" checked  (change) = "status($event)"> Actif
+    <input type="radio" name="{{article.id}}" id="1" value = "1" autocomplete="on" [checked]="article.status == '1'"  (change) = "status($event)"> Actif
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="{{article.id}}" id="3" value = "3" autocomplete="on" (change) = "status($event)"> désactivé
+    <input type="radio" name="{{article.id}}" id="3" value = "3" autocomplete="on" [checked]="article.status == '3'" (change) = "status($event)"> désactivé
   </label>
 </div>
           </td>
@@ -61,7 +64,8 @@
   </div>
 </div>
 <button (click) = "add()">add new article</button>
-<div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
+<div *ngIf="edition">
+<div class="col-sm-8 col-sm-offset-2" *ngIf="formLoaded else editionFormloading">
   <form [formGroup]="articleForm" (ngSubmit)="onSubmitForm()">
     <div class="form-group" display:hidden>
       <label for="id">id</label>
@@ -72,27 +76,27 @@
       <input type="text" id="title" class="form-control" formControlName="title" >
     </div>
     <div class="form-group">
-      <label for="title_en_gb">title_en_gb</label>
+      <label for="title_en_gb">Title in English</label>
       <input type="text" id="title_en_gb" class="form-control" formControlName="title_en_gb">
     </div>
     <div class="form-group">
-      <label for="title_fr_fr">title_fr_fr</label>
+      <label for="title_fr_fr">Title in French</label>
       <input type="text" id="title_fr_fr" class="form-control" formControlName="title_fr_fr">
     </div>
     <div class="form-group">
-      <label for="title_cn_cn">title_cn_cn</label>
+      <label for="title_cn_cn">Title in Chinese</label>
       <input type="text" id="title_cn_cn" class="form-control" formControlName="title_cn_cn">
     </div>
     <div class="form-group">
-      <label for="birth">birth</label>
+      <label for="birth">Date of creation</label>
       <input type="text" id="birth" class="form-control" formControlName="birth">
     </div>
     <div class="form-group">
-      <label for="price">price</label>
+      <label for="price">Price</label>
       <input type="text" id="price" class="form-control" formControlName="price">
     </div>
     <div class="form-group">
-      <label for="category">Category: </label>
+      <label for="category">Category of product: </label>
   <select  class="form-control" formControlName="category">
     <option value="0">--All--</option>
     <option *ngFor="let category of categoryList" [value]="category.id">
@@ -128,7 +132,7 @@
   </select>
     </div>
     Theme: 
-    <div class="form-group" *ngIf="paintingchoice">
+    <div class="form-group" *ngIf="choiceofmedia == '2'">
       <div *ngFor="let order of themesFormArray.controls; let i = index">
       <label formArrayName="themes" *ngIf="themeList[i].media == 'painting'">
     <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'painting'">
@@ -143,7 +147,7 @@
     <ng-template #loading>
  <div>Loading...</div>
 </ng-template>
-    <div class="form-group" *ngIf="calligraphychoice">
+    <div class="form-group" *ngIf="choiceofmedia == '1'">
       <div *ngFor="let order of themesFormArray.controls; let i = index">
       <label formArrayName="themes" *ngIf="themeList[i].media == 'calligraphy'">
     <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'calligraphy'">
@@ -180,11 +184,11 @@
     </div>
     <div class="form-group">
       <label for="description_en_gb">English description:</label>
-      <input type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb">
+      <textarea type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb"> </textarea>
     </div>
     <div class="form-group">
       <label for="description_fr_fr">French description:</label>
-      <input type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr">
+      <textarea type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr"></textarea>
     </div>
 
     <div>
@@ -192,14 +196,14 @@
 
   <div formArrayName="sizes" class="form-group" *ngFor="let size of articleForm.get('sizes').controls; let i=index">
     <!-- The repeated alias template -->
-    <div [formGroupName]="i">
-    <label>
-      width:{{index}}
-      <input type="text" class="form-control" formControlName="width">
-    </label>
+    <div [formGroupName]="i"> 
     <label>
       length:{{index}}
       <input type="text" class="form-control" formControlName="length">
+    </label>
+    <label>
+      width:{{index}}
+      <input type="text" class="form-control" formControlName="width">
     </label>
     <label>
       <input type="text" class="form-control" formControlName="sizeId" hidden>
@@ -217,7 +221,8 @@
 <h3>Upload article small picture</h3>
     
     <div class="form-group">
-        <label for="file">File</label>
+      <p>Existing File : </p> {{smallImageName}}
+        <label for="file">File :</label>
         <input 
             formControlName="smallImage"
             id="smallImage" 
@@ -234,7 +239,8 @@
 <h3>Upload article big picture</h3>
     
     <div class="form-group">
-        <label for="file">File</label>
+      <p>Existing File : </p> {{bigImageName}}
+        <label for="file">File :</label>
         <input 
             formControlName="bigImage"
             id="bigImage" 
@@ -245,9 +251,21 @@
             <div *ngIf="f.bigImage.errors.required">File is required.</div>
         </div>
     </div>
-    
     <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
-
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+</div>
+<ng-template #loading>
+  Loading Articles...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>
+
+<ng-template #editionFormloading>
+  Loading edition form...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>

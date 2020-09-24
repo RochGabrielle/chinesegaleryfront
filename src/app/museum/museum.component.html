@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>{{entity}}</h2>
-      <table>
+      <table *ngIf="museumsLoaded else loading">
       	<tr>
       		<th *ngFor = "let column of headers">     		
       {{column}}
@@ -38,34 +38,42 @@
 <button (click) = "add()">add new museum</button>
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="museumForm" (ngSubmit)="onSubmitForm()">
-    <div class="form-group" display:hidden>
+    <div class="form-group" hidden>
       <label for="id">id</label>
       <input type="text" id="id" class="form-control" formControlName="id">
     </div>
     <div class="form-group">
-      <label for="placeholder">placeholder</label>
+      <label for="placeholder">placeholder :</label>
       <input type="text" id="placeholder" class="form-control" formControlName="placeholder">
     </div>
     <div class="form-group">
-      <label for="name_fr_fr">name in french</label>
+      <label for="name_fr_fr">name in french :</label>
       <input type="text" id="name_fr_fr" class="form-control" formControlName="name_fr_fr">
     </div>
     <div class="form-group">
-      <label for="name_en_gb">name in english</label>
+      <label for="name_en_gb">name in english :</label>
       <input type="text" id="name_en_gb" class="form-control" formControlName="name_en_gb">
     </div>
     <div class="form-group">
-      <label for="name_cn_cn">name in chinese</label>
+      <label for="name_cn_cn">name in chinese :</label>
       <input type="text" id="name_cn_cn" class="form-control" formControlName="name_cn_cn">
     </div>
     <div class="form-group">
-      <label for="link">link</label>
+      <label for="link">link to the museum website in http :</label>
       <input type="text" id="link" class="form-control" formControlName="link">
     </div>
     <div class="form-group">
-      <label for="linkname">linkname</label>
+      <label for="linkname">name of the link that should appear in the page :</label>
       <input type="text" id="linkname" class="form-control" formControlName="linkname">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+<ng-template #loading>
+  Loading Museums...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>
+
+

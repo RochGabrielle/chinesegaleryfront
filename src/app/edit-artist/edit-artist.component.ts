@@ -20,8 +20,11 @@ artists: Array<{name: string, name_cn: string,birth: number, death: number, en_g
 artistForm : FormGroup;
 edition: boolean = false;
 dynastyList: Array<{id: number, name: string}>;
+artistdynasty: any[];
+toto: boolean = true;
+artistsLoaded: boolean = false;
 
-headers = ["name", "birth", "death", "en_gb", "fr_fr", "cn_cn","dynasty"];
+headers = ["name", "name in Chinese", "date of birth", "date of death", "biography in english", "biography in French","biography in Chinese", "dynasty"];
 
 constructor(private router: Router, 
    				private location:Location, 
@@ -41,7 +44,7 @@ constructor(private router: Router,
   }
 
   onChange(e) {
-    const dynastyChoice: FormArray = this.artistForm.get('dynastyChoice') as FormArray;
+    const dynastyChoice: FormArray = this.artistForm.get('dynasty') as FormArray;
 
     if (e.target.checked) {
     dynastyChoice.push(new FormControl(e.target.value));
@@ -55,14 +58,36 @@ constructor(private router: Router,
       i++;
     });
   }
+  const formValue = this.artistForm.value;
+  console.log(formValue['dynasty']);
+  }
+
+  private addCheckboxes() {
+    console.log(this.dynastyList);
+    this.dynastyList.forEach((e) => {
+      const artistdynastyid = this.artistdynasty.map(x => x.id);
+      this.dynastyFormArray.push(new FormControl(artistdynastyid.includes((e.id))));
+  }
+  );
+}
+
+  get dynastyFormArray() {
+    return this.artistForm.controls.dynasty as FormArray;
+  }
+
+  get f(){
+    return this.artistForm.controls;
   }
 
 	initForm( name: string = '',name_cn_cn: string = '', birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
+    this.artistdynasty = dynasty;
 
 	this.translationService.simpletranslationlist('dynasty','false').subscribe(
   (response) => {
   this.dynastyList =response;
   console.log(this.dynastyList );
+  console.log('dynasty:');
+  console.log(dynasty);
   this.artistForm = new FormGroup({
       name: new FormControl(name),
       name_cn_cn: new FormControl(name_cn_cn),
@@ -73,8 +98,11 @@ constructor(private router: Router,
       description_cn_cn: new FormControl(description_cn_cn),
       dynasty: new FormArray([])
     	});
-    	this.artistForm.get('dynastyChoice');
+    	this.artistForm.get('dynasty');
     	console.log(this.artistForm.get('dynasty').value);
+      this.addCheckboxes();
+
+      console.log(this.dynastyFormArray);
     	
     this.edition = true;   
         }
@@ -85,6 +113,11 @@ constructor(private router: Router,
 	onSubmitForm(){
 	console.log('helloesss');
 	const formValue = this.artistForm.value;
+  const dynastyIds = formValue.dynasty
+      .map((checked, i) => checked ? this.dynastyList[i].id : null)
+      .filter(v => v !== null);
+      console.log('selected themes:');
+    console.log(dynastyIds);
     const newArtist = new Artist(
       formValue['name'],
       formValue['name_cn_cn'],
@@ -93,7 +126,7 @@ constructor(private router: Router,
       formValue['description_en_gb'],
       formValue['description_fr_fr'],
       formValue['description_cn_cn'],
-      '1',
+      dynastyIds,
       this.entity
     );
     console.log(JSON.stringify(newArtist));
@@ -101,17 +134,20 @@ constructor(private router: Router,
   (response) => { 
   this.router.navigate([this.location.path()]);
   console.log(this.location.path());
+  this.router.navigate(['edit_artist']);
+  this.edition = false; 
   }
   );
 	}
 
   ngOnInit(): void {
+    this.artistsLoaded = false;
   this.entity = this.location.path().slice(6);
   this.elementService.elementlist(this.entity).subscribe(
   (response) => {
   console.log(Object.values(response));
   this.artists = Object.values(response);
-
+this.artistsLoaded = true;
         }
       );
   console.log(this.entity);

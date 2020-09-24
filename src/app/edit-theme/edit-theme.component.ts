@@ -18,7 +18,7 @@ export class EditThemeComponent implements OnInit {
 	themes: Array<{id: number, placeholder: string, en_gb: string, fr_fr: string, media: string, mediaId: number  }>;
 	medias:  Array<{mediaId: number, media: string}>;
 
-	headers = ["theme", "english", "french", "media"];
+	headers = ["theme", "name in english", "name in french", "media"];
 
   constructor( private router: Router, 
    				private location:Location, 
@@ -29,7 +29,7 @@ export class EditThemeComponent implements OnInit {
   	this.entity = this.location.path().slice(6);
   this.translationService.simpletranslationlist(this.entity, 'true').subscribe(
   (response) => {
-
+console.log(response);
   this.themes =response;
   
         }
@@ -58,8 +58,8 @@ export class EditThemeComponent implements OnInit {
 
     this.themeForm = new FormGroup({
       placeholder: new FormControl(placeholder),
-      en_gb: new FormControl(en_gb),
-      fr_fr: new FormControl(fr_fr),
+      name_en_gb: new FormControl(en_gb),
+      name_fr_fr: new FormControl(fr_fr),
       media: new FormControl(mediaId),
     	});
     this.edition = true;
@@ -71,8 +71,8 @@ export class EditThemeComponent implements OnInit {
 	const formValue = this.themeForm.value;
     const newTheme = new Theme(
       formValue['placeholder'],
-      formValue['en_gb'],
-      formValue['fr_fr'],
+      formValue['name_en_gb'],
+      formValue['name_fr_fr'],
       formValue['media'],
       this.entity
     );
@@ -82,6 +82,7 @@ export class EditThemeComponent implements OnInit {
   this.router.navigate([this.location.path()]);
   this.router.navigate(['edit_theme']);
   console.log(this.location.path());
+  this.edition = false;
   }
 
   );

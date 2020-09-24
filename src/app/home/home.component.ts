@@ -109,7 +109,11 @@ w3RemoveClass(element, name) {
   console.log(Object.values(response));
   console.log(this.imgSrc);
   this.gallery = Object.values(response);
+  let element:HTMLElement = document.getElementById('selectAll') as HTMLElement;
+
+element.click()
         }
-      );  	
+      );  
+
   }
 }

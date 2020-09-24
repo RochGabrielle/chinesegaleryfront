@@ -13,19 +13,19 @@
       			{{translation.placeholder}}     			
       		</td>
       		<td>    
-      			{{translation.en_gb}} 			
+      			{{translation.name_en_gb}} 			
       		</td>
       		<td>     			
-      			{{translation.fr_fr}}
+      			{{translation.name_fr_fr}}
       		</td>
       		<td>
-      			<button (click) = "edit(translation.placeholder,translation.en_gb,translation.fr_fr)">edit</button>
+      			<button (click) = "edit(translation.placeholder,translation.name_en_gb,translation.name_fr_fr)">edit</button>
       		</td>
       	</tr>
       </table>      
     </div>
   </div>
-</div>
+
 <button (click) = "add()">add new placeholder</button>
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="translationForm" (ngSubmit)="onSubmitForm()">
@@ -34,13 +34,14 @@
       <input type="text" id="title" class="form-control" formControlName="placeholder">
     </div>
     <div class="form-group">
-      <label for="artist">fr_fr</label>
-      <input type="text" id="artist" class="form-control" formControlName="fr_fr">
+      <label for="name_fr_fr">french translation</label>
+      <input type="text" id="name_fr_fr" class="form-control" formControlName="name_fr_fr">
     </div>
     <div class="form-group">
-      <label for="dynasty">en_gb</label>
-      <input type="text" id="dynasty" class="form-control" formControlName="en_gb">
+      <label for="name_en_gb">english translation</label>
+      <input type="text" id="name_en_gb" class="form-control" formControlName="name_en_gb">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+</div>
 </div>

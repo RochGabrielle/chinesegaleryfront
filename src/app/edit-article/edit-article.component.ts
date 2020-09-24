@@ -33,8 +33,15 @@ sizes: FormArray;
 imageSrc: string| ArrayBuffer=null;
 smallImage: string| Blob;
 bigImage: string| Blob;
-paintingchoice: boolean = false;
-calligraphychoice: boolean = false;
+smallImageName: string;
+bigImageName: string;
+choiceofmedia: string;
+articlethemelist: any[];
+newArticle: boolean = false;
+articlesizelist: any[];
+articlesLoading: boolean = false;
+formLoaded:boolean =false;
+
 
 
 headers = ["title", "date of creation", "price", "category", "material", "discount"];
@@ -60,14 +67,20 @@ constructor(private router: Router,
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
-        media:  number = 0,
+        media:  string = '0',
         museum:  number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
-        sizes:  any[] = []
+        sizes:  any[] = [],
+        smallImageName: string = '',
+        bigImageName: string = '',
+        themes: any[] = [],
         ) {
+    this.edition = true;
     const me =this;
-
+    this.newArticle = false;
+    this.articlethemelist = themes;
+    this.articlesizelist = sizes;
     const promise = new Promise(function(resolve, reject) {
       me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,category, material,discount, artist,dynasty,media,museum, description_en_gb, description_fr_fr, sizes );
     resolve('form has been charged!');
@@ -75,21 +88,25 @@ constructor(private router: Router,
     console.log(this.articleForm);
     })
     console.log(sizes);
+    this.smallImageName = smallImageName;
+    this.bigImageName = bigImageName;
     promise.then( function(value) {
-      sizes.forEach( size => {
+/*      sizes.forEach( size => {
         console.log('in promise');
         console.log(size);
         console.log(me);
         console.log(this);
         console.log(me.articleForm);
 me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
-  });
+  });*/
       console.log(value);
     });
+    this.choiceofmedia = media; 
    
   }
 
   add() {
+    this.newArticle = true;
   this.initForm( 0, '', '', '', '',
          0, 
          0, 
@@ -98,18 +115,19 @@ me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
          0,
          0, 
          0, 
-         0,
+         '0',
          0, 
         '',
         '',
         []);
+
   }
 
   mediachoice(event) {
     const selectedValue = event.target.value;
     console.log(selectedValue);
-this.paintingchoice = selectedValue == 1 ? true : false; 
-this.calligraphychoice = selectedValue == 2 ? true : false; 
+this.choiceofmedia = selectedValue; 
+
   }
 
 
@@ -142,7 +160,7 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
         });
   }
 
-  addSize(width: number = 45, length: number = 23, sizeId: number = 1, sizecategoryId: number = 1) {
+  addSize(width: number = 0, length: number = 0, sizeId: number = 0, sizecategoryId: number = 1) {
     const me = this;
   me.sizes = me.articleForm.get('sizes') as FormArray;
   me.sizes.push(me.createSizeForm(width, length, sizeId, sizecategoryId));
@@ -167,12 +185,38 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
   }
 
   private addCheckboxes() {
-    console.log(this.themeList);
-    this.themeList.forEach(() => this.themesFormArray.push(new FormControl(false)));
+    console.log(this.dynastyList);
+    if(!this.newArticle) {
+      this.themeList.forEach((e) => {
+      const themeid = this.articlethemelist.map(x => x.id);
+      this.themesFormArray.push(new FormControl(themeid.includes((e.id))));
+  }
+  );
+    } else {
+      this.themeList.forEach(() => {
+      this.themesFormArray.push(new FormControl(false));
+    });
+    
+  }
+}
+
+addSizeForm() {
+    if(!this.newArticle) {
+      this.articlesizelist.forEach((e) => {
+        this.addSize(e.width, e.length, e.id, e.sizecategoryId);     
+  }
+  );
+    } else {
+     this.addSize(0, 0, 0, 0);
+    };   
   }
 
   get themesFormArray() {
     return this.articleForm.controls.themes as FormArray;
+  }
+
+  get sizesFormArray() {
+    return this.articleForm.controls.sizes as FormArray;
   }
 
   get f(){
@@ -199,7 +243,6 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
     
   }   
 
-
   initForm( 
         id: number = 0,
         title: string = '', 
@@ -213,14 +256,14 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
-        media:  number = 0,
+        media:  string = '0',
         museum: number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
         sizes: any[] 
         ) {
   
-
+this.formLoaded =false;
   this.getSimpleList('category');
   this.getSimpleList('discount');
   this.getSimpleList('sizecategory');
@@ -238,7 +281,7 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
   console.log(this.mediaList);
 
 
-    this.edition = true;   
+    
 
       this.articleForm = new FormGroup({
       id: new FormControl(id),
@@ -258,14 +301,27 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
       museum: new FormControl(museum),
       description_en_gb: new FormControl(description_en_gb),
       description_fr_fr: new FormControl(description_fr_fr),
-      sizes: this.formBuilder.array([this.createSizeForm()]),
+      sizes: this.formBuilder.array([]),
+   // sizes: new FormArray([]),
       smallImage: new FormControl(),
       bigImage: new FormControl(),
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
       });
 
-      this.addCheckboxes();
+      this.translationService.simpletranslationlist('theme','false').subscribe(
+  (response) => {
+
+  this['themeList'] =response;
+  this.addCheckboxes();     
+  this.formLoaded = true;    
+        }
+      );
+
+      
+      this.choiceofmedia = media;
+      this.addSizeForm();
+      this.edition = true;   
     }
   );     
   }
@@ -276,8 +332,6 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
 const selectedOrderIds = formValue.themes
       .map((checked, i) => checked ? this.themeList[i].id : null)
       .filter(v => v !== null);
-      console.log('selected themes:');
-    console.log(selectedOrderIds);
 
     const formValues = new FormData();
     formValues.append('id', formValue['id']);
@@ -301,11 +355,7 @@ const selectedOrderIds = formValue.themes
     formValues.append('fr_fr', formValue['fr_fr']);
     formValues.append('small', this.smallImage);
     formValues.append('big', this.bigImage);
-    console.log( 'form dataaaaaaa:');
-   
-    console.log( formValues.get('sizes'));
-    console.log( formValues.get('artist'));
-console.log( formValues.get('themes'));
+console.log(formValues.get('sizes'));
     this.articleService.addArticle(formValues).subscribe(
   (response) => { 
 
@@ -325,11 +375,12 @@ console.log( formValues.get('themes'));
 
   ngOnInit(): void {
   this.entity = this.location.path().slice(6);
+  this.articlesLoading = false;
   this.articleService.articlelist().subscribe(
   (response) => {
   console.log(Object.values(response));
   this.articles = Object.values(response);
-
+this.articlesLoading = true;
         }
       );
   console.log(this.entity);

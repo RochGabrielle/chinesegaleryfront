@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>{{entity}}</h2>
-      <table>
+      <table *ngIf="dynastysLoaded else loading">
       	<tr>
       		<th *ngFor = "let column of headers">     		
       {{column}}
@@ -12,6 +12,9 @@
       		<td >
       			{{dynasty.name}}     			
       		</td>
+          <td >
+            {{dynasty.name_cn_cn}}          
+          </td>
       		<td>    
       			{{dynasty.birth}} 			
       		</td>
@@ -39,33 +42,40 @@
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="dynastyForm" (ngSubmit)="onSubmitForm()">
     <div class="form-group">
-      <label for="name">name</label>
+      <label for="name">Name :</label>
       <input type="text" id="name" class="form-control" formControlName="name">
     </div>
     <div class="form-group">
-      <label for="name_cn_cn">namein chinese</label>
+      <label for="name_cn_cn">Name in chinese:</label>
       <input type="text" id="name_cn_cn" class="form-control" formControlName="name_cn_cn">
     </div>
     <div class="form-group">
-      <label for="birth">birth</label>
+      <label for="birth">Date of foundation :</label>
       <input type="text" id="birth" class="form-control" formControlName="birth">
     </div>
     <div class="form-group">
-      <label for="death">death</label>
+      <label for="death">Date of fall :</label>
       <input type="text" id="death" class="form-control" formControlName="death">
     </div>
     <div class="form-group">
       <label for="description_en_gb">Presentation in english</label>
-      <input type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb">
+      <textarea type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb"> </textarea>
     </div>
     <div class="form-group">
       <label for="description_fr_fr">Presentation in french</label>
-      <input type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr">
+      <textarea type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr"> </textarea>
     </div>
     <div class="form-group">
       <label for="description_cn_cn">Presentation in chinese</label>
-      <input type="text" id="description_cn_cn" class="form-control" formControlName="description_cn_cn">
+      <textarea type="text" id="description_cn_cn" class="form-control" formControlName="description_cn_cn"> </textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
+
+<ng-template #loading>
+  Loading Dynastys...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>

@@ -14,12 +14,12 @@ import { Simpletranslation } from '../models/Simpletranslation.model';
 export class SimpletranslationlistComponent implements OnInit {
 
 entity: string;
-translation: {placeholder: string, en_gb: string, fr_fr: string};
-translations: Array<{placeholder: string, en_gb: string, fr_fr: string}>;
+translation: {placeholder: string, name_en_gb: string, name_fr_fr: string};
+translations: Array<{placeholder: string, name_en_gb: string, name_fr_fr: string}>;
 translationForm : FormGroup;
 edition: boolean = false;
 
-headers = ["placeholder", "en_gb", "fr_fr"];
+headers = ["placeholder", "english", "french"];
 
    constructor(private router: Router, 
    				private location:Location, 
@@ -27,20 +27,20 @@ headers = ["placeholder", "en_gb", "fr_fr"];
    				private formBuilder: FormBuilder) 
    				{ }
 
-	edit(placeholder: string = '', en_gb: string = '', fr_fr: string = '') {
+	edit(placeholder: string = '', name_en_gb: string = '', name_fr_fr: string = '') {
 	console.log("on édite!");
-	this.initForm(placeholder, en_gb, fr_fr);
+	this.initForm(placeholder, name_en_gb, name_fr_fr);
 	}
 
 	add() {console.log("on ajoute!");
   this.initForm();
   }
 
-	initForm( placeholder: string = '', en_gb: string = '', fr_fr: string = '') {
+	initForm( placeholder: string = '', name_en_gb: string = '', name_fr_fr: string = '') {
     this.translationForm = new FormGroup({
       placeholder: new FormControl(placeholder),
-      en_gb: new FormControl(en_gb),
-      fr_fr: new FormControl(fr_fr),
+      name_en_gb: new FormControl(name_en_gb),
+      name_fr_fr: new FormControl(name_fr_fr),
     	});
     this.edition = true;
 	}
@@ -50,15 +50,15 @@ headers = ["placeholder", "en_gb", "fr_fr"];
 	const formValue = this.translationForm.value;
     const newTranslation = new Simpletranslation(
       formValue['placeholder'],
-      formValue['en_gb'],
-      formValue['fr_fr'],
+      formValue['name_en_gb'],
+      formValue['name_fr_fr'],
       this.entity
     );
     console.log(JSON.stringify(newTranslation));
     this.translationService.addTranslation(newTranslation).subscribe(
   (response) => { 
   this.router.navigate([this.location.path()]);
-  this.router.navigate(['edit_material']);
+  this.router.navigate(['edit_'+this.entity]);
   console.log(this.location.path());
   }
 
@@ -69,7 +69,7 @@ headers = ["placeholder", "en_gb", "fr_fr"];
 
   ngOnInit(): void {
   this.entity = this.location.path().slice(6);
-  this.translationService.simpletranslationlist(this.entity, 'true').subscribe(
+  this.translationService.simpletranslationlist(this.entity, "full").subscribe(
   (response) => {
 
   this.translations =response;

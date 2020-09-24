@@ -18,8 +18,9 @@ dynasty: {name: string, name_cn: string,birth: number, death: number, en_gb: str
 dynastys: Array<{name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string}>;
 dynastyForm : FormGroup;
 edition: boolean = false;
+dynastysLoaded:boolean =false;
 
-headers = ["name", "birth", "death", "en_gb", "fr_fr","cn_cn"];
+headers = ["name", "name in Chinese", "Rise", "Fall", "History in English", "History in French","History in Chinese"];
 
    constructor(private router: Router, 
    				private location:Location, 
@@ -66,22 +67,19 @@ headers = ["name", "birth", "death", "en_gb", "fr_fr","cn_cn"];
   (response) => { 
   this.router.navigate([this.location.path()]);
   console.log(this.location.path());
-  }
-  );
+  this.router.navigate(['edit_dynasty']);
+  this.edition = false; 
+  });
 	}
 
   ngOnInit(): void {
+    this.dynastysLoaded = false;
   this.entity = this.location.path().slice(6);
   this.elementService.elementlist(this.entity).subscribe(
   (response) => {
   this.dynastys =response;
- console.log(this.dynastys[0]);
- console.log(this.dynastys[0].name);     
+  this.dynastysLoaded = true;     
         }
       );
-  console.log(this.entity);
-  console.log(this.router.url);
 }
-
-
 }

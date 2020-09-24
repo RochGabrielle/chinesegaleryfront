@@ -5,6 +5,7 @@ import { MuseumService } from './../services/museum.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Museum } from '../models/Museum.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-museum',
@@ -18,8 +19,9 @@ museum: {id: number, placeholder: string, en_gb: string, fr_fr: string, cn_cn: s
 museums: Array<{id : number, placeholder: string, en_gb: string, fr_fr: string, museumForm}>;
 museumForm : FormGroup;
 edition: boolean = false;
+museumsLoaded: boolean = false;
 
-headers = ["placeholder", "en_gb", "fr_fr","cn_cn","link", "linkname"];
+headers = ["placeholder", "name in English", "name in French","name in Chinese","link", "linkname"];
 
    constructor(private router: Router, 
    				private location:Location, 
@@ -29,7 +31,7 @@ headers = ["placeholder", "en_gb", "fr_fr","cn_cn","link", "linkname"];
 
 	edit(id: number = 0, placeholder: string = '', en_gb: string = '', fr_fr: string = '', cn_cn: string = '', link: string = '',linkname: string = '' ) {
 	console.log("on édite!");
-	this.initForm(id, placeholder, en_gb, fr_fr, cn_cn, );
+	this.initForm(id, placeholder, en_gb, fr_fr, cn_cn, link, linkname);
 	}
 
 	add() {console.log("on ajoute!");
@@ -66,16 +68,19 @@ headers = ["placeholder", "en_gb", "fr_fr","cn_cn","link", "linkname"];
   this.router.navigate([this.location.path()]);
   this.router.navigate(['edit_museum']);
   console.log(this.location.path());
+  this.edition = false;
   }
   );
 	}
 
   ngOnInit(): void {
   this.entity = this.location.path().slice(6);
+  this.museumsLoaded = false;
   this.museumService.museumlist().subscribe(
   (response) => {
 
-  this.museums =response;    
+  this.museums =response;   
+  this.museumsLoaded = true; 
         }
       );
 
