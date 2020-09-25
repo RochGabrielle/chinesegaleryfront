@@ -61,6 +61,7 @@ headers = ["placeholder", "discountrate", "English", "French"];
   this.router.navigate([this.location.path()]);
   console.log(this.location.path());
   console.log(response);
+    this.ngOnInit();
   }
   );  
 	}

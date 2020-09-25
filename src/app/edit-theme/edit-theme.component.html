@@ -19,10 +19,10 @@
       			{{theme.name_fr_fr}}
       		</td>
       		<td>     			
-      			{{theme.media}}
+      			{{theme.category}}
       		</td>
       		<td>
-      			<button (click) = "edit(theme.placeholder,theme.name_en_gb,theme.name_fr_fr,theme.mediaId)">edit</button>
+      			<button (click) = "edit(theme.placeholder,theme.name_en_gb,theme.name_fr_fr,theme.categoryId)">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -46,10 +46,10 @@
     </div>
     <div class="form-group">
       <label for="category">Category: </label>
-  <select  class="form-control" formControlName="media">
+  <select  class="form-control" formControlName="category">
     <option value="0">--All--</option>
-    <option *ngFor="let media of medias" [value]="media.id">
-      {{media.placeholder}}
+    <option *ngFor="let category of categorys" [value]="category.id">
+      {{category.placeholder}}
     </option>
   </select>
     </div>

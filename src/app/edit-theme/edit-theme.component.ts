@@ -15,10 +15,10 @@ export class EditThemeComponent implements OnInit {
 	themeForm : FormGroup;
 	edition: boolean = false;
 	entity: string;
-	themes: Array<{id: number, placeholder: string, en_gb: string, fr_fr: string, media: string, mediaId: number  }>;
-	medias:  Array<{mediaId: number, media: string}>;
+	themes: Array<{id: number, placeholder: string, en_gb: string, fr_fr: string, category: string, categoryId: number  }>;
+	categorys:  Array<{mediaId: number, media: string}>;
 
-	headers = ["theme", "name in english", "name in french", "media"];
+	headers = ["theme", "name in english", "name in french", "category"];
 
   constructor( private router: Router, 
    				private location:Location, 
@@ -48,19 +48,19 @@ console.log(response);
       );
   }
 
-  initForm( placeholder: string = '', en_gb: string = '', fr_fr: string = '', mediaId: number = 0 ) {
+  initForm( placeholder: string = '', en_gb: string = '', fr_fr: string = '', categoryId: number = 0 ) {
 
-  	this.translationService.simpletranslationlist('media', 'false').subscribe(
+  	this.translationService.simpletranslationlist('category', 'false').subscribe(
   (response) => {
   console.log(response);
-  this.medias =response;
-  console.log (this.medias);
+  this.categorys =response;
+  console.log (this.categorys);
 
     this.themeForm = new FormGroup({
       placeholder: new FormControl(placeholder),
       name_en_gb: new FormControl(en_gb),
       name_fr_fr: new FormControl(fr_fr),
-      media: new FormControl(mediaId),
+      category: new FormControl(categoryId),
     	});
     this.edition = true;
 	});
@@ -73,7 +73,7 @@ console.log(response);
       formValue['placeholder'],
       formValue['name_en_gb'],
       formValue['name_fr_fr'],
-      formValue['media'],
+      formValue['category'],
       this.entity
     );
     console.log(JSON.stringify(newTheme));
@@ -83,6 +83,7 @@ console.log(response);
   this.router.navigate(['edit_theme']);
   console.log(this.location.path());
   this.edition = false;
+    this.ngOnInit();
   }
 
   );
@@ -90,12 +91,12 @@ console.log(response);
 
 	}
 
-	edit(placeholder: string = '', en_gb: string = '', fr_fr: string = '', mediaId: number = 0) {
-	console.log("on édite!");
-	this.initForm(placeholder, en_gb, fr_fr, mediaId);
+	edit(placeholder: string = '', en_gb: string = '', fr_fr: string = '', categoryId: number = 0) {
+
+	this.initForm(placeholder, en_gb, fr_fr, categoryId);
 	}
 
-	add() {console.log("on ajoute!");
+	add() {
   this.initForm();
   }
 

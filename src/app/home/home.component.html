@@ -22,7 +22,7 @@ interval="6000"
 <div class= "gallery">
 <div  class= "row" *ngFor="let article of gallery">
 
-  <div class="column filter {{article.theme}} {{article.media}} " >
+  <div class="column filter {{article.theme}} {{article.category}} " >
 
       <div class="content" 
       (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">

@@ -24,10 +24,10 @@ dynastyList: Array<{id: number, name: string}>;
 materialList: Array<{id: number, name: string}>;
 artistList: Array<{id: number, name: string}>;
 museumList: Array<{id: number, name: string}>;
-categoryList: Array<{id: number, name: string}>;
+productList: Array<{id: number, name: string}>;
 discountList: Array<{id: number, name: string}>;
 themeList: Array<{id: number, name: string}>;
-mediaList: Array<{id: number, name: string}>;
+categoryList: Array<{id: number, name: string}>;
 sizeCategoryList: Array<{id: number, name: string}>;
 sizes: FormArray;
 imageSrc: string| ArrayBuffer=null;
@@ -35,7 +35,7 @@ smallImage: string| Blob;
 bigImage: string| Blob;
 smallImageName: string;
 bigImageName: string;
-choiceofmedia: string;
+choiceofcategory: string;
 articlethemelist: any[];
 newArticle: boolean = false;
 articlesizelist: any[];
@@ -44,7 +44,7 @@ formLoaded:boolean =false;
 
 
 
-headers = ["title", "date of creation", "price", "category", "material", "discount"];
+headers = ["title", "date of creation", "price", "product", "material", "discount"];
 
 constructor(private router: Router, 
            private location:Location, 
@@ -62,12 +62,12 @@ constructor(private router: Router,
         title_cn_cn: string = '',
         birth: number = 0, 
         price: number = 0, 
-        category:  number = 0, 
+        product:  number = 0, 
         material:  number = 0,
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
-        media:  string = '0',
+        category:  string = '0',
         museum:  number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
@@ -82,7 +82,7 @@ constructor(private router: Router,
     this.articlethemelist = themes;
     this.articlesizelist = sizes;
     const promise = new Promise(function(resolve, reject) {
-      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,category, material,discount, artist,dynasty,media,museum, description_en_gb, description_fr_fr, sizes );
+      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,product, material,discount, artist,dynasty,category,museum, description_en_gb, description_fr_fr, sizes );
     resolve('form has been charged!');
     console.log(me.articleForm);
     console.log(this.articleForm);
@@ -101,7 +101,7 @@ me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
   });*/
       console.log(value);
     });
-    this.choiceofmedia = media; 
+    this.choiceofcategory = category; 
    
   }
 
@@ -123,10 +123,10 @@ me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
 
   }
 
-  mediachoice(event) {
+  categorychoice(event) {
     const selectedValue = event.target.value;
     console.log(selectedValue);
-this.choiceofmedia = selectedValue; 
+this.choiceofcategory = selectedValue; 
 
   }
 
@@ -251,12 +251,12 @@ addSizeForm() {
         title_cn_cn: string = '', 
         birth: number = 0, 
         price: number = 0, 
-        category:  number = 0, 
+        product:  number = 0, 
         material:  number = 0,
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
-        media:  string = '0',
+        category:  string = '0',
         museum: number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
@@ -264,24 +264,19 @@ addSizeForm() {
         ) {
   
 this.formLoaded =false;
-  this.getSimpleList('category');
+  this.getSimpleList('product');
   this.getSimpleList('discount');
   this.getSimpleList('sizecategory');
   this.getSimpleList('theme');
   this.getSimpleList('museum');
   this.getSimpleList('artist');
   this.getSimpleList('dynasty');
-  this.getSimpleList('media');
+  this.getSimpleList('category');
 
 
       this.translationService.simpletranslationlist('material', 'false').subscribe(
   (response) => {
-  this.materialList =response;
-  console.log(this.themeList);
-  console.log(this.mediaList);
-
-
-    
+  this.materialList =response;    
 
       this.articleForm = new FormGroup({
       id: new FormControl(id),
@@ -291,12 +286,12 @@ this.formLoaded =false;
       title_cn_cn: new FormControl(title_cn_cn),
       birth: new FormControl(birth),
       price: new FormControl(price),
-      category: new FormControl(category),
+      product: new FormControl(product),
       material: new FormControl(material),
       discount: new FormControl(discount),
       artist: new FormControl(artist),
       dynasty: new FormControl(dynasty),
-      media: new FormControl(media),
+      category: new FormControl(category),
       themes: new FormArray([]),
       museum: new FormControl(museum),
       description_en_gb: new FormControl(description_en_gb),
@@ -319,7 +314,7 @@ this.formLoaded =false;
       );
 
       
-      this.choiceofmedia = media;
+      this.choiceofcategory = category;
       this.addSizeForm();
       this.edition = true;   
     }
@@ -341,12 +336,12 @@ const selectedOrderIds = formValue.themes
     formValues.append('title_cn_cn', formValue['title_cn_cn']);
     formValues.append('birth', formValue['birth']);
     formValues.append('price', formValue['price']);
-    formValues.append('category', formValue['category']);
+    formValues.append('product', formValue['product']);
     formValues.append('material', formValue['material']);
     formValues.append('discount', formValue['discount']);
     formValues.append('artist', formValue['artist']);
     formValues.append('dynasty', formValue['dynasty']);
-    formValues.append('media', formValue['media']);
+    formValues.append('category', formValue['category']);
     formValues.append('themes', selectedOrderIds);
     formValues.append('museum', formValue['museum']);
     formValues.append('description_en_gb', formValue['description_en_gb']);
@@ -364,6 +359,7 @@ console.log(formValues.get('sizes'));
   console.log(response);
   this.router.navigate(['edit_article']);
   this.edition = false; 
+  this.ngOnInit();
   }
   );
 

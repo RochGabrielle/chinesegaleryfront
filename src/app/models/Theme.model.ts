@@ -3,7 +3,7 @@ export class Theme {
     public placeholder: string,
     public name_en_gb: string,
     public name_fr_fr: string,
-    public mediaId: string,
+    public categoryId: string,
     public entity: string
   ) {}
 }

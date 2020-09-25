@@ -37,6 +37,7 @@ ngb-carousel {
     visibility: visible;
     z-index: 10;
     animation: fadeInAndOut ease-in-out 6s;
+    animation-iteration-count:infinite;
 }
 
 .carousel-control-prev {

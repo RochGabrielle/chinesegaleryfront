@@ -136,6 +136,7 @@ constructor(private router: Router,
   console.log(this.location.path());
   this.router.navigate(['edit_artist']);
   this.edition = false; 
+    this.ngOnInit();
   }
   );
 	}

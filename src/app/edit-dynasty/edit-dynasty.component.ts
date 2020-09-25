@@ -69,6 +69,7 @@ headers = ["name", "name in Chinese", "Rise", "Fall", "History in English", "His
   console.log(this.location.path());
   this.router.navigate(['edit_dynasty']);
   this.edition = false; 
+    this.ngOnInit();
   });
 	}
 

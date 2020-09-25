@@ -46,13 +46,10 @@ export class EditSlideshowComponent implements OnInit {
   	  this.entity = this.location.path().slice(6);
   this.slideService.slideList().subscribe(
   (response) => {
-  console.log(Object.values(response));
   this.slides = Object.values(response);
 
         }
       );
-  console.log(this.entity);
-  console.log(this.router.url);
   }
 
   status(e) {
@@ -60,7 +57,7 @@ export class EditSlideshowComponent implements OnInit {
     {
       id: e.target.name,
       status: e.target.value,
-      entity: 'article'
+      entity: 'slideshow'
     };
 this.statusService.updateStatus(JSON.stringify(data)).subscribe(
   (response) => {
@@ -106,6 +103,9 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
       subtitle_en_gb: new FormControl(subtitle_en_gb),
       subtitle_fr_fr: new FormControl(subtitle_fr_fr),
       subtitle_cn_cn: new FormControl(subtitle_cn_cn),
+      desktop: new FormControl(),
+      tablet: new FormControl(),
+      mobile: new FormControl(),
     	});
     this.edition = true;
 	}
@@ -129,10 +129,11 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
   this.router.navigate([this.location.path()]);
   this.router.navigate(['edit_slideshow']);
   this.edition = false; 
+    this.ngOnInit();
   }
   );
 
   const formData = new FormData();
-    formData.append('file', this.slideshowForm.get('fileSource').value);
+  //  formData.append('file', this.slideshowForm.get('fileSource').value);
 	}
 }

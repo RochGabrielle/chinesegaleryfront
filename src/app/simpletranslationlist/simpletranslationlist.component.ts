@@ -28,11 +28,11 @@ headers = ["placeholder", "english", "french"];
    				{ }
 
 	edit(placeholder: string = '', name_en_gb: string = '', name_fr_fr: string = '') {
-	console.log("on édite!");
+	
 	this.initForm(placeholder, name_en_gb, name_fr_fr);
 	}
 
-	add() {console.log("on ajoute!");
+	add() {
   this.initForm();
   }
 
@@ -46,7 +46,7 @@ headers = ["placeholder", "english", "french"];
 	}
 
 	onSubmitForm(){
-	console.log('helloesss');
+
 	const formValue = this.translationForm.value;
     const newTranslation = new Simpletranslation(
       formValue['placeholder'],
@@ -54,12 +54,13 @@ headers = ["placeholder", "english", "french"];
       formValue['name_fr_fr'],
       this.entity
     );
-    console.log(JSON.stringify(newTranslation));
     this.translationService.addTranslation(newTranslation).subscribe(
   (response) => { 
+    this.edition = false;
   this.router.navigate([this.location.path()]);
   this.router.navigate(['edit_'+this.entity]);
-  console.log(this.location.path());
+  this.ngOnInit()
+; 
   }
 
   );
@@ -73,13 +74,10 @@ headers = ["placeholder", "english", "french"];
   (response) => {
 
   this.translations =response;
- console.log(this.translations[0]);
- console.log(this.translations[0].placeholder);     
+  this.edition = false;
+    
         }
       );
-
-  console.log(this.entity);
-  console.log(this.router.url);
 }
 
 

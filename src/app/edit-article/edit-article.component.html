@@ -19,7 +19,7 @@
       			{{article.price}}
       		</td>
       		<td>
-      			{{article.category[0].placeholder}}
+      			{{article.product[0].placeholder}}
       		</td>
       		<td> 
       			{{article.material[0].placeholder}}
@@ -33,12 +33,12 @@
             article.title_cn_cn,
             article.birth,
             article.price,
-            article.category[0].id,
+            article.product[0].id,
             article.material[0].id,
             article.discount[0].id,
             article.artist[0].id,
             article.dynasty[0].id,
-            article.media.id,
+            article.category.placeholder,
             article.museum[0].id,
             article.description_en_gb,
             article.description_fr_fr,
@@ -96,11 +96,11 @@
       <input type="text" id="price" class="form-control" formControlName="price">
     </div>
     <div class="form-group">
-      <label for="category">Category of product: </label>
-  <select  class="form-control" formControlName="category">
+      <label for="product">Type of product: </label>
+  <select  class="form-control" formControlName="product">
     <option value="0">--All--</option>
-    <option *ngFor="let category of categoryList" [value]="category.id">
-      {{category.placeholder}}
+    <option *ngFor="let product of productList" [value]="product.id">
+      {{product.placeholder}}
     </option>
   </select>
     </div>
@@ -123,19 +123,19 @@
   </select>
     </div>
      <div class="form-group">
-      <label for="media">Media: </label>
-  <select class="form-control" formControlName="media" (change)="mediachoice($event)">
+      <label for="category">Category: </label>
+  <select class="form-control" formControlName="category" (change)="categorychoice($event)">
     <option value="0">--All--</option>
-    <option *ngFor="let media of mediaList" [value]="media.id">
-      {{media.placeholder}}
+    <option *ngFor="let category of categoryList" [value]="category.placeholder">
+      {{category.placeholder}}
     </option>
   </select>
     </div>
     Theme: 
-    <div class="form-group" *ngIf="choiceofmedia == '2'">
+    <div class="form-group" *ngIf="choiceofcategory == 'painting'">
       <div *ngFor="let order of themesFormArray.controls; let i = index">
-      <label formArrayName="themes" *ngIf="themeList[i].media == 'painting'">
-    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'painting'">
+      <label formArrayName="themes" *ngIf="themeList[i].category == 'painting'">
+    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].category == 'painting'">
     {{themeList[i].placeholder}}
       </label>
 </div>
@@ -147,10 +147,10 @@
     <ng-template #loading>
  <div>Loading...</div>
 </ng-template>
-    <div class="form-group" *ngIf="choiceofmedia == '1'">
+    <div class="form-group" *ngIf="choiceofcategory == 'calligraphy'">
       <div *ngFor="let order of themesFormArray.controls; let i = index">
-      <label formArrayName="themes" *ngIf="themeList[i].media == 'calligraphy'">
-    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].media == 'calligraphy'">
+      <label formArrayName="themes" *ngIf="themeList[i].category == 'calligraphy'">
+    <input type="checkbox" [formControlName]="i" *ngIf="themeList[i].category == 'calligraphy'">
     {{themeList[i].placeholder}}
   </label>
 </div>
