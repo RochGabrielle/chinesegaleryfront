@@ -58,7 +58,7 @@
 
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="slideshowForm" (ngSubmit)="onSubmitForm()">
-    <div class="form-group" display:hidden>
+    <div class="form-group" hidden>
       <label for="id">id</label>
       <input type="text" id="id" class="form-control" formControlName="id">
     </div>

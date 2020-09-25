@@ -67,9 +67,9 @@
 <div *ngIf="edition">
 <div class="col-sm-8 col-sm-offset-2" *ngIf="formLoaded else editionFormloading">
   <form [formGroup]="articleForm" (ngSubmit)="onSubmitForm()">
-    <div class="form-group" display:hidden>
+    <div class="form-group" hidden>
       <label for="id">id</label>
-      <input type="text" id="id" class="form-control" formControlName="id" hidden>
+      <input type="text" id="id" class="form-control" formControlName="id" >
     </div>
     <div class="form-group">
       <label for="title">title</label>
@@ -221,7 +221,7 @@
 <h3>Upload article small picture</h3>
     
     <div class="form-group">
-      <p>Existing File : </p> {{smallImageName}}
+      <p>Existing File : <b>{{smallImageName}}</b></p> 
         <label for="file">File :</label>
         <input 
             formControlName="smallImage"
@@ -239,7 +239,7 @@
 <h3>Upload article big picture</h3>
     
     <div class="form-group">
-      <p>Existing File : </p> {{bigImageName}}
+      <p>Existing File :<b>{{bigImageName}}</b></p> 
         <label for="file">File :</label>
         <input 
             formControlName="bigImage"

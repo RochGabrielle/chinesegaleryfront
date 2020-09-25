@@ -76,13 +76,14 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
         title_fr_fr: string = '', 
         title_cn_cn: string = '', 
         subtitle_en_gb: string = '',
-        subtitle_fr_fr: string = ''
+        subtitle_fr_fr: string = '',
+        subtitle_cn_cn: string = ''
         ) {
-	this.initForm(id, title, title_en_gb, title_fr_fr, title_cn_cn, subtitle_en_gb, subtitle_fr_fr);
+	this.initForm(id, title, title_en_gb, title_fr_fr, title_cn_cn, subtitle_en_gb, subtitle_fr_fr, subtitle_cn_cn);
 	}
 
 	add() {
-  this.initForm( 0, '', '', '', '', '', '');
+  this.initForm( 0, '', '', '', '', '', '','');
   }
 
   get f(){
@@ -95,7 +96,7 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
     const fd = new FormData();    
   }
  
-  initForm( id: number = 0, title: string = '', title_en_gb: string = '', title_fr_fr: string = '', title_cn_cn: string = '', subtitle_en_gb: string = '',subtitle_fr_fr: string = '') {
+  initForm( id: number = 0, title: string = '', title_en_gb: string = '', title_fr_fr: string = '', title_cn_cn: string = '', subtitle_en_gb: string = '',subtitle_fr_fr: string = '', subtitle_cn_cn: string = '') {
     this.slideshowForm = new FormGroup({
       id: new FormControl(id),
       title: new FormControl(title),
@@ -104,6 +105,7 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
       title_cn_cn: new FormControl(title_cn_cn),
       subtitle_en_gb: new FormControl(subtitle_en_gb),
       subtitle_fr_fr: new FormControl(subtitle_fr_fr),
+      subtitle_cn_cn: new FormControl(subtitle_cn_cn),
     	});
     this.edition = true;
 	}
@@ -118,6 +120,7 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
     formValues.append('title_cn_cn', formValue['title_cn_cn']);
     formValues.append('subtitle_en_gb', formValue['subtitle_en_gb']);
     formValues.append('subtitle_fr_fr', formValue['subtitle_fr_fr']);
+    formValues.append('subtitle_cn_cn', formValue['subtitle_cn_cn']);
     formValues.append('desktop', this.desktop);
     formValues.append('tablet', this.tablet);
     formValues.append('mobile', this.mobile);
