@@ -13,6 +13,9 @@
       			{{dynasty.name}}     			
       		</td>
           <td >
+            {{dynasty.name_fr_fr}}          
+          </td>
+          <td >
             {{dynasty.name_cn_cn}}          
           </td>
       		<td>    
@@ -31,7 +34,7 @@
             {{dynasty.description_cn_cn}}
           </td>
       		<td>
-      			<button (click) = "edit(dynasty.name,dynasty.name_cn_cn, dynasty.birth,dynasty.death,dynasty.description_en_gb,dynasty.description_fr_fr,dynasty.description_cn_cn)">edit</button>
+      			<button (click) = "edit(dynasty.id, dynasty.name,name_fr_fr, dynasty.name_cn_cn, dynasty.birth,dynasty.death,dynasty.description_en_gb,dynasty.description_fr_fr,dynasty.description_cn_cn)">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -41,12 +44,20 @@
 <button (click) = "add()">add new dynasty</button>
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="dynastyForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group" hidden>
+      <label for="id">id</label>
+      <input type="text" id="id" class="form-control" formControlName="id" >
+    </div>
     <div class="form-group">
       <label for="name">Name :</label>
       <input type="text" id="name" class="form-control" formControlName="name">
     </div>
     <div class="form-group">
-      <label for="name_cn_cn">In chinese:</label>
+      <label for="name_fr_fr">In French:</label>
+      <input type="text" id="name_fr_fr" class="form-control" formControlName="name_fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="name_cn_cn">In Chinese:</label>
       <input type="text" id="name_cn_cn" class="form-control" formControlName="name_cn_cn">
     </div>
     <div class="form-group">

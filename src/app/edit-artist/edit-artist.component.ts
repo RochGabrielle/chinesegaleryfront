@@ -15,8 +15,8 @@ import { Artist } from '../models/Artist.model';
 export class EditArtistComponent implements OnInit {
 
 entity: string;
-artist: {name: string,name_cn: string, birth: number, death: number, en_gb: string, fr_fr: string, cn_cn: string, dynasty: Array<{id: number, name: string}>};
-artists: Array<{name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string, cn_cn: string,dynasty: Array<{id: number, name: string}>}>;
+artist: {name: string,name_cn: string, birth: string, death: string, en_gb: string, fr_fr: string, cn_cn: string, dynasty: Array<{id: number, name: string}>};
+artists: Array<{id: number, name: string, name_cn: string,birth: string, death: string, en_gb: string, fr_fr: string, cn_cn: string,dynasty: Array<{id: number, name: string}>}>;
 artistForm : FormGroup;
 edition: boolean = false;
 dynastyList: Array<{id: number, name: string}>;
@@ -34,8 +34,8 @@ constructor(private router: Router,
            ) 
    				{ }
 
-	edit(name: string = '', name_cn_cn: string = '',birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
-	this.initForm(name, name_cn_cn, birth, death, description_en_gb, description_fr_fr, description_cn_cn, dynasty);
+	edit(id: number = 0, name: string = '', name_cn_cn: string = '',birth: string = 'unknown', death: string = 'unknown', description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
+	this.initForm(id, name, name_cn_cn, birth, death, description_en_gb, description_fr_fr, description_cn_cn, dynasty);
 	
 	}
 
@@ -59,11 +59,9 @@ constructor(private router: Router,
     });
   }
   const formValue = this.artistForm.value;
-  console.log(formValue['dynasty']);
   }
 
   private addCheckboxes() {
-    console.log(this.dynastyList);
     this.dynastyList.forEach((e) => {
       const artistdynastyid = this.artistdynasty.map(x => x.id);
       this.dynastyFormArray.push(new FormControl(artistdynastyid.includes((e.id))));
@@ -79,16 +77,14 @@ constructor(private router: Router,
     return this.artistForm.controls;
   }
 
-	initForm( name: string = '',name_cn_cn: string = '', birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
+	initForm( id: number = 0, name: string = '',name_cn_cn: string = '', birth: string = 'unknown', death:string = 'unknown', description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
     this.artistdynasty = dynasty;
 
 	this.translationService.simpletranslationlist('dynasty','false').subscribe(
   (response) => {
   this.dynastyList =response;
-  console.log(this.dynastyList );
-  console.log('dynasty:');
-  console.log(dynasty);
   this.artistForm = new FormGroup({
+      id : new FormControl(id),
       name: new FormControl(name),
       name_cn_cn: new FormControl(name_cn_cn),
       birth: new FormControl(birth),
@@ -99,10 +95,7 @@ constructor(private router: Router,
       dynasty: new FormArray([])
     	});
     	this.artistForm.get('dynasty');
-    	console.log(this.artistForm.get('dynasty').value);
       this.addCheckboxes();
-
-      console.log(this.dynastyFormArray);
     	
     this.edition = true;   
         }
@@ -111,14 +104,12 @@ constructor(private router: Router,
 	}
 
 	onSubmitForm(){
-	console.log('helloesss');
 	const formValue = this.artistForm.value;
   const dynastyIds = formValue.dynasty
       .map((checked, i) => checked ? this.dynastyList[i].id : null)
       .filter(v => v !== null);
-      console.log('selected themes:');
-    console.log(dynastyIds);
     const newArtist = new Artist(
+      formValue['id'],
       formValue['name'],
       formValue['name_cn_cn'],
       formValue['birth'],
@@ -129,11 +120,9 @@ constructor(private router: Router,
       dynastyIds,
       this.entity
     );
-    console.log(JSON.stringify(newArtist));
     this.elementService.addElement(newArtist).subscribe(
   (response) => { 
   this.router.navigate([this.location.path()]);
-  console.log(this.location.path());
   this.router.navigate(['edit_artist']);
   this.edition = false; 
     this.ngOnInit();
@@ -146,13 +135,10 @@ constructor(private router: Router,
   this.entity = this.location.path().slice(6);
   this.elementService.elementlist(this.entity).subscribe(
   (response) => {
-  console.log(Object.values(response));
   this.artists = Object.values(response);
 this.artistsLoaded = true;
         }
       );
-  console.log(this.entity);
-  console.log(this.router.url);
 }
 
 

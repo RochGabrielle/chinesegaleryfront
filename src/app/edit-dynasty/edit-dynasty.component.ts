@@ -14,13 +14,13 @@ import { Dynasty } from '../models/Dynasty.model';
 export class EditDynastyComponent implements OnInit {
 
 entity: string;
-dynasty: {name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string};
-dynastys: Array<{name: string, name_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string}>;
+dynasty: {id: number, name: string, name_fr_fr: string, name_cn_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string};
+dynastys: Array<{id: number, name: string, name_fr_fr: string, name_cn_cn: string,birth: number, death: number, en_gb: string, fr_fr: string,cn_cn: string}>;
 dynastyForm : FormGroup;
 edition: boolean = false;
 dynastysLoaded:boolean =false;
 
-headers = ["name", "name in Chinese", "Rise", "Fall", "History in English", "History in French","History in Chinese"];
+headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "History in French","History in Chinese"];
 
    constructor(private router: Router, 
    				private location:Location, 
@@ -28,17 +28,19 @@ headers = ["name", "name in Chinese", "Rise", "Fall", "History in English", "His
    				private formBuilder: FormBuilder) 
    				{ }
 
-	edit(name: string = '', name_cn: string = '',birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '',cn_cn: string) {
-	this.initForm(name, name_cn, birth, death, en_gb, fr_fr,cn_cn);
+	edit(id: number = 0, name: string = '', name_fr_fr: string ='', name_cn_cn: string = '',birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '',cn_cn: string) {
+	this.initForm(id, name, name_fr_fr, name_cn_cn, birth, death, en_gb, fr_fr,cn_cn);
 	}
 
 	add() {console.log("on ajoute!");
   this.initForm();
   }
 
-	initForm( name: string = '',name_cn_cn: string = '', birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '',description_cn_cn: string = '') {
+	initForm( id: number = 0 ,name: string = '', name_fr_fr: string ='', name_cn_cn: string = '', birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '',description_cn_cn: string = '') {
     this.dynastyForm = new FormGroup({
+      id: new FormControl(id),
       name: new FormControl(name),
+      name_fr_fr: new FormControl(name_fr_fr),
       name_cn_cn: new FormControl(name_cn_cn),
       birth: new FormControl(birth),
       death: new FormControl(death),
@@ -50,10 +52,11 @@ headers = ["name", "name in Chinese", "Rise", "Fall", "History in English", "His
 	}
 
 	onSubmitForm(){
-	console.log('helloesss');
 	const formValue = this.dynastyForm.value;
     const newDynasty = new Dynasty(
+      formValue['id'],
       formValue['name'],
+      formValue['name_fr_fr'],
       formValue['name_cn_cn'],
       formValue['birth'],
       formValue['death'],
@@ -62,11 +65,9 @@ headers = ["name", "name in Chinese", "Rise", "Fall", "History in English", "His
       formValue['description_cn_cn'],
       this.entity
     );
-    console.log(JSON.stringify(newDynasty));
     this.elementService.addElement(newDynasty).subscribe(
   (response) => { 
   this.router.navigate([this.location.path()]);
-  console.log(this.location.path());
   this.router.navigate(['edit_dynasty']);
   this.edition = false; 
     this.ngOnInit();

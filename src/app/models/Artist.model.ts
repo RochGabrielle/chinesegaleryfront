@@ -1,5 +1,6 @@
 export class Artist {
   constructor(
+    public id: number,  
     public name: string,
     public name_cn_cn: string,
     public birth: string,

@@ -66,9 +66,9 @@ headers = ["placeholder", "name in English", "name in French","name in Chinese",
     this.museumService.addMuseum(newMuseum).subscribe(
   (response) => { 
   this.router.navigate([this.location.path()]);
-  this.router.navigate(['edit_museum']);
-  console.log(this.location.path());
+ // this.router.navigate(['edit_museum']);
   this.edition = false;
+    this.ngOnInit();
   }
   );
 	}

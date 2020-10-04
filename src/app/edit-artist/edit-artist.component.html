@@ -37,7 +37,7 @@
       		</td>
 
       		<td>
-      			<button (click) = "edit(artist.name,artist.name_cn_cn, artist.birth,artist.death,artist.description_en_gb,artist.description_fr_fr, artist.description_cn_cn,artist.dynasty)">edit</button>
+      			<button (click) = "edit(artist.id, artist.name,artist.name_cn_cn, artist.birth,artist.death,artist.description_en_gb,artist.description_fr_fr, artist.description_cn_cn,artist.dynasty)">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -47,6 +47,10 @@
 <button (click) = "add()">add new artist</button>
 <div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
   <form [formGroup]="artistForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group" hidden>
+      <label for="id">id</label>
+      <input type="text" id="id" class="form-control" formControlName="id" >
+    </div>
     <div class="form-group">
       <label for="name">name</label>
       <input type="text" id="name" class="form-control" formControlName="name">
