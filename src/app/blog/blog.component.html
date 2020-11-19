@@ -1,0 +1,13 @@
+<ul *ngFor="let blog of blogList">
+	<li >
+		<div [routerLink] = "['/artist_profile']" [queryParams]="{notice: blog.id}">
+			<div>
+				<p><b>{{blog.title}}</b></p>
+				<p>{{blog.introduction}}</p>
+			</div>
+			<div >
+			 <img src="{{imgSrc}}{{blog.small}}" class="img-responsive">
+			</div>
+		</div>
+	</li>
+</ul>

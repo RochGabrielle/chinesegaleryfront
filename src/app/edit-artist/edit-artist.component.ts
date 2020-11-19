@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { ElementService } from './../services/element.service';
 import { TranslationService } from './../services/translation.service';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
 import { Artist } from '../models/Artist.model';
 
 @Component({
@@ -23,6 +23,11 @@ dynastyList: Array<{id: number, name: string}>;
 artistdynasty: any[];
 toto: boolean = true;
 artistsLoaded: boolean = false;
+imageSrc: string| ArrayBuffer=null;
+smallImage: string| Blob;
+bigImage: string| Blob;
+smallImageName: string;
+bigImageName: string;
 
 headers = ["name", "name in Chinese", "date of birth", "date of death", "biography in english", "biography in French","biography in Chinese", "dynasty"];
 
@@ -34,9 +39,39 @@ constructor(private router: Router,
            ) 
    				{ }
 
-	edit(id: number = 0, name: string = '', name_cn_cn: string = '',birth: string = 'unknown', death: string = 'unknown', description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
-	this.initForm(id, name, name_cn_cn, birth, death, description_en_gb, description_fr_fr, description_cn_cn, dynasty);
-	
+	edit(
+  id: number = 0, 
+  name: string = '', 
+  name_cn_cn: string = '',
+  birth: string = 'unknown', 
+  death: string = 'unknown', 
+  introduction_en_gb: string = '', 
+  introduction_fr_fr: string = '', 
+  introduction_cn_cn: string = '', 
+  description_en_gb: string = '', 
+  description_fr_fr: string = '', 
+  description_cn_cn: string = '',
+  dynasty: any[] = [],
+  small: string = '',
+  big: string = ''
+
+  ) {
+       this.smallImageName = small;
+       this.bigImageName = big;
+	     this.initForm(
+        id, 
+        name, 
+        name_cn_cn, 
+        birth, 
+        death, 
+        introduction_en_gb, 
+        introduction_fr_fr, 
+        introduction_cn_cn, 
+        description_en_gb, 
+        description_fr_fr, 
+        description_cn_cn, 
+        dynasty
+        );
 	}
 
 	add() {
@@ -77,7 +112,27 @@ constructor(private router: Router,
     return this.artistForm.controls;
   }
 
-	initForm( id: number = 0, name: string = '',name_cn_cn: string = '', birth: string = 'unknown', death:string = 'unknown', description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
+   smallImageChange(event) {
+  let me = this;
+  
+
+    me.smallImage = event.target.files[0];
+
+    const fd = new FormData();    
+  }
+  
+  bigImageChange(event) {
+  let me = this;
+  
+
+    me.bigImage = event.target.files[0];
+
+    const fd = new FormData();
+    console.log('send file');
+    
+  }   
+
+	initForm( id: number = 0, name: string = '',name_cn_cn: string = '', birth: string = 'unknown', death:string = 'unknown', introduction_en_gb: string = '', introduction_fr_fr: string = '', introduction_cn_cn: string = '', description_en_gb: string = '', description_fr_fr: string = '', description_cn_cn: string = '',dynasty: any[] = []) {
     this.artistdynasty = dynasty;
 
 	this.translationService.simpletranslationlist('dynasty','false').subscribe(
@@ -89,10 +144,17 @@ constructor(private router: Router,
       name_cn_cn: new FormControl(name_cn_cn),
       birth: new FormControl(birth),
       death: new FormControl(death),
+      introduction_en_gb: new FormControl(introduction_en_gb),
+      introduction_fr_fr: new FormControl(introduction_fr_fr),
+      introduction_cn_cn: new FormControl(introduction_cn_cn),
       description_en_gb: new FormControl(description_en_gb),
       description_fr_fr: new FormControl(description_fr_fr),
       description_cn_cn: new FormControl(description_cn_cn),
-      dynasty: new FormArray([])
+      dynasty: new FormArray([]),
+      smallImage: new FormControl(),
+      bigImage: new FormControl(),
+      file: new FormControl('', [Validators.required]),
+      fileSource: new FormControl('', [Validators.required])
     	});
     	this.artistForm.get('dynasty');
       this.addCheckboxes();
@@ -105,23 +167,33 @@ constructor(private router: Router,
 
 	onSubmitForm(){
 	const formValue = this.artistForm.value;
+  console.log("envoi form");
   const dynastyIds = formValue.dynasty
       .map((checked, i) => checked ? this.dynastyList[i].id : null)
       .filter(v => v !== null);
-    const newArtist = new Artist(
-      formValue['id'],
-      formValue['name'],
-      formValue['name_cn_cn'],
-      formValue['birth'],
-      formValue['death'],
-      formValue['description_en_gb'],
-      formValue['description_fr_fr'],
-      formValue['description_cn_cn'],
-      dynastyIds,
-      this.entity
-    );
-    this.elementService.addElement(newArtist).subscribe(
+
+    const formValues = new FormData();
+    formValues.append('id', formValue['id']);
+    formValues.append('name', formValue['name']);
+    formValues.append('name_en_gb', formValue['name']);
+    formValues.append('name_cn_cn', formValue['name_cn_cn']);
+    formValues.append('name_fr_fr', formValue['name']);
+    formValues.append('birth', formValue['birth']);
+    formValues.append('death', formValue['death']);
+    formValues.append('introduction_en_gb', formValue['introduction_en_gb']);
+    formValues.append('introduction_fr_fr', formValue['introduction_fr_fr']);
+    formValues.append('introduction_cn_cn', formValue['introduction_cn_cn']);
+    formValues.append('description_en_gb', formValue['description_en_gb']);
+    formValues.append('description_fr_fr', formValue['description_fr_fr']);
+    formValues.append('description_cn_cn', formValue['description_cn_cn']);
+    formValues.append('entity', this.entity);
+    formValues.append('dynasty', dynastyIds);
+    formValues.append('small', this.smallImage);
+    formValues.append('big', this.bigImage);
+   
+    this.elementService.addElement(formValues).subscribe(
   (response) => { 
+  console.log(response);
   this.router.navigate([this.location.path()]);
   this.router.navigate(['edit_artist']);
   this.edition = false; 

@@ -1,0 +1,28 @@
+<div class ="profile">
+  <div class ="profile__text">
+    <p>{{artist.name}}</p>
+<p>{{artist.description}}</p>
+  </div>
+  <div class="profile__image">
+    <img src= "{{imgSrc}}{{artist.bigimage}}">
+  </div>
+</div>
+<p>{{artist.name}}</p>
+<p>{{artist.death}}</p>
+
+<p><b>Oeuvres :</b></p>
+<div class="container_gallery" >
+	<div *ngFor="let article of paintingList">
+  <div class="item_gallery column filter {{article.theme}} {{article.category}}" ><div class="content" 
+      (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
+        <div class="gallery_content">
+                <img src="{{imgSrc}}{{article.smallimage}}" class="img-responsive">
+                <h4>{{article.title}}</h4>
+        </div>
+      </div>
+  </div>
+</div>
+  <span class="item break"></span>
+  <span class="item break"></span>
+  <span class="item break"></span>
+</div>

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { ElementService } from './services/element.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { MuseumService } from './services/museum.service';
+import { BlogService } from './services/blog.service';
 import { SlideService } from './services/slide.service';
 import { TokenStorageService } from './services/token-storage.service';
 import { FirewallService } from './services/firewall.service';
@@ -47,11 +49,14 @@ import { RegisterComponent } from './register/register.component';
 import { MuseumComponent } from './museum/museum.component';
 import { EditSlideshowComponent } from './edit-slideshow/edit-slideshow.component';
 import { EditThemeComponent } from './edit-theme/edit-theme.component';
+import { GreatmastersComponent } from './greatmasters/greatmasters.component';
+import { ArtistprofileComponent } from './artistprofile/artistprofile.component';
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
+import { BlogComponent } from './blog/blog.component';
 
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
-  { path: 'history', component: HistoryComponent },
   { path: 'articles', component: ArticleListComponent },
   { path: 'new-article', component: NewArticleComponent },
   { path: 'edit_material', component: SimpletranslationlistComponent},
@@ -66,10 +71,19 @@ const appRoutes: Routes = [
   { path: 'edit_museum', component: MuseumComponent},
   { path: 'edit_slideshow', component: EditSlideshowComponent},
   { path: 'edit_category', component: SimpletranslationlistComponent},
-  { path: 'displayArticle', component: DisplayarticleComponent},   
-   { path: 'login', component: LoginComponent },
+  { path: 'edit_blog', component: EditBlogComponent},
+  { path: 'displayArticle', component: DisplayarticleComponent}, 
+  { path: 'page_highlights', component: GalleryComponent}, 
+  { path: 'page_masters', component: GreatmastersComponent}, 
+  { path: 'artist_profile', component: ArtistprofileComponent},
+  { path: 'latest_story', component: BlogComponent}, 
+  { path: 'chinese_painting_history', component: HistoryComponent}, 
+  { path: 'learn', component: BlogComponent},
+  { path: 'support_us', component: BlogComponent},
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: '', component: ContactComponent }
 ];
 
@@ -100,7 +114,11 @@ const appRoutes: Routes = [
     RegisterComponent,
     MuseumComponent,
     EditSlideshowComponent,
-    EditThemeComponent
+    EditThemeComponent,
+    GreatmastersComponent,
+    ArtistprofileComponent,
+    EditBlogComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +129,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BrowserModule, 
     NgbModule,
+    NgxImageZoomModule,
   ],
   providers: [
       TranslationService,
@@ -124,7 +143,8 @@ const appRoutes: Routes = [
       FirewallService,
       MuseumService,
       SlideService,
-      StatusService
+      StatusService,
+      BlogService
 
   ],
   bootstrap: [AppComponent]

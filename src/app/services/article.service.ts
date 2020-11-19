@@ -54,4 +54,9 @@ updateStatus(data) : Observable<any> {
   return this.httpClient.post(GlobalConstants.apiAdminURL+'status', data, this.httpOptions);
 }
 
+paintingListOfArtist( artistId : string, lang: string)  : Observable<any>{
+return this.httpClient
+    .get<any[]>(GlobalConstants.apiURL+'articleListOfArtist/'+artistId+'/'+lang);
+}
+
 }

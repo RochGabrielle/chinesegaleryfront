@@ -1,0 +1,25 @@
+.vignette {
+	width : 800px;
+	height : 200px;
+	margin-left : 100px;
+	box-shadow: 1px 1px 12px #555;
+	display:flex;
+	margin-top :35px;
+	cursor : pointer;
+	&__image {
+	max-width : 200px;
+	align-self: flex-end;
+	}
+	&__text {
+	flex: 1 1 auto;
+	margin-left: 20px;
+	margin-top: 10px;
+	}
+}
+
+
+
+ul {
+	list-style-type: none;
+}
+

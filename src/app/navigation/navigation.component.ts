@@ -21,10 +21,16 @@ isLoggedIn = false;
 showAdminBoard = false;
 showModeratorBoard = false;
 username: string;
+displayMenu : boolean = false; 
 
   constructor(private translationService: TranslationService,
               private tokenStorageService: TokenStorageService) 
   { }
+
+  togg() {
+        this.displayMenu = !this.displayMenu;
+        console.log(this.displayMenu);
+  }
 
   ngOnInit(): void {
 

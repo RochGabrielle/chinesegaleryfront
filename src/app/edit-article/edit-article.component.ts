@@ -176,7 +176,8 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
   }
 
   getElementList(entity: string = '') {
-    this.elementService.simpleelementlist(entity).subscribe(
+  const params = entity+'/en_gb';
+    this.elementService.elementListByLanguage(params).subscribe(
     (response) => {
     
     this[entity+'List'] =response;         

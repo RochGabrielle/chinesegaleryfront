@@ -1,0 +1,15 @@
+<p>Great masters :</p>
+
+<ul *ngFor="let master of greatMasters">
+	<li >
+		<div  class="vignette" [routerLink] = "['/artist_profile']" [queryParams]="{artist: master.id}">
+			<div class="vignette__text">
+				<p><b>{{master.name}}</b></p>
+				<p>{{master.introduction}}</p>
+			</div>
+			<div class="vignette__image">
+			 <img src="{{imgSrc}}{{master.small}}" class="img-responsive">
+			</div>
+		</div>
+	</li>
+</ul>

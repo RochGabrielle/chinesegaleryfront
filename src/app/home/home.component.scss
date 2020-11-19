@@ -1,108 +1,58 @@
-.gallery {
-	width: 1000px;
+
+.link_image {
+  cursor: pointer;
+}
+
+.container {
 
 }
 
-.maingallery {
-  background-color: #f1f1f1;
-  padding: 20px;
-  font-family: Arial;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.gallery-item {
-	width: 800px;
-	text-align: center;
-}
-
-.gallery-item img {
-  display: block;
-  max-width:150px;
-  max-height:150px;
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-}
-
-.gallery-item ul {
-list-style:none;
-cursor: pointer;
-}
-
-.main-item {
-display: block;
-height: 1000px;
-	width: 800px;
-	text-align: center;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.main-item img{
-
-}
-
-.test {
-	position: relative;
-}
-
-.toto  {
-  width: 100px;
-  height: 100px;
-  background: red;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: width 2s, opacity 2s, left 2s;
-}
-
-.toto:hover {
- opacity: 0.5; 
- left: -100px;
-}
-
-.row {
-  margin: 8px -16px;
-  width: 200px;
-  display: flex;
-  flex-direction: row;
+.main-menu {
   
+  padding-top : 15px;
+  padding-bottom : 15px;
+
+  width: 1280px;
 }
 
-/* Add padding BETWEEN each column (if you want) */
-.row,
-.row > .column {
-  padding: 8px;
-}
 
-/* Create three equal columns that floats next to each other */
-.column {
-   float: left;
-   width: 200 px; 
-  display: none; /* Hide columns by default */
-}
 
-/* Clear floats after rows */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Content */
-.content {
+.vignette {
   background-color: white;
-  padding: 10px;
+  width : 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-/* The "show" class is added to the filtered elements */
-.show {
-  display: block;
-  width: 200px;
+.sticker {
+  display : flex;
+  flex-direction : column;
+  width : 300px;
+  padding: 0px 0px;
+  margin : 20px 10px;
+  background-image: url('../../assets/img/homepage/texture.jpg');
+  box-shadow: 1px 1px 12px #555;
+  &__image {
+padding: 0px 0px;
+  }
+  &__text {
+padding: 0px 0px;
+
+  }
 }
 
-.gallery img {
-  max-width: 100px;
-  max-height: 100px;
+.menu_image {
+  position: relative;
+  text-align: center;
+  color: white;
+
+}
+
+.menu_text {
+  position: absolute;
+  top: 100px;
+  left: 30px;
+}
+
+#topimage {
 }

@@ -17,6 +17,8 @@ export class DisplayarticleComponent implements OnInit {
 	bigimage : string;
 
 	imgSrc = GlobalConstants.imgURL;
+  myThumbnail : string;
+  myFullresImage : string;
 
 
   constructor(
@@ -28,10 +30,14 @@ export class DisplayarticleComponent implements OnInit {
         this.bigimage = params['bigimage'];
         this.description = params['description'];
 
+        this.myThumbnail = this.imgSrc + "earth_1_small.png";
+        this.myFullresImage = this.imgSrc + this.bigimage;
+
     });
 }
 
   ngOnInit(): void {
   }
+
 
 }

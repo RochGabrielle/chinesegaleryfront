@@ -1,3 +1,44 @@
 .centerright {
 	text-align: right;
 }
+
+.navigation {
+	position: fixed;
+    top: 0px;
+    width: 100%;
+    max-width: 1280px;
+    z-index : 1000;
+}
+
+.enabled {
+	height : 100px;
+  overflow: hidden;
+	background-color : #343a40;
+  -moz-transition: height 1s ease;
+  -webkit-transition: height 1s ease;
+  -o-transition: height 1s ease;
+  transition: height 1s ease;
+}
+
+.disabled {
+	height: 0px;
+  overflow: hidden;
+	background-color : #343a40;
+	-moz-transition: height 1s ease;
+  -webkit-transition: height 1s ease;
+  -o-transition: height 1s ease;
+  transition: height 1s ease;
+}
+
+
+li
+{
+display:inline-block;
+}
+
+/*.placeholder {
+  display: block;
+  height: 100px;
+  background-color : black;
+}*/
+

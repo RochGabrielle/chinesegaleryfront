@@ -1,1 +1,56 @@
-<p>un tableau de belles peintures</p>
+<div class="maingallery textured-background">
+<!--<ngb-carousel 
+interval="6000"
+>
+
+  <ng-template ngbSlide *ngFor="let slide of slides">
+    <div class="picsum-img-wrapper">
+      <img src="{{imgSrc}}{{slide.desktop}}" alt="{{slide.title}}">
+    </div>
+    <div class="carousel-caption">
+      <h3>{{slide.title}}</h3>
+      <p>{{slide.subtitle}}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+-->
+<div id="myBtnContainer">
+  <button class="btn active" (click)="filterSelection('all')" id="selectAll"> Show all</button>
+  <button class="btn" (click)="filterSelection('calligraphy')"> Calligraphy</button>
+  <button class="btn" (click)="filterSelection('painting')"> Painting</button>
+</div>
+<!--<div class= "gallery">
+<div  class= "row" *ngFor="let article of gallery">
+
+  <div class="column filter {{article.theme}} {{article.category}} " >
+
+      <div class="content" 
+      (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
+        <div class="gallery_content">
+                <img src="{{imgSrc}}{{article.smallimage}}" class="img-responsive">
+                <h4>{{article.title}}</h4>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+</div>
+-->
+
+<div class="container_gallery" >
+	<div *ngFor="let article of gallery">
+  <div class="item_gallery column filter {{article.theme}} {{article.category}}" ><div class="content" 
+      (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
+        <div class="gallery_content">
+                <img src="{{imgSrc}}{{article.smallimage}}" class="img-responsive">
+                <p>{{article.title}}</p>
+        </div>
+      </div>
+  </div>
+</div>
+  <span class="item break"></span>
+  <span class="item break"></span>
+  <span class="item break"></span>
+</div>
+</div>

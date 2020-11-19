@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>{{entity}}</h2>
+      <table *ngIf="blogListLoaded else loading">
+      	<tr>
+      		<th *ngFor = "let column of headers">     		
+      {{column}}
+      </th>
+      	</tr>
+      	<tr *ngFor="let blog of blogList">
+      		<td >
+      			{{blog.title_en_gb}}     			
+      		</td>
+      		<td>    
+      			{{blog.heading}} 			
+      		</td>
+      		
+      		<td>     			
+      			{{blog.link}}
+      		</td>
+      		<td>     			
+      			{{blog.linkname}}
+      		</td>
+
+      		<td>
+      			<button (click) = "edit(
+      			blog.id, 
+      			blog.title_en_gb,
+      			blog.title_fr_fr, 
+      			blog.title_cn_cn,
+      			blog.introduction_en_gb,
+      			blog.introduction_fr_fr, 
+      			blog.introduction_cn_cn,
+      			blog.text_en_gb,
+      			blog.text_fr_fr, 
+      			blog.text_cn_cn,
+      			blog.heading, 
+      			blog.link,
+      			blog.linkname,
+      			blog.small,
+      			blog.big
+      			 )"
+      			 >edit</button>
+      		</td>
+	        <td>
+	      		<div class="o-switch btn-group" data-toggle="buttons" role="group">
+	  				<label class="btn btn-secondary active">
+	    				<input type="radio" name="{{blog.id}}" id="1" value = "1" autocomplete="on" [checked]="blog.status == '1'"  (change) = "status($event)"> Actif
+	  				</label>
+	  				<label class="btn btn-secondary">
+	    				<input type="radio" name="{{blog.id}}" id="3" value = "3" autocomplete="on" [checked]="blog.status == '3'" (change) = "status($event)"> Désactivé
+	  				</label>
+				</div>
+          </td>
+      	</tr>
+      </table>      
+    </div>
+  </div>
+<button (click) = "add()">add new blog</button>
+<div class="col-sm-8 col-sm-offset-2" *ngIf="edition">
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group" hidden>
+      <label for="id">id</label>
+      <input type="text" id="id" class="form-control" formControlName="id">
+    </div>
+    <div class="form-group">
+      <label for="introduction_fr_fr">title in French :</label>
+      <input type="text" id="introduction_fr_fr" class="form-control" formControlName="title_fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="title_en_gb">title in english :</label>
+      <input type="text" id="title_en_gb" class="form-control" formControlName="title_en_gb">
+    </div>
+    <div class="form-group">
+      <label for="title_cn_cn">title in chinese :</label>
+      <input type="text" id="title_cn_cn" class="form-control" formControlName="title_cn_cn">
+    </div>
+     <div class="form-group">
+      <label for="introduction_fr_fr">introduction in French :</label>
+      <input type="text" id="introduction_fr_fr" class="form-control" formControlName="introduction_fr_fr">
+    </div>
+    <div class="form-group">
+      <label for="introduction_en_gb">introduction in english :</label>
+      <input type="text" id="introduction_en_gb" class="form-control" formControlName="introduction_en_gb">
+    </div>
+    <div class="form-group">
+      <label for="introduction_cn_cn">introduction in chinese :</label>
+      <input type="text" id="introduction_cn_cn" class="form-control" formControlName="introduction_cn_cn">
+    </div>
+    <div class="form-group">
+      <label for="text_fr_fr">text in French :</label>
+       <textarea type="text" id="text_fr_fr" class="form-control" formControlName="text_fr_fr"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="text_en_gb">text in english :</label>
+     <textarea type="text" id="text_en_gb" class="form-control" formControlName="text_en_gb"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="text_cn_cn">text in chinese :</label>
+      <textarea type="text" id="text_cn_cn" class="form-control" formControlName="text_cn_cn"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="heading">Section: </label>
+  <select  class="form-control" formControlName="heading">
+    <option value="0">--All--</option>
+    <option *ngFor="let heading of headingList" [value]="heading">
+      {{heading}}
+    </option>
+  </select>
+    </div>
+
+    <div class="form-group">
+      <label for="link">link to the website in http :</label>
+      <input type="text" id="link" class="form-control" formControlName="link">
+    </div>
+    <div class="form-group">
+      <label for="linkname">name of the link that should appear in the page :</label>
+      <input type="text" id="linkname" class="form-control" formControlName="linkname">
+    </div>
+    <h3>Upload blog introduction picture</h3>
+    
+    <div class="form-group">
+      <p>Existing File : <b>{{smallImageName}}</b></p> 
+        <label for="file">File :</label>
+        <input 
+            formControlName="smallImage"
+            id="smallImage" 
+            type="file" 
+            class="form-control"
+            (change)="smallImageChange($event)">
+        <div *ngIf="f.smallImage.touched && f.smallImage.invalid" class="alert alert-danger">
+            <div *ngIf="f.smallImage.errors.required">File is required.</div>
+        </div>
+    </div>
+    
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+
+<h3>Upload blog picture :</h3>
+    
+    <div class="form-group">
+      <p>Existing File :<b>{{bigImageName}}</b></p> 
+        <label for="file">File :</label>
+        <input 
+            formControlName="bigImage"
+            id="bigImage" 
+            type="file" 
+            class="form-control"
+            (change)="bigImageChange($event)">
+        <div *ngIf="f.bigImage.touched && f.bigImage.invalid" class="alert alert-danger">
+            <div *ngIf="f.bigImage.errors.required">File is required.</div>
+        </div>
+    </div>
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<ng-template #loading>
+  Loading Blogs...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>
+</div>
+
+

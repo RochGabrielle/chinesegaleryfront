@@ -1,44 +1,12 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+<div class="navigation">
+<nav class="navbar navbar-dark bg-dark">
+	<button class="navbar-toggler" type="button"  aria-expanded="false" aria-label="Toggle navigation" (click)="togg();">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<div class="collapse navbar-collapse" id="navbarNavDropdown">
-		<ul class="navbar-nav centerright">
-			<li class="nav-item active" routerLinkActive="active">
-				<a class="nav-link" routerLink="home">{{home}} <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item active" routerLinkActive="active">
-				<a class="nav-link" routerLink="history">{{history}} <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item" routerLinkActive="active">
-				<a class="nav-link" routerLink="contact">{{contact}}</a>
-			</li>
-			<li  *ngIf="showAdminBoard">
-				<div ngbDropdown class="d-inline-block">
-					<a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>{{admin}}</a>
-					<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-						<button ngbDropdownItem routerLink="edit_article">article</button>
-						<button ngbDropdownItem routerLink="edit_artist">artist</button>
-						<button ngbDropdownItem routerLink="edit_product">product</button>
-						<button ngbDropdownItem routerLink="edit_discount">discount</button>
-						<button ngbDropdownItem routerLink="edit_dynasty">dynasty</button>
-						<button ngbDropdownItem routerLink="edit_material">material</button>
-						<button ngbDropdownItem routerLink="edit_navigation">navigation</button>
-						<button ngbDropdownItem routerLink="edit_theme">theme</button>
-						<button ngbDropdownItem routerLink="edit_sizecategory">size category</button>
-						<button ngbDropdownItem routerLink="edit_category">category</button>
-						<button ngbDropdownItem routerLink="edit_museum">museum</button><button ngbDropdownItem routerLink="edit_slideshow">slideshow</button>
-
-
-					</div>
-				</div>
-			</li>    
-		</ul>
-		 <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-      </li>
+	 <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      
       <li class="nav-item">
         <a href="/login" class="nav-link" routerLink="login">Login</a>
       </li>
@@ -52,5 +20,62 @@
         <a href class="nav-link" (click)="logout()">LogOut</a>
       </li>
     </ul>
-	</div>
 </nav>
+	<div class="nav-item" id="" [className]="displayMenu? 'enabled' : 'disabled'" >
+		<ul >
+			<li class="nav-item active" routerLinkActive="active">
+				<a  routerLink="home">{{home}} <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item active" routerLinkActive="active">
+				<a  routerLink="history">{{history}} <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item" routerLinkActive="active">
+				<a class="nav-link" routerLink="contact">{{contact}}</a>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_article">article</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_artist">artist</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_product">product</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_discount">discount</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_dynasty">dynasty</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_material">material</button>
+			</li>
+		</ul>
+		<ul>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_navigation">navigation</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_theme">theme</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_sizecategory">size category</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_category">category</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_museum">museum</button>
+			</li>
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_slideshow">slideshow</button>
+			</li> 
+			<li  *ngIf="showAdminBoard">
+						<button ngbDropdownItem routerLink="edit_blog">Blog</button>
+			</li> 
+		</ul>
+		
+	</div>
+
+</div>
+<div class = "placeholder">tt</div>

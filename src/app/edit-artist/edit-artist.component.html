@@ -37,7 +37,22 @@
       		</td>
 
       		<td>
-      			<button (click) = "edit(artist.id, artist.name,artist.name_cn_cn, artist.birth,artist.death,artist.description_en_gb,artist.description_fr_fr, artist.description_cn_cn,artist.dynasty)">edit</button>
+      			<button (click) = "edit(
+              artist.id, 
+              artist.name,
+              artist.name_cn_cn, 
+              artist.birth,
+              artist.death,
+              artist.introduction_en_gb,
+              artist.introduction_fr_fr, 
+              artist.introduction_cn_cn,
+              artist.description_en_gb,
+              artist.description_fr_fr, 
+              artist.description_cn_cn,
+              artist.dynasty,
+              artist.small,
+              artist.big
+              )">edit</button>
       		</td>
       	</tr>
       </table>      
@@ -67,16 +82,28 @@
       <label for="death">date of death</label>
       <input type="text" id="death" class="form-control" formControlName="death">
     </div>
+     <div class="form-group">
+      <label for="introduction_en_gb">Introduction in English :</label>
+      <textarea type="text" id="introduction_en_gb" class="form-control" formControlName="introduction_en_gb"></textarea>
+    </div>
     <div class="form-group">
-      <label for="description_en_gb">English biography</label>
+      <label for="introduction_fr_fr">Introduction in French :</label>
+      <textarea type="text" id="introduction_fr_fr" class="form-control" formControlName="introduction_fr_fr"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="introduction_cn_cn">Introduction in Chinese :</label>
+      <textarea type="text" id="introduction_cn_cn" class="form-control" formControlName="introduction_cn_cn"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="description_en_gb">Biography in English :</label>
       <textarea type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb"></textarea>
     </div>
     <div class="form-group">
-      <label for="description_fr_fr">French biography</label>
+      <label for="description_fr_fr">Biography in French :</label>
       <textarea type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr"></textarea>
     </div>
     <div class="form-group">
-      <label for="description_cn_cn">Chinese biography</label>
+      <label for="description_cn_cn">Biography in Chinese :</label>
       <textarea type="text" id="description_cn_cn" class="form-control" formControlName="description_cn_cn"></textarea>
     </div>
     <div> Dynasty of activity</div>
@@ -87,6 +114,40 @@
     {{dynastyList[i].placeholder}}
       </label>
 </div>
+<h3>Upload artist introduction picture</h3>
+    
+    <div class="form-group">
+      <p>Existing File : <b>{{smallImageName}}</b></p> 
+        <label for="file">File :</label>
+        <input 
+            formControlName="smallImage"
+            id="smallImage" 
+            type="file" 
+            class="form-control"
+            (change)="smallImageChange($event)">
+        <div *ngIf="f.smallImage.touched && f.smallImage.invalid" class="alert alert-danger">
+            <div *ngIf="f.smallImage.errors.required">File is required.</div>
+        </div>
+    </div>
+    
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+
+<h3>Upload artist identity picture</h3>
+    
+    <div class="form-group">
+      <p>Existing File :<b>{{bigImageName}}</b></p> 
+        <label for="file">File :</label>
+        <input 
+            formControlName="bigImage"
+            id="bigImage" 
+            type="file" 
+            class="form-control"
+            (change)="bigImageChange($event)">
+        <div *ngIf="f.bigImage.touched && f.bigImage.invalid" class="alert alert-danger">
+            <div *ngIf="f.bigImage.errors.required">File is required.</div>
+        </div>
+    </div>
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
 
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

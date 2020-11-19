@@ -17,19 +17,26 @@ httpOptions = {
 
 constructor(private httpClient: HttpClient) { }
 
-addElement( newItem: Object) {
+addElement( artist: FormData) {
 return this.httpClient
-    .post<any[]>(GlobalConstants.apiAdminURL+'add_element', JSON.stringify(newItem),this.httpOptions);
+    .post<any[]>(GlobalConstants.apiAdminURL+'add_element', artist);
 }
 
 elementlist(entity:string) : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'getElementList/'+entity);
+    .get<any[]>(GlobalConstants.apiAdminURL+'getElementList/'+entity);
 }
 
-simpleelementlist(entity:string) : Observable<any>{
+// params = "entity/lang"
+elementListByLanguage(params:string) : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'simpleElementList/'+entity);
+    .get<any[]>(GlobalConstants.apiURL+'simpleElementList/'+params);
+}
+
+// params = "entity/lang/lan/id"
+getOneElement(params : string) : Observable<any>{
+return this.httpClient
+    .get<any[]>(GlobalConstants.apiURL+'getOneElement/'+params);
 }
 
   

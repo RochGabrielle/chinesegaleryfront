@@ -65,7 +65,20 @@ headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "H
       formValue['description_cn_cn'],
       this.entity
     );
-    this.elementService.addElement(newDynasty).subscribe(
+     const formValues = new FormData();
+
+    formValues.append('id', formValue['id']);
+    formValues.append('name', formValue['name']);
+    formValues.append('name_fr_fr', formValue['name_fr_fr']);
+    formValues.append('name_cn_cn', formValue['name_cn_cn']);
+    formValues.append('birth', formValue['birth']);
+    formValues.append('death', formValue['death']);
+    formValues.append('description_en_gb', formValue['description_en_gb']);
+    formValues.append('description_fr_fr', formValue['description_fr_fr']);
+    formValues.append('description_cn_cn', formValue['description_cn_cn']);
+    formValues.append('entity', this.entity);
+
+    this.elementService.addElement(formValues).subscribe(
   (response) => { 
   this.router.navigate([this.location.path()]);
   this.router.navigate(['edit_dynasty']);
