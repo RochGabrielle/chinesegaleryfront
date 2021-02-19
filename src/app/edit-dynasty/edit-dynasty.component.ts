@@ -28,18 +28,42 @@ headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "H
    				private formBuilder: FormBuilder) 
    				{ }
 
-	edit(id: number = 0, name: string = '', name_fr_fr: string ='', name_cn_cn: string = '',birth: number = 0, death: number = 0, en_gb: string = '', fr_fr: string = '',cn_cn: string) {
-	this.initForm(id, name, name_fr_fr, name_cn_cn, birth, death, en_gb, fr_fr,cn_cn);
+  edit(id: number = 0, 
+    name_en_gb: string = '', 
+    name_fr_fr: string ='', 
+    name_cn_cn: string = '',
+    birth: number = 0, 
+    death: number = 0, 
+    description_en_gb: string = '', 
+    description_fr_fr: string = '',
+    description_cn_cn: string= '',
+    introduction_en_gb: string= '',
+    introduction_fr_fr: string= '',
+    introduction_cn_cn: string= '',
+  ) {
+	this.initForm(id, name_en_gb, name_fr_fr, name_cn_cn, birth, death, description_en_gb, description_fr_fr,description_cn_cn,introduction_en_gb,introduction_fr_fr,introduction_cn_cn);
 	}
 
 	add() {console.log("on ajoute!");
   this.initForm();
   }
 
-	initForm( id: number = 0 ,name: string = '', name_fr_fr: string ='', name_cn_cn: string = '', birth: number = 0, death: number = 0, description_en_gb: string = '', description_fr_fr: string = '',description_cn_cn: string = '') {
+  initForm( id: number = 0 ,
+    name_en_gb: string = '', 
+    name_fr_fr: string ='', 
+    name_cn_cn: string = '', 
+    birth: number = 0, 
+    death: number = 0, 
+    description_en_gb: string = '', 
+    description_fr_fr: string = '',
+    description_cn_cn: string = '',
+    introduction_en_gb: string = '',
+    introduction_fr_fr: string = '',
+    introduction_cn_cn: string = '',
+  ) {
     this.dynastyForm = new FormGroup({
       id: new FormControl(id),
-      name: new FormControl(name),
+      name_en_gb: new FormControl(name),
       name_fr_fr: new FormControl(name_fr_fr),
       name_cn_cn: new FormControl(name_cn_cn),
       birth: new FormControl(birth),
@@ -47,6 +71,9 @@ headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "H
       description_en_gb: new FormControl(description_en_gb),
       description_fr_fr: new FormControl(description_fr_fr),
       description_cn_cn: new FormControl(description_cn_cn),
+      introduction_en_gb: new FormControl(introduction_en_gb),
+      introduction_fr_fr: new FormControl(introduction_fr_fr),
+      introduction_cn_cn: new FormControl(introduction_cn_cn),
     	});
     this.edition = true;
 	}
@@ -55,7 +82,7 @@ headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "H
 	const formValue = this.dynastyForm.value;
     const newDynasty = new Dynasty(
       formValue['id'],
-      formValue['name'],
+      formValue['name_en_gb'],
       formValue['name_fr_fr'],
       formValue['name_cn_cn'],
       formValue['birth'],
@@ -63,12 +90,15 @@ headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "H
       formValue['description_en_gb'],
       formValue['description_fr_fr'],
       formValue['description_cn_cn'],
+      formValue['introduction_en_gb'],
+      formValue['introduction_fr_fr'],
+      formValue['introduction_cn_cn'],
       this.entity
     );
      const formValues = new FormData();
 
     formValues.append('id', formValue['id']);
-    formValues.append('name', formValue['name']);
+    formValues.append('name_en_gb', formValue['name_en_gb']);
     formValues.append('name_fr_fr', formValue['name_fr_fr']);
     formValues.append('name_cn_cn', formValue['name_cn_cn']);
     formValues.append('birth', formValue['birth']);
@@ -76,6 +106,9 @@ headers = ["name", "French", "Chinese", "Rise", "Fall", "History in English", "H
     formValues.append('description_en_gb', formValue['description_en_gb']);
     formValues.append('description_fr_fr', formValue['description_fr_fr']);
     formValues.append('description_cn_cn', formValue['description_cn_cn']);
+    formValues.append('introduction_en_gb', formValue['introduction_en_gb']);
+    formValues.append('introduction_fr_fr', formValue['introduction_fr_fr']);
+    formValues.append('introduction_cn_cn', formValue['introduction_cn_cn']);
     formValues.append('entity', this.entity);
 
     this.elementService.addElement(formValues).subscribe(

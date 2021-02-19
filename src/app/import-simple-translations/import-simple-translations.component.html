@@ -1,0 +1,27 @@
+<p>Import {{entity}} .csv file</p>
+
+<input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" /> <span *ngIf="!fileValid">{{errorWarning}}</span>
+<table class="minimalistBlack" *ngIf="csvToArray.length > 0">    
+        <thead>    
+          <tr> 
+            <th>id </th>
+            <th>placeholder </th>  
+            <th>name_en_gb </th> 
+            <th>name_fr_fr </th>     
+          </tr>    
+        </thead>    
+        <tbody>    
+          <tr *ngFor="let csv of csvToArray;let i = index;"> 
+            <td> <span>{{csv.id}}</span> </td> 
+            <td> <span>{{csv.placeholder}}</span> </td>     
+            <td> <span>{{csv.name_en_gb}}</span> </td>    
+            <td> <span>{{csv.name_fr_fr}}</span> </td>                 
+          </tr>    
+        </tbody>    
+</table>  
+
+<button type="submit" class="btn btn-primary"(click)="onImportFile()" *ngIf="fileValid">Import File</button>
+
+<span>{{progress}}</span>{{importLog}}<span>
+
+

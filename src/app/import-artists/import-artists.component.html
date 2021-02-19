@@ -1,0 +1,49 @@
+<p>Import Artist .csv file</p>
+
+
+
+<input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" /> <span *ngIf="!fileValid">{{errorWarning}}</span>
+<table class="minimalistBlack" *ngIf="csvToArray.length > 0">    
+        <thead>    
+          <tr> 
+            <th>id </th>
+            <th>name_en_gb </th>  
+            <th>name_fr_fr </th> 
+            <th>name_cn_cn </th>     
+            <th>birth </th>    
+            <th>death </th> 
+            <th>dynasty </th>
+            <th>description_en_gb </th>  
+            <th>description_fr_fr </th> 
+            <th>description_cn_cn </th> 
+            <th>introduction_en_gb </th>   
+            <th>introduction_fr_fr </th> 
+            <th>introduction_cn_cn </th>
+            <th>dynasty</th>  
+          </tr>    
+        </thead>    
+        <tbody>    
+          <tr *ngFor="let csv of csvToArray;let i = index;"> 
+            <td> <span>{{csv.id}}</span> </td>   
+            <td> <span>{{csv.name_en_gb}}</span> </td>    
+            <td> <span>{{csv.name_fr_fr}}</span> </td>    
+            <td> <span>{{csv.name_cn_cn}}</span> </td>    
+            <td> <span>{{csv.birth}}</span> </td>    
+            <td> <span>{{csv.death}}</span> </td>  
+            <td> <span>{{csv.dynasty}}</span> </td>
+            <td> <span>{{csv.description_en_gb}}</span> </td> 
+            <td> <span>{{csv.description_fr_fr}}</span> </td> 
+            <td> <span>{{csv.description_cn_cn}}</span> </td> 
+            <td> <span>{{csv.introduction_en_gb}}</span> </td>    
+            <td> <span>{{csv.introduction_fr_fr}}</span> </td> 
+            <td> <span>{{csv.introduction_cn_cn}}</span> </td> 
+            <td> <span>{{csv.dynasty}}</span> </td>
+          </tr>    
+        </tbody>    
+</table>  
+
+<button type="submit" class="btn btn-primary"(click)="onImportFile()" *ngIf="fileValid">Import File</button>
+
+{{progress}}
+
+{{importLog}}

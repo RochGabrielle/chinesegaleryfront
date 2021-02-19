@@ -31,6 +31,7 @@ import { SlideService } from './services/slide.service';
 import { TokenStorageService } from './services/token-storage.service';
 import { FirewallService } from './services/firewall.service';
 import { StatusService } from './services/status.service';
+import { CsvImportService } from './services/csvImport.service';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -53,6 +54,11 @@ import { GreatmastersComponent } from './greatmasters/greatmasters.component';
 import { ArtistprofileComponent } from './artistprofile/artistprofile.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { BlogComponent } from './blog/blog.component';
+import { ImportDynastiesComponent } from './import-dynasties/import-dynasties.component';
+import { ImportArtistsComponent } from './import-artists/import-artists.component';
+import { ImportArticlesComponent } from './import-articles/import-articles.component';
+import { ImportSimpleTranslationsComponent } from './import-simple-translations/import-simple-translations.component';
+import { ImportMuseumComponent } from './import-museum/import-museum.component';
 
 
 const appRoutes: Routes = [
@@ -118,7 +124,12 @@ const appRoutes: Routes = [
     GreatmastersComponent,
     ArtistprofileComponent,
     EditBlogComponent,
-    BlogComponent
+    BlogComponent,
+    ImportDynastiesComponent,
+    ImportArtistsComponent,
+    ImportArticlesComponent,
+    ImportSimpleTranslationsComponent,
+    ImportMuseumComponent
   ],
   imports: [
     BrowserModule,
@@ -144,7 +155,8 @@ const appRoutes: Routes = [
       MuseumService,
       SlideService,
       StatusService,
-      BlogService
+      BlogService,
+      CsvImportService
 
   ],
   bootstrap: [AppComponent]

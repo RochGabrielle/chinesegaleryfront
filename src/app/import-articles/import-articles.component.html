@@ -1,0 +1,50 @@
+<p>Import Article .csv file</p>
+
+
+
+<input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" /> <span *ngIf="!fileValid">{{errorWarning}}</span>
+<table class="minimalistBlack" *ngIf="csvToArray.length > 0">    
+        <thead>    
+          <tr> 
+            <th>id </th>
+            <th>title_en_gb </th> 
+            <th>title_fr_fr </th>     
+            <th>title_cn_cn </th>    
+            <th>price </th> 
+            <th>category </th>
+            <th>material </th>  
+            <th>discount </th> 
+            <th>artist </th> 
+            <th>dynasty </th>   
+            <th>museum </th> 
+            <th>description_en_gb </th>
+            <th>description_fr_fr</th> 
+            <th>description_cn_cn</th>
+          </tr>    
+        </thead>    
+        <tbody>    
+          <tr *ngFor="let csv of csvToArray;let i = index;"> 
+            <td> <span>{{csv.id}}</span> </td>    
+            <td> <span>{{csv.title_en_gb}}</span> </td>    
+            <td> <span>{{csv.title_fr_fr}}</span> </td>    
+            <td> <span>{{csv.title_cn_cn}}</span> </td>    
+            <td> <span>{{csv.price}}</span> </td>  
+            <td> <span>{{csv.category}}</span> </td>
+            <td> <span>{{csv.material}}</span> </td> 
+            <td> <span>{{csv.discount}}</span> </td> 
+            <td> <span>{{csv.artist}}</span> </td> 
+            <td> <span>{{csv.dynasty}}</span> </td>    
+            <td> <span>{{csv.museum}}</span> </td> 
+            <td> <span>{{csv.description_en_gb}}</span> </td> 
+            <td> <span>{{csv.description_fr_fr}}</span> </td>
+            <td> <span>{{csv.description_cn_cn}}</span> </td>
+          
+          </tr>    
+        </tbody>    
+</table>  
+
+<button type="submit" class="btn btn-primary"(click)="onImportFile()" *ngIf="fileValid">Import File</button>
+
+{{progress}}
+
+{{importLog}}

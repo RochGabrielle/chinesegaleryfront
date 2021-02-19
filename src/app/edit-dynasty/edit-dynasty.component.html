@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
+      <app-import-dynasties></app-import-dynasties>
       <h2>{{entity}}</h2>
       <table *ngIf="dynastysLoaded else loading">
       	<tr>
@@ -49,8 +50,8 @@
       <input type="text" id="id" class="form-control" formControlName="id" >
     </div>
     <div class="form-group">
-      <label for="name">Name :</label>
-      <input type="text" id="name" class="form-control" formControlName="name">
+      <label for="name_en_gb">Name :</label>
+      <input type="text" id="name_en_gb" class="form-control" formControlName="name_en_gb">
     </div>
     <div class="form-group">
       <label for="name_fr_fr">In French:</label>
@@ -69,17 +70,29 @@
       <input type="text" id="death" class="form-control" formControlName="death">
     </div>
     <div class="form-group">
-      <label for="description_en_gb">Introduction in english</label>
+      <label for="description_en_gb">Description in English</label>
       <textarea type="text" id="description_en_gb" class="form-control" formControlName="description_en_gb"> </textarea>
     </div>
     <div class="form-group">
-      <label for="description_fr_fr">Introduction in french</label>
+      <label for="description_fr_fr">Description in French</label>
       <textarea type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr"> </textarea>
     </div>
     <div class="form-group">
-      <label for="description_cn_cn">Introduction in chinese</label>
-      <textarea type="text" id="description_cn_cn" class="form-control" formControlName="description_cn_cn"> </textarea>
+        <label for="description_cn_cn">Description in Chinese</label>
+        <textarea type="text" id="description_cn_cn" class="form-control" formControlName="description_cn_cn"> </textarea>
+      </div>
+    <div class="form-group">
+      <label for="introduction_en_gb">Introduction in English</label>
+      <textarea type="text" id="introduction_en_gb" class="form-control" formControlName="introduction_en_gb"> </textarea>
     </div>
+    <div class="form-group">
+        <label for="introduction_fr_fr">Introduction in French</label>
+        <textarea type="text" id="introduction_fr_fr" class="form-control" formControlName="introduction_fr_fr"> </textarea>
+      </div>
+      <div class="form-group">
+          <label for="introduction_cn_cn">Introduction in Chinese</label>
+          <textarea type="text" id="introduction_cn_cn" class="form-control" formControlName="introduction_cn_cn"> </textarea>
+        </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
