@@ -62,12 +62,14 @@ constructor(private router: Router,
         title_cn_cn: string = '',
         birth: number = 0, 
         price: number = 0, 
+        size: string = '',
         product:  number = 0, 
         material:  number = 0,
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
         category:  string = '0',
+        form: number = 0,
         museum:  number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
@@ -82,7 +84,7 @@ constructor(private router: Router,
     this.articlethemelist = themes;
     this.articlesizelist = sizes;
     const promise = new Promise(function(resolve, reject) {
-      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,product, material,discount, artist,dynasty,category,museum, description_en_gb, description_fr_fr, sizes );
+      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty,category, form, museum, description_en_gb, description_fr_fr, sizes );
     resolve('form has been charged!');
     console.log(me.articleForm);
     console.log(this.articleForm);
@@ -107,19 +109,7 @@ me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
 
   add() {
     this.newArticle = true;
-  this.initForm( 0, '', '', '', '',
-         0, 
-         0, 
-         0, 
-         0,
-         0,
-         0, 
-         0, 
-         '0',
-         0, 
-        '',
-        '',
-        []);
+  this.initForm();
 
   }
 
@@ -252,6 +242,7 @@ addSizeForm() {
         title_cn_cn: string = '', 
         birth: number = 0, 
         price: number = 0, 
+        size: string = '', 
         product:  number = 0, 
         material:  number = 0,
         discount:  number = 0, 
@@ -259,9 +250,10 @@ addSizeForm() {
         dynasty:  number = 0, 
         category:  string = '0',
         museum: number = 0, 
+        form: number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
-        sizes: any[] 
+        sizes: any[] = []
         ) {
   
 this.formLoaded =false;
@@ -273,6 +265,7 @@ this.formLoaded =false;
   this.getSimpleList('artist');
   this.getSimpleList('dynasty');
   this.getSimpleList('category');
+  this.getSimpleList('form');
 
 
       this.translationService.simpletranslationlist('material', 'false').subscribe(
@@ -287,12 +280,14 @@ this.formLoaded =false;
       title_cn_cn: new FormControl(title_cn_cn),
       birth: new FormControl(birth),
       price: new FormControl(price),
+      size: new FormControl(size),
       product: new FormControl(product),
       material: new FormControl(material),
       discount: new FormControl(discount),
       artist: new FormControl(artist),
       dynasty: new FormControl(dynasty),
       category: new FormControl(category),
+      form: new FormControl(form),
       themes: new FormArray([]),
       museum: new FormControl(museum),
       description_en_gb: new FormControl(description_en_gb),
@@ -337,8 +332,10 @@ const selectedOrderIds = formValue.themes
     formValues.append('title_cn_cn', formValue['title_cn_cn']);
     formValues.append('birth', formValue['birth']);
     formValues.append('price', formValue['price']);
+    formValues.append('size', formValue['size']);
     formValues.append('product', formValue['product']);
     formValues.append('material', formValue['material']);
+    formValues.append('form', formValue['form']);
     formValues.append('discount', formValue['discount']);
     formValues.append('artist', formValue['artist']);
     formValues.append('dynasty', formValue['dynasty']);

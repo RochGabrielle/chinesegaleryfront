@@ -66,6 +66,7 @@ const appRoutes: Routes = [
   { path: 'articles', component: ArticleListComponent },
   { path: 'new-article', component: NewArticleComponent },
   { path: 'edit_material', component: SimpletranslationlistComponent},
+  { path: 'edit_form', component: SimpletranslationlistComponent},
   { path: 'edit_product', component: SimpletranslationlistComponent},
   { path: 'edit_theme', component: EditThemeComponent},
   { path: 'edit_navigation', component: SimpletranslationlistComponent},

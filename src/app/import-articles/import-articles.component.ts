@@ -86,13 +86,13 @@ export class ImportArticlesComponent implements OnInit {
       let formValues = new FormData();
       let currentRecord = (<string>artistsCSVArray[i]).split(','); 
       
-      this.getAllElementId(formValues, currentRecord[10], currentRecord[11], currentRecord[12], currentRecord[13], currentRecord[14], currentRecord[15],currentRecord[16] ) 
+      this.getAllElementId(formValues,  currentRecord[11], currentRecord[12], currentRecord[13], currentRecord[14], currentRecord[15],currentRecord[16],currentRecord[17],currentRecord[18]  ) 
       ;
       if (currentRecord.length == headersRow.length) 
       {  
        
          
-        for (let j = 0; j < (headersRow.length-7); j++) 
+        for (let j = 0; j < (headersRow.length-8); j++) 
         {
          
               formValues.append(headersRow[j].trim(), currentRecord[j].trim());
@@ -133,7 +133,7 @@ export class ImportArticlesComponent implements OnInit {
   }
 
 
-  getAllElementId(formValues: FormData, museumParam : string, categoryParam : string, materialParam : string, discountParam : string, artistParam : string, dynastyParam : string, productParam : string ) 
+  getAllElementId(formValues: FormData, museumParam : string, categoryParam : string, materialParam : string, discountParam : string, artistParam : string, dynastyParam : string, productParam : string, formParam ) 
   {
 
     let artistId = this.getElementId( artistParam,formValues, 'artist' );
@@ -143,9 +143,10 @@ export class ImportArticlesComponent implements OnInit {
     let discountId = this.getElementId( discountParam,formValues, 'discount');
     let materialId = this.getElementId( materialParam,formValues, 'material');
     let museumId = this.getElementId( museumParam,formValues, 'museum');
-    forkJoin(artistId, dynastyId,categoryId, productId, discountId, materialId, museumId ).subscribe(_ => {
+    let formId = this.getElementId( museumParam,formValues, 'form');
+    forkJoin(artistId, dynastyId,categoryId, productId, discountId, materialId, museumId, formId ).subscribe(_ => {
       // all observables have been completed
-console.log('form values : '+formValues.values());
+
       this.articleService.addArticle(formValues).subscribe(
         (response) => { 
           console.log(response)
