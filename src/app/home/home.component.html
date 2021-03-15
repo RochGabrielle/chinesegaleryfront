@@ -15,66 +15,81 @@ interval="6000"
   </ng-template>
 </ngb-carousel>
 -->
-<div id="topimage">
-  <img src="{{imgHomePageURL}}banner.jpeg" alt="a picture by liu jingyun">
-</div>
-<div class = "textured-background" >
-<div class="container main-menu ">
-  <div class="row">
-    <div class="col-4 link_image menu_image" [routerLink]="['/page_highlights']">
-      <img src="{{imgHomePageURL}}menu-left.jpeg" alt="highlights from the collection">
-      <div class="menu_text">highlights from the collection</div>
-    </div>
-    <div class="col-4 link_image menu_image" [routerLink]="['/page_masters']">
-      <img src="{{imgHomePageURL}}menu-middle.jpeg" alt="great masters">
-      <div class="menu_text">great masters</div>
-    </div>
-    <div class="col-4 link_image menu_image" 
-    [routerLink] = "['/latest_story']" 
-    [queryParams]="{ heading: 'story'}"
-    >
-      <img src="{{imgHomePageURL}}menu-right.jpeg" alt="latest stories">
-      <div class="menu_text">latest stories</div>
-    </div>
+
+<div class="bannerTop posAbsolute">
+  <div class="sitePresentation">
+    <h1>
+      Welcome to CFAG <br>
+      A virtual gallery dedicated to <br>
+      Chinese fine art
+    </h1>
+    <a>learn more</a>
   </div>
 </div>
-</div>
-  <div class="container vignette">
-  <div class="row">
-    <div class="col-4">
-    <div class="col-3 link_image sticker" 
-    [routerLink] = "['/chinese_painting_history']"
-    [queryParams]="{heading: 'history'}"
-    >
-      <div class="sticker__image">
-        <img src="{{imgHomePageURL}}sticker-left.jpeg" alt="chinese painting history">
-      </div>
-      <div class="sticker_text">
-        Chinese Painting History
-      </div>
-    </div>
+
+<div class = "homeMiddleMenu" >
+  
+  <div class= "link_image menu_image posRelative" [routerLink]="['/page_highlights']">
+    <img src="{{imgHomePageURL}}menu-left.png" alt="highlights from the collection" class="widthCentpc">
+    <div class="menu_text">highlights from the collection</div>
   </div>
-    <div class="col-4">
-    <div class=" link_image sticker" 
-    [routerLink] = "['/learn']" 
-    [queryParams]="{heading: 'learn'}">
-      <div class="sticker__image">
-      <img src="{{imgHomePageURL}}sticker-middle.jpeg" alt="learn about chinese painting">
-      </div>
-      <div class="sticker_text">
-      Learn about Chinese Painting
-    </div>
-    </div>
+  <div class=" link_image menu_image posRelative" [routerLink]="['/page_masters']">
+    <img src="{{imgHomePageURL}}menu-middle.jpeg" alt="great masters" class="widthCentpc">
+    <div class="menu_text">great masters</div>
   </div>
-  <div class="col-4">
-    <div class=" link_image sticker" [routerLink] = "['/support_us']" [queryParams]="{heading: 'supportus'}">
-      <div class="sticker__image">
-        <img src="{{imgHomePageURL}}sticker-right.jpeg" alt="support us">
-      </div>
-      <div class="sticker_text">
-      Support Us
-      </div>
-    </div>
-  </div>
+  <div class=" link_image menu_image posRelative" 
+  [routerLink] = "['/latest_story']" 
+  [queryParams]="{ heading: 'story'}"
+  >
+    <img src="{{imgHomePageURL}}menu-right.jpeg" alt="latest stories" class="widthCentpc">
+    <div class="menu_text">latest stories</div>
   </div>
 </div>
+
+<div class="posRelative exploreSection">
+  <div class="siteExploration">
+    <h2>
+      Explore the collection
+    </h2>
+  </div>
+
+</div>
+
+
+  <div class="vignette">
+    <div>
+      <h2>
+        Learning about Chinese painting
+      </h2>
+    </div>
+    <div class="homeMiddleMenu">
+      
+      <div class=" link_image menu_sticker" 
+      [routerLink] = "['/chinese_painting_history']"
+      [queryParams]="{heading: 'history'}"
+      >
+          <img src="{{imgHomePageURL}}sticker-left.png" alt="chinese painting history" class="widthCentpc">
+        <div class="sticker_text">
+          Brief history
+        </div>
+      </div>
+    
+    
+      <div class=" link_image menu_sticker" 
+      [routerLink] = "['/learn']" 
+      [queryParams]="{heading: 'learn'}">
+        <img src="{{imgHomePageURL}}sticker-middle.jpeg" alt="learn about chinese painting" class="widthCentpc">
+        <div class="sticker_text">
+       Great Masters
+      </div>
+      </div>
+  
+      <div class=" link_image menu_sticker" [routerLink] = "['/support_us']" [queryParams]="{heading: 'supportus'}">
+        <img src="{{imgHomePageURL}}sticker-right.png" alt="support us" class="widthCentpc">
+        <div class="sticker_text">
+          Interesting facts
+        </div>
+      </div>
+    
+    </div>
+  </div>

@@ -1,4 +1,32 @@
 .placeblock {
 	display: block;
-	height: 200px;
+	height: 130px;
+}
+
+.container_gallery {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.galleryElement {
+	width: 30%;
+	margin-top: 20px;
+}
+
+.widthCentpc {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+  }
+
+.underlined {
+	text-decoration: underline;
+}
+
+.artResume {
+	margin-top : 10px;
+	font-weight: bold;
 }

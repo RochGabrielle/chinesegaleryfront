@@ -3,16 +3,10 @@
   cursor: pointer;
 }
 
-.container {
-
-}
-
 .main-menu {
   
   padding-top : 15px;
   padding-bottom : 15px;
-
-  width: 1280px;
 }
 
 .main-menu img {
@@ -20,13 +14,24 @@
   height: auto;
 }
 
+.bannerTop {
+  background-image: url('../../assets/img/homepage/banner.png');
+  height: 600px;
+}
+
+.exploreSection {
+  background-image: url('../../assets/img/homepage/ExploreCollectionBackground.jpg');
+  height: 600px;
+}
 
 
 .vignette {
-  background-color: white;
-  width : 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+  background-image: url('../../assets/img/homepage/Background.png');
+  margin: 30px auto;
+  text-align: center;
+  color: #393C41;
 }
 
 .sticker {
@@ -35,7 +40,7 @@
   width : 300px;
   padding: 0px 0px;
   margin : 20px 10px;
-  background-image: url('../../assets/img/homepage/texture.jpg');
+  background-image: url('../../assets/img/homepage/Background.png');
   box-shadow: 1px 1px 12px #555;
   &__image {
 padding: 0px 0px;
@@ -50,14 +55,59 @@ padding: 0px 0px;
   position: relative;
   text-align: center;
   color: white;
-
+  width: 30%;
+  background-image: url('../../assets/img/homepage/Background.png');
 }
 
 .menu_text {
   position: absolute;
-  top: 100px;
-  left: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#topimage {
+.posRelative {
+  position: relative;
 }
+
+.sitePresentation {
+  position: absolute;
+  top: 330px;
+  left: 65%;
+  color: white;
+}
+
+.siteExploration {
+  position: absolute;
+  top: 330px;
+  left: 65%;
+  color: white;
+}
+
+.homeMiddleMenu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 40px auto;
+  
+}
+
+.widthCentpc {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.menu_sticker {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 
+
+.sticker_text {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+

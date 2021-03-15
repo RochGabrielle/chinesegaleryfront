@@ -36,7 +36,8 @@ gallery : Array<{
 	material: any[],
 	discount: any[],
 	artist: any[],
-	dynasty: any[],
+  dynasty: any[],
+  theme: any[]
 }>;
 imgSrc = GlobalConstants.imgURL;
 
@@ -108,7 +109,7 @@ w3RemoveClass(element, name) {
   (response) => {
   this.gallery = Object.values(response);
   let element:HTMLElement = document.getElementById('selectAll') as HTMLElement;
-
+console.log(this.gallery);
 element.click()
         }
       );  

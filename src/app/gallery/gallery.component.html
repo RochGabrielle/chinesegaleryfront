@@ -1,6 +1,13 @@
 
 <div class="placeblock"></div>
-<div class="maingallery textured-background">
+<div class="maingallery">
+  <h1>Chinese fine art</h1>
+
+  <div>
+    <h2>
+      Search the collection
+    </h2>
+  </div>
 <!--<ngb-carousel 
 interval="6000"
 >
@@ -17,6 +24,9 @@ interval="6000"
 </ngb-carousel>
 -->
 <div id="myBtnContainer">
+  <h3>
+    Filter by:
+  </h3>
   <button class="btn active" (click)="filterSelection('all')" id="selectAll"> Show all</button>
   <button class="btn" (click)="filterSelection('calligraphy')"> Calligraphy</button>
   <button class="btn" (click)="filterSelection('painting')"> Painting</button>
@@ -39,20 +49,39 @@ interval="6000"
 </div>
 </div>
 -->
+<!--
+  <div class="container_gallery" >
+    <div *ngFor="let article of gallery">
+      <div class="item_gallery column filter {{article.theme}} {{article.category}}" >
+        <div class="content" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)"></div>
+          
+            <div class="gallery_content">
+                    <img src="{{imgSrc}}{{article.smallimage}}" class="img-responsive">
+                    <p>{{article.title}}</p>
 
-<div class="container_gallery" >
-	<div *ngFor="let article of gallery">
-  <div class="item_gallery column filter {{article.theme}} {{article.category}}" ><div class="content" 
-      (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
-        <div class="gallery_content">
-                <img src="{{imgSrc}}{{article.smallimage}}" class="img-responsive">
-                <p>{{article.title}}</p>
+            </div>
+          </div>
+      </div>
+    </div>-->
+    <div class="container_gallery" >
+      <div *ngFor="let article of gallery" class="galleryElement">
+        <div class="{{article.category}} {{article.theme}} {{article.dynasty[0].name}}" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
+              <img src="{{imgSrc}}{{article.smallimage}}" class="widthCentpc">
+              <div class="artResume"> 
+                <span class="underlined">
+                  {{article.artist[0].name}}
+                </span>
+                <br>
+                {{article.title}}
+                <br>
+                {{article.dynasty[0].name}}
+              </div>
+              
+          </div>
         </div>
       </div>
+    <span class="item break"></span>
+    <span class="item break"></span>
+    <span class="item break"></span>
   </div>
-</div>
-  <span class="item break"></span>
-  <span class="item break"></span>
-  <span class="item break"></span>
-</div>
-</div>
+

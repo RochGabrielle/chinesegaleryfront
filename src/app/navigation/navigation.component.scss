@@ -6,7 +6,6 @@
 	position: fixed;
     top: 0px;
     width: 100%;
-    max-width: 1280px;
     z-index : 1000;
 }
 
@@ -30,11 +29,21 @@
   transition: height 1s ease;
 }
 
+.navBarColor {
+  background-color: rgba(5, 71, 121, 0.7);
+}
+
 
 li
 {
 display:inline-block;
 }
+
+.textcolorwhite {
+  color: white;
+  margin-left: 15px;
+}
+
 
 /*.placeholder {
   display: block;
