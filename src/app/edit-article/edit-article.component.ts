@@ -77,6 +77,7 @@ constructor(private router: Router,
         smallImageName: string = '',
         bigImageName: string = '',
         themes: any[] = [],
+        highlight:  number = 0, 
         ) {
     this.edition = true;
     const me =this;
@@ -84,7 +85,7 @@ constructor(private router: Router,
     this.articlethemelist = themes;
     this.articlesizelist = sizes;
     const promise = new Promise(function(resolve, reject) {
-      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty,category, form, museum, description_en_gb, description_fr_fr, sizes );
+      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty,category, form, museum, description_en_gb, description_fr_fr, sizes, highlight );
     resolve('form has been charged!');
     console.log(me.articleForm);
     console.log(this.articleForm);
@@ -253,7 +254,8 @@ addSizeForm() {
         form: number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
-        sizes: any[] = []
+        sizes: any[] = [],
+        highlight:  number = 0, 
         ) {
   
 this.formLoaded =false;
@@ -297,7 +299,8 @@ this.formLoaded =false;
       smallImage: new FormControl(),
       bigImage: new FormControl(),
     file: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    fileSource: new FormControl('', [Validators.required]),
+    highlight:  new FormControl(highlight),
       });
 
       this.translationService.simpletranslationlist('theme','false').subscribe(
@@ -348,6 +351,7 @@ const selectedOrderIds = formValue.themes
     formValues.append('fr_fr', formValue['fr_fr']);
     formValues.append('small', this.smallImage);
     formValues.append('big', this.bigImage);
+    formValues.append('highlight', formValue['highlight']);
 console.log(formValues.get('sizes'));
     this.articleService.addArticle(formValues).subscribe(
   (response) => { 

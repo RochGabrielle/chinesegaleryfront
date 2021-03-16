@@ -32,6 +32,7 @@ import { TokenStorageService } from './services/token-storage.service';
 import { FirewallService } from './services/firewall.service';
 import { StatusService } from './services/status.service';
 import { CsvImportService } from './services/csvImport.service';
+import { FilterPipe } from './pipes/filter';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { NewArticleComponent } from './new-article/new-article.component';
@@ -157,7 +158,8 @@ const appRoutes: Routes = [
       SlideService,
       StatusService,
       BlogService,
-      CsvImportService
+      CsvImportService,
+      FilterPipe
 
   ],
   bootstrap: [AppComponent]

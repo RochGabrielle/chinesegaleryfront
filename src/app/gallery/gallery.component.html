@@ -7,6 +7,7 @@
     <h2>
       Search the collection
     </h2>
+    <input type="text" [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search">
   </div>
 <!--<ngb-carousel 
 interval="6000"
@@ -63,7 +64,7 @@ interval="6000"
           </div>
       </div>
     </div>-->
-    <div class="container_gallery" >
+    <div class="container_gallery|filter:searchTerm" >
       <div *ngFor="let article of gallery" class="galleryElement">
         <div class="{{article.category}} {{article.theme}} {{article.dynasty[0].name}}" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
               <img src="{{imgSrc}}{{article.smallimage}}" class="widthCentpc">

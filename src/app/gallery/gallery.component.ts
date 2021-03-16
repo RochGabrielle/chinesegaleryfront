@@ -8,6 +8,7 @@ import { SlideService } from './../services/slide.service';
 import { Subscription } from 'rxjs';
 import { Article } from '../models/Article.model';
 import{ GlobalConstants } from './../common/global-constants';
+import{ FilterPipe } from './../pipes/filter';
 
 @Component({
   selector: 'app-gallery',
@@ -39,11 +40,13 @@ gallery : Array<{
   dynasty: any[],
   theme: any[]
 }>;
+searchTerm:string="";
 imgSrc = GlobalConstants.imgURL;
 
   constructor(
   	private articleService : ArticleService,
     private slideService : SlideService,
+    private filter : FilterPipe,
   	private router : Router) { }
 
   displayArticle(title :string, artist : any[], dynasty : any[], bigimage : string, description : string) {
