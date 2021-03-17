@@ -131,7 +131,8 @@ const appRoutes: Routes = [
     ImportArtistsComponent,
     ImportArticlesComponent,
     ImportSimpleTranslationsComponent,
-    ImportMuseumComponent
+    ImportMuseumComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -159,8 +160,6 @@ const appRoutes: Routes = [
       StatusService,
       BlogService,
       CsvImportService,
-      FilterPipe
-
   ],
   bootstrap: [AppComponent]
 })
