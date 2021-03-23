@@ -30,3 +30,12 @@
 	margin-top : 10px;
 	font-weight: bold;
 }
+
+.filterList {
+	list-style-type: none;
+	display: flex;
+}
+
+.filterList li {
+	margin-right: 15px;
+}

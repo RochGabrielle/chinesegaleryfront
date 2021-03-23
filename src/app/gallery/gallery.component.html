@@ -15,15 +15,36 @@
       Filter by:
     </h2>
       Dynasty 
-      <input type="checkbox" ng-checked="all" value="qing" (change)="onCheckChange($event)">Qing<br>
-      <input type="checkbox" ng-checked="all" value="song"  (change)="onCheckChange($event)">song<br>
-      <input type="checkbox" ng-checked="all" value="ming"  (change)="onCheckChange($event)">Ming
+      <ul class="filterList">
+        <li>
+          <input type="checkbox" ng-checked="all" value="qing" (change)="onCheckChange($event)">Qing<br>
+        </li>
+        <li>
+          <input type="checkbox" ng-checked="all" value="song"  (change)="onCheckChange($event)">song<br>
+        </li>
+        <li>
+          <input type="checkbox" ng-checked="all" value="ming"  (change)="onCheckChange($event)">Ming
+        </li>
+      </ul>
+      
+      
+      
       Theme
-      <input type="checkbox" ng-checked="all" value="Landscape" (change)="onCheckChange($event)">Landscape<br>
-      <input type="checkbox" ng-checked="all" value="Figure" (change)="onCheckChange($event)">Figure<br>
-      <input type="checkbox" ng-checked="all" value="Bird-and-flower" (change)="onCheckChange($event)">Bird-and-flower<br>
-      <input type="checkbox" ng-checked="all" value="Daoist and Budhist images" (change)="onCheckChange($event)">Daoist and Budhist images<br>
-    
+      <ul class="filterList">
+        <li>
+          <input type="checkbox" ng-checked="all" value="Landscape" (change)="onCheckChange($event)">Landscape<br>
+        </li>
+        <li>
+          <input type="checkbox" ng-checked="all" value="Figure" (change)="onCheckChange($event)">Figure<br>
+        </li>
+        <li>
+          <input type="checkbox" ng-checked="all" value="Bird-and-flower" (change)="onCheckChange($event)">Bird-and-flower<br>
+        </li>
+        <li>
+          <input type="checkbox" ng-checked="all" value="Daoist and Budhist images" (change)="onCheckChange($event)">Daoist and Budhist images<br>
+        </li>
+      </ul>
+      
   </div>
 <!--<ngb-carousel 
 interval="6000"
@@ -71,7 +92,7 @@ interval="6000"
         </div>
       </div>
     </div>-->
-    <div class="container_gallery" >
+      <div class="container_gallery" >
       <div *ngFor="let article of gallery | filter:searchTerm:filterTerms" class="galleryElement">
         <div class="{{article.category}} {{article.theme}} {{article.dynasty[0].name}}" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
               <img src="{{imgSrc}}{{article.smallimage}}" class="widthCentpc">
@@ -86,8 +107,8 @@ interval="6000"
               </div>
               
           </div>
-        </div>
       </div>
+    </div>
     <span class="item break"></span>
     <span class="item break"></span>
     <span class="item break"></span>
