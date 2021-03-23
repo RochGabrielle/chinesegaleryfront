@@ -3,6 +3,7 @@ import { Location } from "@angular/common";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Article } from '../models/Article.model';
 import{ GlobalConstants } from './../common/global-constants';
+import * as openSeaDragon from 'openseadragon';
 
 @Component({
   selector: 'app-displayarticle',
@@ -37,6 +38,12 @@ export class DisplayarticleComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    var viewer = openSeaDragon({
+      id: "openseadragon1",
+      prefixUrl: "./assets/openseadragon/images/",
+      tileSources: "./assets/img/folder/file.dzi",
+      showNavigator:  true
+  });
   }
 
 
