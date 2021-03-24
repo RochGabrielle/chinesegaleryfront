@@ -38,10 +38,11 @@ export class DisplayarticleComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    let titi = 'file';
     var viewer = openSeaDragon({
       id: "openseadragon1",
       prefixUrl: "./assets/openseadragon/images/",
-      tileSources: "./assets/img/folder/file.dzi",
+      tileSources: this.imgSrc + "/folder/" + titi + ".dzi",
       showNavigator:  true
   });
   }

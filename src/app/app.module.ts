@@ -82,6 +82,7 @@ const appRoutes: Routes = [
   { path: 'edit_blog', component: EditBlogComponent},
   { path: 'displayArticle', component: DisplayarticleComponent}, 
   { path: 'page_highlights', component: GalleryComponent}, 
+  { path: 'page_gallery', component: GalleryComponent}, 
   { path: 'page_masters', component: GreatmastersComponent}, 
   { path: 'artist_profile', component: ArtistprofileComponent},
   { path: 'latest_story', component: BlogComponent}, 
