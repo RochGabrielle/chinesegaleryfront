@@ -20,4 +20,8 @@ updateStatus(data) : Observable<any> {
   return this.httpClient.post(GlobalConstants.apiAdminURL+'status', data, this.httpOptions);
 }
 
+updateHighlight(data) : Observable<any> {
+  return this.httpClient.post(GlobalConstants.apiAdminURL+'highlight', data, this.httpOptions);
+}
+
 }

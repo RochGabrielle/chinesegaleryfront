@@ -44,7 +44,7 @@ formLoaded:boolean =false;
 
 
 
-headers = ["title", "date of creation", "price", "product", "material", "discount"];
+headers = ["highlight", "title", "date of creation","artist", "dynasty", "status"];
 
 constructor(private router: Router, 
            private location:Location, 
@@ -73,7 +73,7 @@ constructor(private router: Router,
         museum:  number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
-        sizes:  any[] = [],
+      //  sizes:  any[] = [],
         smallImageName: string = '',
         bigImageName: string = '',
         themes: any[] = [],
@@ -83,16 +83,17 @@ constructor(private router: Router,
     const me =this;
     this.newArticle = false;
     this.articlethemelist = themes;
-    this.articlesizelist = sizes;
+    //this.articlesizelist = sizes;
     const promise = new Promise(function(resolve, reject) {
-      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty,category, form, museum, description_en_gb, description_fr_fr, sizes, highlight );
+      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty,category, form, museum, description_en_gb, description_fr_fr, highlight );
     resolve('form has been charged!');
-    console.log(me.articleForm);
+    
     console.log(this.articleForm);
     })
-    console.log(sizes);
+   
     this.smallImageName = smallImageName;
     this.bigImageName = bigImageName;
+    console.log('big name : '+this.bigImageName);
     promise.then( function(value) {
 /*      sizes.forEach( size => {
         console.log('in promise');
@@ -134,6 +135,24 @@ this.statusService.updateStatus(JSON.stringify(data)).subscribe(
 
   }
   );
+}
+
+highlight(e) {
+  //let highlightindex = e.target.name.indexOf('highlight');
+  let id = e.target.name.slice(0,-9);
+  console.log(e.target.name);
+  console.log(id);
+  var data: {[key: string]: string} = 
+  {
+    id: id,
+    highlight: e.target.value,
+    entity: 'article'
+  };
+this.statusService.updateHighlight(JSON.stringify(data)).subscribe(
+(response) => {
+console.log('hiligthed');
+}
+);
 }
 
   getSizes() : FormArray {
@@ -254,7 +273,7 @@ addSizeForm() {
         form: number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
-        sizes: any[] = [],
+        //sizes: any[] = [],
         highlight:  number = 0, 
         ) {
   
@@ -314,7 +333,7 @@ this.formLoaded =false;
 
       
       this.choiceofcategory = category;
-      this.addSizeForm();
+    //  this.addSizeForm();
       this.edition = true;   
     }
   );     

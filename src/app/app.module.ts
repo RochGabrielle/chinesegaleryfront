@@ -60,6 +60,7 @@ import { ImportArtistsComponent } from './import-artists/import-artists.componen
 import { ImportArticlesComponent } from './import-articles/import-articles.component';
 import { ImportSimpleTranslationsComponent } from './import-simple-translations/import-simple-translations.component';
 import { ImportMuseumComponent } from './import-museum/import-museum.component';
+import { GalleryhighlightsComponent } from './galleryhighlights/galleryhighlights.component';
 
 
 const appRoutes: Routes = [
@@ -81,7 +82,7 @@ const appRoutes: Routes = [
   { path: 'edit_category', component: SimpletranslationlistComponent},
   { path: 'edit_blog', component: EditBlogComponent},
   { path: 'displayArticle', component: DisplayarticleComponent}, 
-  { path: 'page_highlights', component: GalleryComponent}, 
+  { path: 'page_highlights', component: GalleryhighlightsComponent}, 
   { path: 'page_gallery', component: GalleryComponent}, 
   { path: 'page_masters', component: GreatmastersComponent}, 
   { path: 'artist_profile', component: ArtistprofileComponent},
@@ -133,7 +134,8 @@ const appRoutes: Routes = [
     ImportArticlesComponent,
     ImportSimpleTranslationsComponent,
     ImportMuseumComponent,
-    FilterPipe
+    FilterPipe,
+    GalleryhighlightsComponent
   ],
   imports: [
     BrowserModule,

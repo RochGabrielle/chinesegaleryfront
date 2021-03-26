@@ -92,7 +92,7 @@ interval="6000"
         </div>
       </div>
     </div>-->
-    <div class="container_gallery" >
+      <div class="container_gallery" >
       <div *ngFor="let article of gallery | filter:searchTerm:filterTerms" class="galleryElement">
         <div class="{{article.category}} {{article.theme}} {{article.dynasty !== undefined ? article.dynasty[0].name : ''}}" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb)">
               <img src="{{imgSrc}}{{article.smallimage}}" class="widthCentpc">
@@ -111,8 +111,13 @@ interval="6000"
           </div>
       </div>
     </div>
+    <span class="item break"></span>
+    <span class="item break"></span>
+    <span class="item break"></span>
   </div>
 
   <ng-template #no_item>
     <span>unknown</span>
   </ng-template>
+
+

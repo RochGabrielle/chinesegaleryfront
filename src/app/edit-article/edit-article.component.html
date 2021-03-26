@@ -11,7 +11,16 @@
       	</tr>
       	<tr *ngFor="let article of articles">
           <td >
-      			{{article.highlight}}     			
+      			{{article.highlight}}  
+            {{article.highlight == '1'}}  
+            <div class="o-switch btn-group" data-toggle="buttons" role="group">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="{{article.id}}highlight" id="1" value = "1" autocomplete="on" [checked]="article.highlight == '1'"  (change) = "highlight($event)"> Actif
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="{{article.id}}highlight" id="3" value = "3" autocomplete="on" [checked]="article.highlight == '3'" (change) = "highlight($event)"> désactivé 
+              </label>
+            </div>   			
       		</td>
       		<td >
       			{{article.title}}     			
@@ -20,13 +29,13 @@
       			{{article.birth}} 			
       		</td>
       		<td>     			
-      			{{article.price}}
+      			{{article.artist[0].name}}
       		</td>
       		<td>
-      			{{article.product[0].placeholder}}
+      			{{article.dynasty[0].name}}
       		</td>
       		<td> 
-      			{{article.material[0].placeholder}}
+      			{{article.status}}
       		</td>
       		<td>
       			<button (click) = "edit(
@@ -37,19 +46,21 @@
             article.title_cn_cn,
             article.birth,
             article.price,
+            article.size,
             article.product[0].id,
             article.material[0].id,
             article.discount[0].id,
             article.artist[0].id,
             article.dynasty[0].id,
             article.category.placeholder,
+            article.form[0].id,
             article.museum[0].id,
             article.description_en_gb,
             article.description_fr_fr,
-            article.sizes,
             article.smallimage,
             article.bigimage,
-            article.theme
+            article.theme[0].id,
+            article.highlight
             )">edit</button>
       		</td>
           <td>
@@ -213,12 +224,12 @@
       <textarea type="text" id="description_fr_fr" class="form-control" formControlName="description_fr_fr"></textarea>
     </div>
 
-    <div>
+  <!-- <div>
   <h3>Sizes</h3> <button  type="button" (click)="addSize()">Add size</button>
 
   <div formArrayName="sizes" class="form-group" *ngFor="let size of articleForm.get('sizes').controls; let i=index">
     <!-- The repeated alias template -->
-    <div [formGroupName]="i"> 
+  <!--  <div [formGroupName]="i"> 
     <label>
       length:{{index}}
       <input type="text" class="form-control" formControlName="length">
@@ -239,7 +250,7 @@
   </select>
 </div>
   </div>
-</div>
+</div>-->
 <h3>Upload article small picture</h3>
     
     <div class="form-group">
