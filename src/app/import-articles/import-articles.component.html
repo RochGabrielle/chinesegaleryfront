@@ -14,7 +14,8 @@
             <th>title_en_gb </th> 
             <th>title_fr_fr </th>     
             <th>title_cn_cn </th>    
-            <th>price </th> 
+            <th>theme</th>
+            <th>form</th>
             <th>category </th>
             <th>material </th>  
             <th>discount </th> 
@@ -24,6 +25,7 @@
             <th>description_en_gb </th>
             <th>description_fr_fr</th> 
             <th>description_cn_cn</th>
+            <th>price </th> 
           </tr>    
         </thead>    
         <tbody>    
@@ -32,7 +34,8 @@
             <td> <span>{{csv.title_en_gb}}</span> </td>    
             <td> <span>{{csv.title_fr_fr}}</span> </td>    
             <td> <span>{{csv.title_cn_cn}}</span> </td>    
-            <td> <span>{{csv.price}}</span> </td>  
+            <td> <span>{{csv.theme}}</span> </td>   
+            <td> <span>{{csv.form}}</span> </td>  
             <td> <span>{{csv.category}}</span> </td>
             <td> <span>{{csv.material}}</span> </td> 
             <td> <span>{{csv.discount}}</span> </td> 
@@ -42,6 +45,8 @@
             <td> <span>{{csv.description_en_gb}}</span> </td> 
             <td> <span>{{csv.description_fr_fr}}</span> </td>
             <td> <span>{{csv.description_cn_cn}}</span> </td>
+            <td> <span>{{csv.price}}</span> </td>
+
           
           </tr>    
         </tbody>    
@@ -49,6 +54,12 @@
 
 <button type="submit" class="btn btn-primary"(click)="onImportFile()" *ngIf="fileValid">Import File</button>
 
+<div *ngIf="importing" >
+  Import in progress <div class="spinner-border text-success" role="status"></div>
+</div>
+<div *ngIf="importSuccess">
+.csv file imported with success.
+</div>
 {{progress}}
 
 {{importLog}}

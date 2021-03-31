@@ -24,6 +24,8 @@ export class ImportArticlesComponent implements OnInit {
   importDynastyForm : FormGroup;
   loadedCsvArray : any;
   pusheditems: { [id: string]: any; } = {};
+  importing : boolean = false;
+  importSuccess : boolean = false;
   
   public csvToArray: any[] = [];  
   @ViewChild('csvReader') csvReader: any;  
@@ -86,7 +88,7 @@ export class ImportArticlesComponent implements OnInit {
       let formValues = new FormData();
       let currentRecord = (<string>artistsCSVArray[i]).split(','); 
       
-      this.getAllElementId(formValues,  currentRecord[11], currentRecord[12], currentRecord[13], currentRecord[14], currentRecord[15],currentRecord[16],currentRecord[17],currentRecord[18]  ) 
+      this.getAllElementId(formValues,  currentRecord[12], currentRecord[13], currentRecord[14], currentRecord[15], currentRecord[16],currentRecord[17],currentRecord[18],currentRecord[19]  ) 
       ;
       if (currentRecord.length == headersRow.length) 
       {  
@@ -113,6 +115,8 @@ export class ImportArticlesComponent implements OnInit {
 
   onImportFile() {
 
+      this.importing = true;
+      this.importSuccess = false;
         let headersRow = this.csvImportService.getHeaderArray(this.loadedCsvArray);  
 
         // send one form to back office server for each line in csv file 
@@ -133,17 +137,17 @@ export class ImportArticlesComponent implements OnInit {
   }
 
 
-  getAllElementId(formValues: FormData, museumParam : string, categoryParam : string, materialParam : string, discountParam : string, artistParam : string, dynastyParam : string, productParam : string, formParam ) 
+  getAllElementId(formValues: FormData, museumParam : string, themeParam : string, materialParam : string, discountParam : string, artistParam : string, dynastyParam : string, productParam : string, formParam : string ) 
   {
 
     let artistId = this.getElementId( artistParam,formValues, 'artist' );
     let dynastyId = this.getElementId( dynastyParam,formValues, 'dynasty');
-    let categoryId = this.getElementId( categoryParam,formValues, 'category');
+    let categoryId = this.getElementId( themeParam,formValues, 'theme');
     let productId = this.getElementId( productParam,formValues, 'product');
     let discountId = this.getElementId( discountParam,formValues, 'discount');
     let materialId = this.getElementId( materialParam,formValues, 'material');
     let museumId = this.getElementId( museumParam,formValues, 'museum');
-    let formId = this.getElementId( museumParam,formValues, 'form');
+    let formId = this.getElementId( formParam,formValues, 'form');
     forkJoin(artistId, dynastyId,categoryId, productId, discountId, materialId, museumId, formId ).subscribe(_ => {
       // all observables have been completed
 
@@ -151,6 +155,8 @@ export class ImportArticlesComponent implements OnInit {
         (response) => { 
           console.log(response)
        this.progress = response;
+       this.importing = false;
+       this.importSuccess = true;
         });
 
     });

@@ -8,7 +8,7 @@ export class Article {
     public price: any = '',
     public birth: any = '',
     public size: any = '',
-    public category: any = '',
+    public theme: any = '',
     public material: any = '',
     public discount: any = '',
     public artist: any = '',
@@ -19,7 +19,8 @@ export class Article {
     public description_en_gb: string = '',
     public description_fr_fr: string = '',
     public description_cn_cn: string = '',
-    public sizes: any  = '',
+    public highlight: any = '0',
+    //public sizes: any  = '',
     public file: string = '',
     public fileSource: any = '',
   ) {}

@@ -42,7 +42,7 @@ return this.httpClient
 // 
 checkElement(params : string) : Observable<any>{
     return this.httpClient
-        .get<any[]>(GlobalConstants.apiURL+'getOneElementId/'+params);
+        .get<any[]>(GlobalConstants.apiAdminURL+'getOneElementId/'+params);
     }
   
 }

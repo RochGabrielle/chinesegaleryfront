@@ -12,6 +12,7 @@ import{ GlobalConstants } from './../common/global-constants';
 export class ArtistprofileComponent implements OnInit {
 artistId : string;
 imgSrc = GlobalConstants.imgArtistURL;
+artistLoaded: boolean = false;
 
 artist : {
   name: string, 
@@ -72,6 +73,7 @@ lang : string = "en_gb";
   this.artist = response;
   console.log(this.artist);
   console.log(this.artist);
+  this.artistLoaded = true;
         }
       ); 
    this.articleService.paintingListOfArtist(this.artistId, this.lang).subscribe(

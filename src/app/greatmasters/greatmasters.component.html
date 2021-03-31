@@ -1,15 +1,17 @@
-<p>Great masters :</p>
+<div class="container">
+	<h1>Chinese Fine Art Great masters :</h1>
 
-<ul *ngFor="let master of greatMasters">
-	<li >
-		<div  class="vignette" [routerLink] = "['/artist_profile']" [queryParams]="{artist: master.id}">
-			<div class="vignette__text">
-				<p><b>{{master.name}}</b></p>
-				<p>{{master.introduction}}</p>
+	<ul *ngFor="let master of greatMasters">
+		<li >
+			<div  class="vignette" [routerLink] = "['/artist_profile']" [queryParams]="{artist: master.id}">
+				<div class="vignette__text">
+					<p><b>{{master.name}}</b></p>
+					<p>{{master.introduction}}</p>
+				</div>
+				<div class="vignette__image">
+				<img src="{{imgSrc}}{{master.small}}" class="img-responsive">
+				</div>
 			</div>
-			<div class="vignette__image">
-			 <img src="{{imgSrc}}{{master.small}}" class="img-responsive">
-			</div>
-		</div>
-	</li>
-</ul>
+		</li>
+	</ul>
+</div>

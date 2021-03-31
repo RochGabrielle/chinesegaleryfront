@@ -65,10 +65,12 @@ isValidCSVFile(file: any) {
         validityReport.errorLog += 'wrong type of entity';
         break;
     }
-
-    
+    console.log(entity);
+    console.log(Object.keys(model).length);
+    console.log(headerArray.length == (Object.keys(model).length)&& entity !== 'article');
+    console.log(headerArray.length);
       validityReport.isValid = true;
-    if ((headerArray.length == (Object.keys(model).length-1)&& entity !== 'article') || (headerArray.length == (Object.keys(model).length-3)&& entity == 'article'))
+    if ((headerArray.length == (Object.keys(model).length-1) && entity !== 'article') || (headerArray.length == (Object.keys(model).length-2)&& entity == 'article'))
     {
       for (let i = 0; i < headerArray.length; i++) 
       {

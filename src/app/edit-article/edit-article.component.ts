@@ -68,7 +68,6 @@ constructor(private router: Router,
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
-        category:  string = '0',
         form: number = 0,
         museum:  number = 0, 
         description_en_gb: string = '',
@@ -76,16 +75,17 @@ constructor(private router: Router,
       //  sizes:  any[] = [],
         smallImageName: string = '',
         bigImageName: string = '',
-        themes: any[] = [],
+      //  themes: any[] = [],    
         highlight:  number = 0, 
+        theme: number = 0,
         ) {
     this.edition = true;
     const me =this;
     this.newArticle = false;
-    this.articlethemelist = themes;
+    //this.articlethemelist = themes;
     //this.articlesizelist = sizes;
     const promise = new Promise(function(resolve, reject) {
-      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty,category, form, museum, description_en_gb, description_fr_fr, highlight );
+      me.initForm(id, title,title_en_gb, title_fr_fr, title_cn_cn, birth, price,size, product, material,discount, artist,dynasty, form, museum, description_en_gb, description_fr_fr, highlight, theme );
     resolve('form has been charged!');
     
     console.log(this.articleForm);
@@ -105,7 +105,6 @@ me.addSize(size.width, size.length, size.sizeId, size.sizecategoryId);
   });*/
       console.log(value);
     });
-    this.choiceofcategory = category; 
    
   }
 
@@ -268,13 +267,13 @@ addSizeForm() {
         discount:  number = 0, 
         artist:  number = 0, 
         dynasty:  number = 0, 
-        category:  string = '0',
         museum: number = 0, 
         form: number = 0, 
         description_en_gb: string = '',
         description_fr_fr: string = '',
         //sizes: any[] = [],
         highlight:  number = 0, 
+        theme: number =0
         ) {
   
 this.formLoaded =false;
@@ -307,34 +306,40 @@ this.formLoaded =false;
       discount: new FormControl(discount),
       artist: new FormControl(artist),
       dynasty: new FormControl(dynasty),
-      category: new FormControl(category),
       form: new FormControl(form),
-      themes: new FormArray([]),
+    //  themes: new FormArray([]),     theme was a multiple choice box it has become a single one
+      theme: new FormControl(theme),
       museum: new FormControl(museum),
       description_en_gb: new FormControl(description_en_gb),
       description_fr_fr: new FormControl(description_fr_fr),
-      sizes: this.formBuilder.array([]),
+    //  sizes: this.formBuilder.array([]),
    // sizes: new FormArray([]),
       smallImage: new FormControl(),
       bigImage: new FormControl(),
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required]),
     highlight:  new FormControl(highlight),
+   
       });
-
+/*   no link between category and theme anymore
       this.translationService.simpletranslationlist('theme','false').subscribe(
   (response) => {
 
   this['themeList'] =response;
   this.addCheckboxes();     
-  this.formLoaded = true;    
+ 
         }
       );
 
       
-      this.choiceofcategory = category;
+      this.choiceofcategory = category; */
     //  this.addSizeForm();
-      this.edition = true;   
+    this.formLoaded = true;    
+      this.edition = true;  
+      console.log(form);
+      console.log(theme) ;
+      console.log(material) ;
+      
     }
   );     
   }
@@ -342,9 +347,9 @@ this.formLoaded =false;
   onSubmitForm(){
 
   const formValue = this.articleForm.value;
-const selectedOrderIds = formValue.themes
+/*const selectedOrderIds = formValue.themes
       .map((checked, i) => checked ? this.themeList[i].id : null)
-      .filter(v => v !== null);
+      .filter(v => v !== null);*/
 
     const formValues = new FormData();
     formValues.append('id', formValue['id']);
@@ -362,16 +367,17 @@ const selectedOrderIds = formValue.themes
     formValues.append('artist', formValue['artist']);
     formValues.append('dynasty', formValue['dynasty']);
     formValues.append('category', formValue['category']);
-    formValues.append('themes', selectedOrderIds);
+  //  formValues.append('themes', selectedOrderIds);
+    formValues.append('theme', formValue['theme']);
     formValues.append('museum', formValue['museum']);
     formValues.append('description_en_gb', formValue['description_en_gb']);
     formValues.append('description_fr_fr', formValue['description_fr_fr']);
-    formValues.append('sizes', JSON.stringify(formValue['sizes']));
+   // formValues.append('sizes', JSON.stringify(formValue['sizes']));
     formValues.append('fr_fr', formValue['fr_fr']);
     formValues.append('small', this.smallImage);
     formValues.append('big', this.bigImage);
     formValues.append('highlight', formValue['highlight']);
-console.log(formValues.get('sizes'));
+//console.log(formValues.get('sizes'));
     this.articleService.addArticle(formValues).subscribe(
   (response) => { 
 

@@ -11,11 +11,9 @@
       	</tr>
       	<tr *ngFor="let article of articles">
           <td >
-      			{{article.highlight}}  
-            {{article.highlight == '1'}}  
             <div class="o-switch btn-group" data-toggle="buttons" role="group">
               <label class="btn btn-secondary active">
-                <input type="radio" name="{{article.id}}highlight" id="1" value = "1" autocomplete="on" [checked]="article.highlight == '1'"  (change) = "highlight($event)"> Actif
+                <input type="radio" name="{{article.id}}highlight" id="1" value = "1" autocomplete="on" [checked]="article.highlight == '1'"  (change) = "highlight($event)"> higlighted
               </label>
               <label class="btn btn-secondary">
                 <input type="radio" name="{{article.id}}highlight" id="3" value = "3" autocomplete="on" [checked]="article.highlight == '3'" (change) = "highlight($event)"> désactivé 
@@ -52,15 +50,14 @@
             article.discount[0].id,
             article.artist[0].id,
             article.dynasty[0].id,
-            article.category.placeholder,
             article.form[0].id,
             article.museum[0].id,
             article.description_en_gb,
             article.description_fr_fr,
             article.smallimage,
             article.bigimage,
-            article.theme[0].id,
-            article.highlight
+            article.highlight,
+            article.theme[0].id
             )">edit</button>
       		</td>
           <td>
@@ -155,6 +152,7 @@
     </option>
   </select>
     </div>
+<!--
      <div class="form-group">
       <label for="category">Category: </label>
   <select class="form-control" formControlName="category" (change)="categorychoice($event)">
@@ -164,7 +162,18 @@
     </option>
   </select>
     </div>
-    Theme: 
+  -->
+    <div class="form-group">
+      <label for="theme">Theme of the artwork: </label>
+  <select  class="form-control" formControlName="theme">
+    <option value="0">--All--</option>
+    <option *ngFor="let theme of themeList" [value]="theme.id">
+      {{theme.placeholder}}
+    </option>
+  </select>
+    </div>
+
+    <!--
     <div class="form-group" *ngIf="choiceofcategory == 'painting'">
       <div *ngFor="let order of themesFormArray.controls; let i = index">
       <label formArrayName="themes" *ngIf="themeList[i].category == 'painting'">
@@ -188,6 +197,7 @@
   </label>
 </div>
     </div>
+  -->
     <div class="form-group">
       <label for="artist">Artist: </label>
   <select class="form-control" formControlName="artist">
