@@ -1,15 +1,16 @@
 <div class="container" *ngIf="artistLoaded else loading">
   <div class ="profile">
-    <div class ="profile__text">
-      <p>{{artist.name}}</p>
-  <p>{{artist.description}}</p>
+    <div class ="profileIntroduction">
+      <h1>{{artist.name}}</h1>
+      <p>{{artist.birth}}-{{artist.death}}</p>
+      <div class="profileimage">
+        <img src= "{{imgSrc}}{{artist.big}}">
+      </div>
+  
     </div>
-    <div class="profile__image">
-      <img src= "{{imgSrc}}{{artist.bigimage}}">
-    </div>
+    <p class="artistText">{{artist.description}}</p>
   </div>
-  <p>{{artist.name}}</p>
-  <p>{{artist.death}}</p>
+  
 
   <p><b>Oeuvres :</b></p>
   <div class="container_gallery" >

@@ -10,14 +10,32 @@ li {
 	padding: 0 0;
 }
 
+.historyHeader:nth-child(1) {
+	background-image: url('../../assets/img/historyDynasty/1.png');
+}
+
+.historyHeader:nth-child(2) {
+	background-image: url('../../assets/img/historyDynasty/2.png');
+}
+
+.historyHeader:nth-child(3) {
+	background-image: url('../../assets/img/historyDynasty/3.png');
+}
+
+.historyHeader:nth-child(4) {
+	background-image: url('../../assets/img/historyDynasty/1.png');
+}
+
 .historyHeader{
-	background: rgb(180,77,21);
-	background: linear-gradient(90deg, rgba(180,77,21,0.8799894957983193) 0%, rgba(133,105,53,0) 100%, rgba(121,93,9,0) 100%);
+	//background: rgb(180,77,21);
+	//background: linear-gradient(90deg, rgba(180,77,21,0.8799894957983193) 0%, rgba(133,105,53,0) 100%, rgba(121,93,9,0) 100%);
+	//background-image: url('../../assets/img/historyDynasty/1.png');
 	height: 50px;
 	font-weight : bold;
 	padding-left : 1em;
 	padding-top : 0.2em;
 	margin-bottom: .1em;
+	color: white;
 }
 
 .historyDescription 
@@ -54,4 +72,24 @@ li {
 	-webkit-transition: height 0.2s ease;
     -moz-transition: height 0.2s ease;
     transition: height 0.2s ease;
+}
+
+.container {
+	margin-top: 80px;
+}
+
+.red {
+	background-color: red;
+	color: white;
+	height: 45px;
+}
+
+.red span {
+	margin-left: 17px;
+}
+
+
+ul {
+	list-style: none;
+    padding-left: 0;
 }

@@ -1,32 +1,43 @@
-<p>Chinese painting histroy :</p>
+<div class="container">
+	<h1>Chinese painting history :</h1>
 
-<ul *ngFor="let dynasty of dynastyList" class="animate">
-	<li > 
-		<p class="historyHeader" 
-		(click) = 
-			"
-				dynasty.open == '1' || dynasty.open == '2' ? dynasty.open = '0' : dynasty.open = '1';
+	<ul>
+		<li class="red">
+			<span>Overview</span>
+		</li>
+		<li>
+			<ul *ngFor="let dynasty of dynastyList" class="animate">
+				<li > 
+					<p class="historyHeader" 
+					(click) = 
+						"
+							dynasty.open == '1' || dynasty.open == '2' ? dynasty.open = '0' : dynasty.open = '1';
+				
+						"
+					> 
+						{{dynasty.name}} {{dynasty.birth}} - {{dynasty.death}}
+					</p>
+					<div 
+					class="historyDescription" 
+					[class.open]="dynasty.open== '1' || dynasty.open== '2'"
+					[class.fullDescription]="dynasty.open== '2'"
+					> 
+						<div [class.text]="dynasty.open == '1'" [class.fullDescription]="dynasty.open == '2'">
+							{{dynasty.description}}
+						</div>
+						<p  [class.text]="dynasty.open == '1'" 
+						(click) = 
+						" 
+						dynasty.open = '2'
+						"
+						> 
+							Read more ...
+						</p>
+					</div>
+				</li>
+			</ul>
+
+		</li>
+	</ul>
 	
-			"
-		> 
-			{{dynasty.name}} {{dynasty.birth}} - {{dynasty.death}}
-		</p>
-		<div 
-		class="historyDescription" 
-		[class.open]="dynasty.open== '1' || dynasty.open== '2'"
-		[class.fullDescription]="dynasty.open== '2'"
-		> 
-			<div [class.text]="dynasty.open == '1'" [class.fullDescription]="dynasty.open == '2'">
-				{{dynasty.description}}
-			</div>
-			<p  [class.text]="dynasty.open == '1'" 
-			(click) = 
-			" 
-			dynasty.open = '2'
-			"
-			> 
-				Read more ...
-			</p>
-		</div>
-	</li>
-</ul>
+</div>

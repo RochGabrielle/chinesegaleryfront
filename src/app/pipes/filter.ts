@@ -49,11 +49,15 @@ export class FilterPipe implements PipeTransform{
             return items.filter(item=>{
                 for(let key of filterFields)
                 {
-                    //console.log(key);
+                    console.log(key);
                     if( Array.isArray(item[key]) ) // for artist, dynasty
                     {
-                       // console.log('array'+item[key]);
-                        prop=isNaN(item[key][0]['name']) ? item[key][0]['name'].toString().toUpperCase() : item[key][0]['name'].toString();
+                        if( typeof item[key][0]['name'] !== 'undefined' )
+                        {
+                            console.log('array : '+item[key]);
+                            prop=isNaN(item[key][0]['name']) ? item[key][0]['name'].toString().toUpperCase() : item[key][0]['name'].toString();
+                        }
+                        
                     } else if ( typeof item[key] == 'string')
                     {
                        // console.log('string '+item[key]);

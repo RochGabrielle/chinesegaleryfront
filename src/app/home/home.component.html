@@ -23,7 +23,7 @@ interval="6000"
       A virtual gallery dedicated to <br>
       Chinese fine art
     </h1>
-    <a>learn more</a>
+    <a class="contactLink" [routerLink]="['/contact']">learn more</a>
   </div>
 </div>
 
@@ -35,7 +35,7 @@ interval="6000"
   </div>
   <div class=" link_image menu_image posRelative" [routerLink]="['/page_masters']">
     <img src="{{imgHomePageURL}}menu-middle.jpeg" alt="great masters" class="widthCentpc">
-    <div class="menu_text">great masters</div>
+    <div class="menu_text">Exhibitions</div>
   </div>
   <div class=" link_image menu_image posRelative" 
   [routerLink] = "['/latest_story']" 
@@ -76,9 +76,9 @@ interval="6000"
     
     
       <div class=" link_image menu_sticker" 
-      [routerLink] = "['/learn']" 
+      [routerLink] = "['/great_masters']" 
       [queryParams]="{heading: 'learn'}">
-        <img src="{{imgHomePageURL}}sticker-middle.jpeg" alt="learn about chinese painting" class="widthCentpc">
+        <img src="{{imgHomePageURL}}sticker-middle.jpeg" alt="learn about chinese great masters" class="widthCentpc">
         <div class="sticker_text">
        Great Masters
       </div>

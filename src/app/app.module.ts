@@ -84,7 +84,7 @@ const appRoutes: Routes = [
   { path: 'displayArticle', component: DisplayarticleComponent}, 
   { path: 'page_highlights', component: GalleryhighlightsComponent}, 
   { path: 'page_gallery', component: GalleryComponent}, 
-  { path: 'page_masters', component: GreatmastersComponent}, 
+  { path: 'great_masters', component: GreatmastersComponent}, 
   { path: 'artist_profile', component: ArtistprofileComponent},
   { path: 'latest_story', component: BlogComponent}, 
   { path: 'chinese_painting_history', component: HistoryComponent}, 

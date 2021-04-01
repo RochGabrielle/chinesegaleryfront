@@ -42,7 +42,7 @@ export class DisplayarticleComponent implements OnInit {
     var viewer = openSeaDragon({
       id: "openseadragon1",
       prefixUrl: "./assets/openseadragon/images/",
-      tileSources: this.imgSrc + "/folder/" + titi + ".dzi",
+      tileSources: this.imgSrc + "/"+this.bigimage+"/" + this.bigimage + ".dzi",
       showNavigator:  true
   });
   }
