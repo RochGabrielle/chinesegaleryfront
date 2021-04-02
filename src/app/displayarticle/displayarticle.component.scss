@@ -1,3 +1,7 @@
+.container {
+  margin: 80px auto;
+}
+
 .displayarticle {
 	text-align : center;
 }
@@ -17,4 +21,22 @@
 #openseadragon1 {
   margin: 0 auto;
   margin-top: 100px;
+  position: relative;
+}
+
+.pictureMainInfo {
+  position: absolute;
+  top: 500px;
+  left: 50px;
+  color: white;
+}
+
+.displayheadmenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.displayheadmenu li {
+  margin: 10px 10px;
+  font-weight: bold;
 }

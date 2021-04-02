@@ -32,6 +32,7 @@ import { TokenStorageService } from './services/token-storage.service';
 import { FirewallService } from './services/firewall.service';
 import { StatusService } from './services/status.service';
 import { CsvImportService } from './services/csvImport.service';
+import { ContactService } from './services/contact.service';
 import { FilterPipe } from './pipes/filter';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
@@ -61,10 +62,12 @@ import { ImportArticlesComponent } from './import-articles/import-articles.compo
 import { ImportSimpleTranslationsComponent } from './import-simple-translations/import-simple-translations.component';
 import { ImportMuseumComponent } from './import-museum/import-museum.component';
 import { GalleryhighlightsComponent } from './galleryhighlights/galleryhighlights.component';
+import { AboutComponent } from './about/about.component';
 
 
 const appRoutes: Routes = [
   { path: 'contact', component: ContactComponent },
+  { path: 'aboutCFAG', component: AboutComponent },
   { path: 'articles', component: ArticleListComponent },
   { path: 'new-article', component: NewArticleComponent },
   { path: 'edit_material', component: SimpletranslationlistComponent},
@@ -135,7 +138,8 @@ const appRoutes: Routes = [
     ImportSimpleTranslationsComponent,
     ImportMuseumComponent,
     FilterPipe,
-    GalleryhighlightsComponent
+    GalleryhighlightsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -163,6 +167,7 @@ const appRoutes: Routes = [
       StatusService,
       BlogService,
       CsvImportService,
+      ContactService,
   ],
   bootstrap: [AppComponent]
 })

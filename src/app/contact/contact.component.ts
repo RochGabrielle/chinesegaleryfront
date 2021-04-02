@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import{ GlobalConstants } from './../common/global-constants';
+import { FormBuilder, FormGroup, FormControl,} from '@angular/forms';
+import { ContactService } from './../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,11 +9,35 @@ import{ GlobalConstants } from './../common/global-constants';
 })
 export class ContactComponent implements OnInit {
 
-  imgContactURL = GlobalConstants.imgContactURL;
+  FormData: FormGroup;
 
-  constructor() { }
+  constructor(private builder: FormBuilder, private contact: ContactService) { }
 
   ngOnInit(): void {
+    /* using validator TO DO
+    this.FormData = this.builder.group({
+      Fullname: new FormControl('', [Validators.required]),
+      Email: new FormControl('', [Validators.compose([Validators.required, Validators.email])]),
+      Comment: new FormControl('', [Validators.required])
+      })
+      */
+      this.FormData = this.builder.group({
+        Fullname: new FormControl(''),
+        Email: new FormControl(''),
+        Comment: new FormControl('')
+        })
   }
+
+  onSubmit(FormData) {
+    console.log(FormData)
+    this.contact.PostMessage(FormData)
+    .subscribe(response => {
+    location.href = 'https://mailthis.to/confirm'
+    console.log(response)
+    }, error => {
+    console.warn(error.responseText)
+    console.log({ error })
+    })
+    }
 
 }

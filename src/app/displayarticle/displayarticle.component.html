@@ -1,30 +1,53 @@
 
-<div  class= "displayarticle" >
- <ul >
-      <li>
-    <!--       <lib-ngx-image-zoom
-    [thumbImage]= myThumbnail
-    [fullImage]=myFullresImage
-    [magnification]="2"
-    [enableScrollZoom]="true"
-    [enableLens]="true"
-    [lensWidth]="200"
-  
-></lib-ngx-image-zoom>
---> 
-<div id="openseadragon1" style="width: 800px; height: 600px;">
-
-</div>
-
-        	
-      	</li>
-      	
-<li>    		
-      		{{title}}       		
-      	</li>
-      	<li> by <b [routerLink] = "['/artist_profile']" [queryParams]="{artist:artist[0].id}">{{artist[0].name}}</b></li>
-      	<li>{{description}} </li>
+<div class="container">
+  <div  class= "displayarticle" >
+    <ul class="displayheadmenu">
+       <li  (click)="toggKeyFacts();">
+         key facts
+       </li>
+       <li  (click)="toggDescription();">
+         description
+       </li>
+     </ul>
+     <div class="nav-item " id="" [className]="displayKeyFacts? 'enabled' : 'disabled'" >
+      <ul >
+        <li >
+         size : {{size}}
+        </li>
+        <li >
+          material : {{material}}
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          form : {{form}}
+        </li>
       </ul>
-
-
+      
+    </div>
+    <div [className]="displayDescription? 'enabled' : 'disabled'">
+      {{description}}
+    </div>
+       <!--       <lib-ngx-image-zoom
+       [thumbImage]= myThumbnail
+       [fullImage]=myFullresImage
+       [magnification]="2"
+       [enableScrollZoom]="true"
+       [enableLens]="true"
+       [lensWidth]="200"
+     
+   ></lib-ngx-image-zoom>
+   --> 
+   <div id="openseadragon1" style="width: 800px; height: 600px;">
+   
+     <ul class="pictureMainInfo">
+       <li>    		
+         {{title}}       		
+       </li>
+       <li> by <b [routerLink] = "['/artist_profile']" [queryParams]="{artist:artist[0].id}">{{artist[0].name}}</b></li>
+       <li>{{description}} </li>
+      </ul>   	
+   
+   </div>
+   
+             
+   </div>
 </div>

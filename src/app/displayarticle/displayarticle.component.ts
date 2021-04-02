@@ -16,6 +16,8 @@ export class DisplayarticleComponent implements OnInit {
 	description : string;
 	dynasty : any[];
 	bigimage : string;
+  displayKeyFacts : boolean = false; 
+  displayDescription : boolean = false; 
 
 	imgSrc = GlobalConstants.imgURL;
   myThumbnail : string;
@@ -46,6 +48,23 @@ export class DisplayarticleComponent implements OnInit {
       showNavigator:  true
   });
   }
+
+  togg() {
+    this.displayMenu = !this.displayMenu;
+    console.log(this.displayMenu);
+}
+
+toggKeyFacts() {
+  this.displayKeyFacts = !this.displayKeyFacts;
+  this.displayDescription = false;
+    console.log(this.displayKeyFacts);
+}
+
+toggDescription() {
+  this.displayDescription = !this.displayDescription;
+  this.displayKeyFacts = false;
+    console.log(this.displayDescription);
+}
 
 
 }

@@ -8,14 +8,11 @@ import { SlideService } from './../services/slide.service';
 import { Subscription } from 'rxjs';
 import { Article } from '../models/Article.model';
 import{ GlobalConstants } from './../common/global-constants';
-import{ FilterPipe } from './../pipes/filter';
 
 @Component({
   selector: 'app-galleryhighlights',
   templateUrl: './galleryhighlights.component.html',
   styleUrls: ['./galleryhighlights.component.scss'],
-  providers: [
-    FilterPipe]
 })
 export class GalleryhighlightsComponent implements OnInit {
 
@@ -45,12 +42,11 @@ gallery : Array<{
 gallerySave : Array<{any}>;
 searchTerm:string="";
 imgSrc = GlobalConstants.imgURL;
-filterTerms: Array<string>=[];
+
 
   constructor(
   	private articleService : ArticleService,
     private slideService : SlideService,
-    private filter : FilterPipe,
   	private router : Router) { }
 
   displayArticle(title :string, artist : any[], dynasty : any[], bigimage : string, description : string) {
@@ -63,21 +59,6 @@ filterTerms: Array<string>=[];
   											}]);
   }
 
-  onCheckChange(event) 
-  {
-    /* Selected */
-    if(event.target.checked)
-    {
-      // Add a new control in the arrayForm
-      this.filterTerms.push(event.target.value);
-    } else 
-    {
-      let i = this.filterTerms.indexOf(event.target.value);
-      this.filterTerms.splice(i,1);
-    }
-    console.log(this.filterTerms);
-    this.gallery = this.filter.transform(this.gallerySave, this.searchTerm, this.filterTerms);
-  }
 
   ngOnInit(): void {
 /*
