@@ -1,31 +1,23 @@
 
 <div class="container">
   <div  class= "displayarticle" >
-    <ul class="displayheadmenu">
-       <li  (click)="toggKeyFacts();">
-         key facts
-       </li>
-       <li  (click)="toggDescription();">
-         description
-       </li>
-     </ul>
-     <div class="nav-item " id="" [className]="displayKeyFacts? 'enabled' : 'disabled'" >
-      <ul >
-        <li >
-         size : {{size}}
-        </li>
-        <li >
-          material : {{material}}
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          form : {{form}}
-        </li>
-      </ul>
+    <div class="menuArea">
       
-    </div>
-    <div [className]="displayDescription? 'enabled' : 'disabled'">
-      {{description}}
-    </div>
+      <ul class="displayheadmenu">
+         <li  (click)="toggKeyFacts();">
+           Key facts
+         </li>
+         <li  (click)="toggDescription();">
+           Description
+         </li>
+         <li>
+          
+         
+        </li>
+       </ul>
+       <div id="toolbarDiv" class="toolbar" style="position: relative;"></div>
+      </div>
+     
        <!--       <lib-ngx-image-zoom
        [thumbImage]= myThumbnail
        [fullImage]=myFullresImage
@@ -35,19 +27,100 @@
        [lensWidth]="200"
      
    ></lib-ngx-image-zoom>
+
    --> 
-   <div id="openseadragon1" style="width: 800px; height: 600px;">
+
+   <div id="openseadragon1" style="width: 1200px; height: 1200px;">
+    <div class="keyFactContainer">
+     <div class="keyFacts" [ngClass]="displayKeyFacts? 'enabled' : 'disabled'" >
+        <table>
+          <tr>
+            <td>
+              Full title
+            </td>
+            <td>
+              {{title}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Artist Name
+            </td>
+            <td>
+              {{artist[0].name}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Artist dates
+            </td>
+            <td>
+              {{title}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Dynasty
+            </td>
+            <td>
+              {{artist[0].name}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Medium and Support
+            </td>
+            <td>
+              {{material}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Measurement (cm) H x W
+            </td>
+            <td>
+              {{size}}
+            </td>
+          </tr>
+         </table>
+
+         <div class="closeButton" (click)="toggKeyFacts();">
+          X
+         </div>
+    </div>
+  </div>
+
+  <div class="keyFactContainer">
+      <div class="keyFacts" [ngClass]="displayDescription? 'enabled' : 'disabled'">
+      
+        <div>
+          {{description}}
+        </div>
+        <div class="closeButton" (click)="toggDescription();">
+            X
+        </div>
+      </div>
+    </div>
    
      <ul class="pictureMainInfo">
        <li>    		
-         {{title}}       		
+          {{title}}       		
        </li>
-       <li> by <b [routerLink] = "['/artist_profile']" [queryParams]="{artist:artist[0].id}">{{artist[0].name}}</b></li>
-       <li>{{description}} </li>
+       <li  [routerLink] = "['/artist_profile']" [queryParams]="{artist:artist[0].id}" class="underlined"> 
+          {{artist[0].name}}
+        </li>
+       <li class="dynastySize">
+          {{description}} 
+       </li>
       </ul>   	
    
    </div>
    
              
    </div>
+
+<h2>More paintings by {{artist[0].name}} </h2>
+
+<app-display-artist-gallery [artistId]="artistId"></app-display-artist-gallery>
+
 </div>

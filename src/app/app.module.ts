@@ -63,6 +63,7 @@ import { ImportSimpleTranslationsComponent } from './import-simple-translations/
 import { ImportMuseumComponent } from './import-museum/import-museum.component';
 import { GalleryhighlightsComponent } from './galleryhighlights/galleryhighlights.component';
 import { AboutComponent } from './about/about.component';
+import { DisplayArtistGalleryComponent } from './display-artist-gallery/display-artist-gallery.component';
 
 
 const appRoutes: Routes = [
@@ -139,7 +140,8 @@ const appRoutes: Routes = [
     ImportMuseumComponent,
     FilterPipe,
     GalleryhighlightsComponent,
-    AboutComponent
+    AboutComponent,
+    DisplayArtistGalleryComponent
   ],
   imports: [
     BrowserModule,

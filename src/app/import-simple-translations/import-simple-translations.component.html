@@ -1,3 +1,7 @@
+<div class="container">
+<div class="placeholder">
+
+</div>
 <p>Import {{entity}} .csv file</p>
 
 <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)" accept=".csv" /> <span *ngIf="!fileValid">{{errorWarning}}</span>
@@ -22,6 +26,5 @@
 
 <button type="submit" class="btn btn-primary"(click)="onImportFile()" *ngIf="fileValid">Import File</button>
 
-<span>{{progress}}</span>{{importLog}}<span>
-
-
+<span>{{progress}}</span><span>{{importLog}}</span>
+</div>

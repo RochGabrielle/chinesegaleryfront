@@ -1,26 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpHeaders  } from '@angular/common/http';
+import{ GlobalConstants } from './../common/global-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  private api = ''
+  httpOptions = {
+  headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      //'Authorization': 'my-auth-token'
+    })
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  PostMessage(input: any) {
-    return this.http.post(this.api, input, { responseType: 'text'}).pipe(
-      map(
-        (response) => {
-          if (response) {
-            return response;
-          }
-        },
-        (error: any) => {
-          return error;
-        }
-      )
-    )
+  PostMessage( newItem: Object) {
+return this.httpClient
+    .post<any[]>(GlobalConstants.apiContactURL, JSON.stringify(newItem),this.httpOptions);
+
   }
 }

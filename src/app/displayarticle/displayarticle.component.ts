@@ -13,6 +13,7 @@ import * as openSeaDragon from 'openseadragon';
 export class DisplayarticleComponent implements OnInit {
 	title : string;
 	artist : any[];
+  artistId: string;
 	description : string;
 	dynasty : any[];
 	bigimage : string;
@@ -22,7 +23,10 @@ export class DisplayarticleComponent implements OnInit {
 	imgSrc = GlobalConstants.imgURL;
   myThumbnail : string;
   myFullresImage : string;
-
+  size : string;
+  material : string;
+  form: string;
+  displayMenu: boolean = false;
 
   constructor(
   	public router: Router,
@@ -32,9 +36,13 @@ export class DisplayarticleComponent implements OnInit {
         this.artist = JSON.parse(params['artist']);
         this.bigimage = params['bigimage'];
         this.description = params['description'];
+        this.size = params['size'];
+        this.material = params['material'];
+        this.form = params['form'];
 
         this.myThumbnail = this.imgSrc + "earth_1_small.png";
         this.myFullresImage = this.imgSrc + this.bigimage;
+        this.artistId = this.artist[0].id;
 
     });
 }
@@ -45,11 +53,15 @@ export class DisplayarticleComponent implements OnInit {
       id: "openseadragon1",
       prefixUrl: "./assets/openseadragon/images/",
       tileSources: this.imgSrc + "/"+this.bigimage+"/" + this.bigimage + ".dzi",
-      showNavigator:  true
+      showNavigator:  true,
+      navigatorPosition:   "BOTTOM_RIGHT",
+      toolbar: "toolbarDiv",
+      visibilityRatio: 1.0,
+      constrainDuringPan: true,
   });
   }
 
-  togg() {
+togg() {
     this.displayMenu = !this.displayMenu;
     console.log(this.displayMenu);
 }

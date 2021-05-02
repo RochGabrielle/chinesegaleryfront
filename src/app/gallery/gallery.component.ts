@@ -53,13 +53,15 @@ filterTerms: Array<string>=[];
     private filter : FilterPipe,
   	private router : Router) { }
 
-  displayArticle(title :string, artist : any[], dynasty : any[], bigimage : string, description : string) {
+  displayArticle(title :string, artist : any[], dynasty : any[], bigimage : string, description : string, material: any[], size: string) {
   console.log(artist) ;
   this.router.navigate(["/displayArticle", {title : title, 
   											 artist : JSON.stringify(artist), 
   											 dynasty : JSON.stringify(dynasty),
   											 bigimage : bigimage,
-  											 description : description
+  											 description : description,
+                         material: JSON.stringify(material),
+                         size: size
   											}]);
   }
 

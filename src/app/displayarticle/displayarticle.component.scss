@@ -12,23 +12,26 @@
 
 
 .displayarticle img {
-  max-width:800px;
-  max-height:800px;
+  max-width:1200px;
+  max-height:1200px;
   width: auto;
   height: auto;
 }
 
 #openseadragon1 {
   margin: 0 auto;
-  margin-top: 100px;
   position: relative;
 }
 
 .pictureMainInfo {
   position: absolute;
-  top: 500px;
+  bottom: 100px;
   left: 50px;
   color: white;
+  z-index: 100;
+  text-align: left;
+  font-size: 35px;
+  font-weight: 400;
 }
 
 .displayheadmenu {
@@ -39,4 +42,72 @@
 .displayheadmenu li {
   margin: 10px 10px;
   font-weight: bold;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.dynastySize {
+  font-size: 30px; 
+}
+
+.keyFacts {
+  display: float;
+  position: relative;
+  text-align: left;
+  transition: all 1s;
+  width: 660;
+  background-color: #F9F9F9;
+  padding: 48px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.disabled {
+  transform: translate(-660px);
+}
+
+.enabled {
+  transform: translate(0px);
+}
+
+.keyFactContainer {
+  position: absolute;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.keyFacts table {
+  border-collapse: collapse;
+  border-style: hidden;
+  
+}
+
+.keyFacts table td {
+  border: 1px solid #C4C4C4;
+  padding: 15px 0;
+}
+
+.keyFacts table tr td:first-child {
+  width: 200px;
+}
+
+.keyFacts table tr td:nth-child(2n+0) {
+  width: 275px;
+  padding-left: 15px;
+}
+
+.menuArea {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+}
+
+.toolbar {
+  width: 200px;
 }

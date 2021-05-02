@@ -23,17 +23,14 @@ export class ContactComponent implements OnInit {
       */
       this.FormData = this.builder.group({
         Fullname: new FormControl(''),
-        Email: new FormControl(''),
-        Comment: new FormControl('')
+        visitorEmail: new FormControl(''),
+        visitorMessage: new FormControl('')
         })
   }
 
   onSubmit(FormData) {
-    console.log(FormData)
     this.contact.PostMessage(FormData)
     .subscribe(response => {
-    location.href = 'https://mailthis.to/confirm'
-    console.log(response)
     }, error => {
     console.warn(error.responseText)
     console.log({ error })

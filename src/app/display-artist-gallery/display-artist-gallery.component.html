@@ -1,12 +1,8 @@
-
 <div class="placeblock"></div>
 <div class="maingallery">
-  <h1 class="enbolded">Highlights from the collection</h1>
-  <h2>Explore the most popular master pieces</h2>
-
-
+{{artistId}}
       <div class="container_gallery" >
-      <div *ngFor="let article of gallery" class="galleryElement">
+      <div *ngFor="let article of artistGallery" class="galleryElement">
         <div class="{{article.category}} {{article.theme}} {{article.dynasty !== undefined ? article.dynasty[0].name : ''}}" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb, article.material, article.size)">
               <img src="{{imgSrc}}{{article.smallimage}}" class="widthCentpc">
               <div class="artResume"> 
@@ -29,5 +25,3 @@
   <ng-template #no_item>
     <span>unknown</span>
   </ng-template>
-
-

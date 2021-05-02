@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { ArticleService } from './../services/article.service';
@@ -10,21 +10,13 @@ import { Article } from '../models/Article.model';
 import{ GlobalConstants } from './../common/global-constants';
 
 @Component({
-  selector: 'app-galleryhighlights',
-  templateUrl: './galleryhighlights.component.html',
-  styleUrls: ['./galleryhighlights.component.scss'],
+  selector: 'app-display-artist-gallery',
+  templateUrl: './display-artist-gallery.component.html',
+  styleUrls: ['./display-artist-gallery.component.scss']
 })
-export class GalleryhighlightsComponent implements OnInit {
+export class DisplayArtistGalleryComponent implements OnInit {
 
-slides : Array<{
-  title: string, 
-  subtitle: string, 
-  desktop : string,
-  tablet : string,
-  mobile : string,
-}>;
-
-gallery : Array<{
+	artistGallery : Array<{
 	title: string, 
 	birth: number, 
 	price : number, 
@@ -39,49 +31,36 @@ gallery : Array<{
   dynasty: any[],
   theme: any[]
 }>;
-gallerySave : Array<{any}>;
-searchTerm:string="";
-imgSrc = GlobalConstants.imgURL;
 
-
-  constructor(
-  	private articleService : ArticleService,
+  constructor(private articleService : ArticleService,
     private slideService : SlideService,
   	private router : Router) { }
 
   displayArticle(title :string, artist : any[], dynasty : any[], bigimage : string, description : string, material: any[], size: string) {
-  console.log(artist) ;
+  console.log(material) ;
+  console.log('next page');
   this.router.navigate(["/displayArticle", {title : title, 
   											 artist : JSON.stringify(artist), 
   											 dynasty : JSON.stringify(dynasty),
   											 bigimage : bigimage,
   											 description : description,
-                         material: JSON.stringify(material),
-                         size: size
+  											 material: JSON.stringify(material),
+  											 size: size
   											}]);
   }
 
+  @Input() artistId: string;
 
   ngOnInit(): void {
-/*
-    this.slideService.slideshow('fr_fr').subscribe(
+  	 this.articleService.articleGalleryList('fr_fr', this.artistId).subscribe(
   (response) => {
-    console.log("main");
-  console.log(Object.values(response));
-  console.log(this.imgSrc);
-  this.slides = Object.values(response);
-
-        }
-      );
-*/
-    this.articleService.articleGalleryList('fr_fr', "highlight").subscribe(
-  (response) => {
-  this.gallery = Object.values(response);
-  this.gallerySave = Object.values(response);
+  	console.log(this.artistId);
+  this.artistGallery = Object.values(response);
  
         }
       );  
-
   }
-}
 
+
+
+}

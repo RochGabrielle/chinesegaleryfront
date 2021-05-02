@@ -45,6 +45,9 @@ uploadFile(fd : FormData) : Observable<any> {
   return this.httpClient.post(GlobalConstants.apiAdminURL+'uploadFile', fd);
 }
 
+//type:highlights  highlight gallery
+//      main       main page
+//     number      work of an artist
 articleGalleryList(lang: string, type: string) : Observable<any>{
   return this.httpClient
     .get<any[]>(GlobalConstants.apiURL+'gallery/'+type+'/'+lang);
