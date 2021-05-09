@@ -1,9 +1,8 @@
 <div class="placeblock"></div>
-<div class="maingallery">
-{{artistId}}
+<div class="maingallery" *ngIf="artworkByArtistLoading else loading">
       <div class="container_gallery" >
       <div *ngFor="let article of artistGallery" class="galleryElement">
-        <div class="{{article.category}} {{article.theme}} {{article.dynasty !== undefined ? article.dynasty[0].name : ''}}" (click) = "displayArticle(article.title, article.artist, article.dynasty, article.bigimage, article.en_gb, article.material, article.size)">
+        <div class="{{article.category}} {{article.theme}} {{article.dynasty !== undefined ? article.dynasty[0].name : ''}}" [routerLink]="['/gallery/art',article.id]" routerLinkActive="on">
               <img src="{{imgSrc}}{{article.smallimage}}" class="widthCentpc">
               <div class="artResume"> 
                 {{article.title}}
@@ -25,3 +24,10 @@
   <ng-template #no_item>
     <span>unknown</span>
   </ng-template>
+
+  <ng-template #loading>
+  Loading Art work by artist...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>

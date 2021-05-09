@@ -85,7 +85,7 @@ const appRoutes: Routes = [
   { path: 'edit_slideshow', component: EditSlideshowComponent},
   { path: 'edit_category', component: SimpletranslationlistComponent},
   { path: 'edit_blog', component: EditBlogComponent},
-  { path: 'displayArticle', component: DisplayarticleComponent}, 
+  { path: 'gallery/art/:id', component: DisplayarticleComponent}, 
   { path: 'page_highlights', component: GalleryhighlightsComponent}, 
   { path: 'page_gallery', component: GalleryComponent}, 
   { path: 'great_masters', component: GreatmastersComponent}, 

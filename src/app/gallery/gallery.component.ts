@@ -100,6 +100,5 @@ filterTerms: Array<string>=[];
  
         }
       );  
-
   }
 }

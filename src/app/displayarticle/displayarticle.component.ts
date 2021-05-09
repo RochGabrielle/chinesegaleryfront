@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Article } from '../models/Article.model';
 import{ GlobalConstants } from './../common/global-constants';
 import * as openSeaDragon from 'openseadragon';
+import { ArticleService } from './../services/article.service';
 
 @Component({
   selector: 'app-displayarticle',
@@ -19,6 +20,7 @@ export class DisplayarticleComponent implements OnInit {
 	bigimage : string;
   displayKeyFacts : boolean = false; 
   displayDescription : boolean = false; 
+  art: any[];
 
 	imgSrc = GlobalConstants.imgURL;
   myThumbnail : string;
@@ -27,38 +29,48 @@ export class DisplayarticleComponent implements OnInit {
   material : string;
   form: string;
   displayMenu: boolean = false;
+  id: string;
+
+  artworkLoading: boolean = false;
+
 
   constructor(
   	public router: Router,
+    private articleService : ArticleService,
   	private route: ActivatedRoute) { 
   route.params.subscribe(params => {
-        this.title = params['title'];
-        this.artist = JSON.parse(params['artist']);
-        this.bigimage = params['bigimage'];
-        this.description = params['description'];
-        this.size = params['size'];
-        this.material = params['material'];
-        this.form = params['form'];
-
-        this.myThumbnail = this.imgSrc + "earth_1_small.png";
-        this.myFullresImage = this.imgSrc + this.bigimage;
-        this.artistId = this.artist[0].id;
-
+        this.id = params['id'];
+        
     });
 }
 
   ngOnInit(): void {
-    let titi = 'file';
+    this.artworkLoading = false;
+     this.articleService.articleDisplay(this.id, 'en_gb').subscribe(
+  (response) => {
+  this.art = response;
+  this.title = this.art['title'];
+  console.log(this.art) ;
+  console.log(this.art['bigImage']);
+  console.log(response);
+
+  console.log(this.artworkLoading)
+    this.artworkLoading = true;
+
+  let titi = 'file';
     var viewer = openSeaDragon({
       id: "openseadragon1",
       prefixUrl: "./assets/openseadragon/images/",
-      tileSources: this.imgSrc + "/"+this.bigimage+"/" + this.bigimage + ".dzi",
+      tileSources: this.imgSrc + "/"+this.art['bigImage']+"/" + this.art['bigImage'] + ".dzi",
       showNavigator:  true,
       navigatorPosition:   "BOTTOM_RIGHT",
       toolbar: "toolbarDiv",
       visibilityRatio: 1.0,
       constrainDuringPan: true,
   });
+        }
+      );
+    
   }
 
 togg() {

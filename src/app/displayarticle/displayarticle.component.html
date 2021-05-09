@@ -1,6 +1,7 @@
 
-<div class="container">
-  <div  class= "displayarticle" >
+<div class="container" >
+  <div *ngIf="artworkLoading else loading">
+  <div class= "displayarticle">
     <div class="menuArea">
       
       <ul class="displayheadmenu">
@@ -39,7 +40,9 @@
               Full title
             </td>
             <td>
-              {{title}}
+              <span *ngIf="art['title'] !== undefined ;else no_item">
+                {{title}}
+              </span>
             </td>
           </tr>
           <tr>
@@ -47,7 +50,9 @@
               Artist Name
             </td>
             <td>
-              {{artist[0].name}}
+              <span *ngIf="art['artist'] !== undefined ;else no_item">
+                {{art['artist'][0].name}}
+              </span>
             </td>
           </tr>
           <tr>
@@ -55,7 +60,9 @@
               Artist dates
             </td>
             <td>
-              {{title}}
+              <span  *ngIf="art['title'] !== undefined ;else no_item">
+              {{art['title']}}
+              </span>
             </td>
           </tr>
           <tr>
@@ -63,7 +70,9 @@
               Dynasty
             </td>
             <td>
-              {{artist[0].name}}
+               <span  *ngIf="art['dynasty'] !== undefined ;else no_item">
+                {{art['dynasty'][0].name}}
+              </span>
             </td>
           </tr>
           <tr>
@@ -71,7 +80,9 @@
               Medium and Support
             </td>
             <td>
-              {{material}}
+              <span  *ngIf="art['material'] !== undefined ;else no_item">
+              {{art['material']}}
+            </span>
             </td>
           </tr>
           <tr>
@@ -79,7 +90,9 @@
               Measurement (cm) H x W
             </td>
             <td>
-              {{size}}
+              <span  *ngIf="art['size'] !== undefined ;else no_item">
+              {{art['size']}}
+            </span>
             </td>
           </tr>
          </table>
@@ -93,8 +106,10 @@
   <div class="keyFactContainer">
       <div class="keyFacts" [ngClass]="displayDescription? 'enabled' : 'disabled'">
       
-        <div>
-          {{description}}
+        <div class="artDescription">
+          <span  *ngIf="art['description'] !== undefined ;else no_item">
+          {{art['description']}}
+        </span>
         </div>
         <div class="closeButton" (click)="toggDescription();">
             X
@@ -103,14 +118,20 @@
     </div>
    
      <ul class="pictureMainInfo">
-       <li>    		
-          {{title}}       		
+       <li>
+       <span  *ngIf="art['title'] !== undefined ;else no_item">    		
+          {{art['title']}}     
+          </span>  		
        </li>
-       <li  [routerLink] = "['/artist_profile']" [queryParams]="{artist:artist[0].id}" class="underlined"> 
-          {{artist[0].name}}
+       <li  [routerLink] = "['/artist_profile']" [queryParams]="{artist:art['artist'][0].id}" class="underlined"> 
+          <span  *ngIf="art['artist'] !== undefined ;else no_item">   
+          {{art['artist'][0].name}}
+        </span>
         </li>
        <li class="dynastySize">
-          {{description}} 
+        <span  *ngIf="art['dynasty'] !== undefined ;else no_item">  
+          {{art['dynasty']}} 
+        </span>
        </li>
       </ul>   	
    
@@ -119,8 +140,20 @@
              
    </div>
 
-<h2>More paintings by {{artist[0].name}} </h2>
 
-<app-display-artist-gallery [artistId]="artistId"></app-display-artist-gallery>
+<h2>More paintings by {{art['artist'][0].name}} </h2>
+
+<app-display-artist-gallery [artistId]="art['artist'][0].id"></app-display-artist-gallery>
 
 </div>
+ </div>
+<ng-template #loading>
+  Loading art work...
+  <div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</ng-template>
+
+<ng-template #no_item>
+    <span>unknown</span>
+  </ng-template>

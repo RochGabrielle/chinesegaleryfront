@@ -32,7 +32,7 @@ export class ArticleService {
 
   articlelist() : Observable<any>{
 return this.httpClient
-    .get<any[]>(GlobalConstants.apiURL+'articlelist');
+    .get<any[]>(GlobalConstants.apiAdminURL+'articlelist');
 }
 
 simplearticlelist(entity:string) : Observable<any>{
@@ -60,6 +60,13 @@ updateStatus(data) : Observable<any> {
 paintingListOfArtist( artistId : string, lang: string)  : Observable<any>{
 return this.httpClient
     .get<any[]>(GlobalConstants.apiURL+'articleListOfArtist/'+artistId+'/'+lang);
+}
+
+//      id       id of article
+//     lang      lang
+articleDisplay(id: string, lang: string) : Observable<any>{
+  return this.httpClient
+    .get<any[]>(GlobalConstants.apiURL+'gallery/art/'+id+'/'+lang);
 }
 
 }

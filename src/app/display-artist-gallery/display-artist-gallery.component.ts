@@ -32,31 +32,23 @@ export class DisplayArtistGalleryComponent implements OnInit {
   theme: any[]
 }>;
 
+artworkByArtistLoading: boolean = false;
+
   constructor(private articleService : ArticleService,
     private slideService : SlideService,
   	private router : Router) { }
 
-  displayArticle(title :string, artist : any[], dynasty : any[], bigimage : string, description : string, material: any[], size: string) {
-  console.log(material) ;
-  console.log('next page');
-  this.router.navigate(["/displayArticle", {title : title, 
-  											 artist : JSON.stringify(artist), 
-  											 dynasty : JSON.stringify(dynasty),
-  											 bigimage : bigimage,
-  											 description : description,
-  											 material: JSON.stringify(material),
-  											 size: size
-  											}]);
-  }
 
   @Input() artistId: string;
 
   ngOnInit(): void {
+    this.artworkByArtistLoading = false;
   	 this.articleService.articleGalleryList('fr_fr', this.artistId).subscribe(
   (response) => {
   	console.log(this.artistId);
   this.artistGallery = Object.values(response);
- 
+  console.log(response);
+ this.artworkByArtistLoading = true;
         }
       );  
   }
